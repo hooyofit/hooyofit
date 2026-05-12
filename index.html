@@ -12,7 +12,22 @@
 <meta name="apple-mobile-web-app-title" content="HooyoFit"/>
 <link rel="apple-touch-icon" href="/icon-192.png"/>
 <style>
-/* ── PWA INSTALL BANNER (Android/Desktop) ── */
+/* ── SW UPDATE BANNER ── */
+#update-banner{
+  position:fixed;top:0;left:50%;transform:translateX(-50%) translateY(-100%);
+  width:100%;max-width:480px;z-index:1000;
+  background:linear-gradient(135deg,#1a1a2e,#2d1b4e);
+  color:#fff;padding:12px 16px;
+  display:flex;align-items:center;gap:10px;
+  box-shadow:0 4px 20px rgba(0,0,0,.3);
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+}
+#update-banner.show{transform:translateX(-50%) translateY(0)}
+#update-banner .upd-icon{font-size:20px;flex-shrink:0}
+#update-banner .upd-text{flex:1;font-size:13px;font-weight:600}
+#update-banner .upd-text small{display:block;font-size:11px;opacity:.7;font-weight:400;margin-top:1px}
+#update-banner .btn-upd-refresh{background:#f87171;color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+#update-banner .btn-upd-dismiss{background:none;border:none;color:rgba(255,255,255,.5);font-size:18px;cursor:pointer;padding:0 4px;flex-shrink:0}
 #pwa-banner{
   position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);
   width:100%;max-width:480px;z-index:999;
@@ -601,6 +616,17 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
   <div class="toast" id="toast"></div>
 </div>
 
+<!-- UPDATE NOTIFICATION BANNER -->
+<div id="update-banner">
+  <div class="upd-icon">🆕</div>
+  <div class="upd-text">
+    Update diyaar ah!
+    <small>Cusbooneysii si aad u hesho nooca cusub</small>
+  </div>
+  <button class="btn-upd-refresh" id="btn-upd-refresh">Cusbooneysii</button>
+  <button class="btn-upd-dismiss" id="btn-upd-dismiss">✕</button>
+</div>
+
 <!-- PWA INSTALL BANNER — Android / Desktop -->
 <div id="pwa-banner">
   <div class="pwa-icon">💪</div>
@@ -997,6 +1023,7 @@ const TRANSLATIONS = {
     kcal_left:(n)=> n>0 ? `✅ ${n} kcal wali harta` : '🎉 Hadafka la gaartay!',
     ex_progress:(d,t)=>`${d}/${t} Jimicsi`,
     ex_done_label:(d)=>`${d} la dhammeeyay`,
+    upd_title:'Update diyaar ah!', upd_sub:'Cusbooneysii si aad u hesho nooca cusub', upd_btn:'Cusbooneysii',
   },
   en:{
     toggle:'🇬🇧 EN → SO',
@@ -1042,6 +1069,7 @@ const TRANSLATIONS = {
     kcal_left:(n)=> n>0 ? `✅ ${n} kcal remaining` : '🎉 Goal reached!',
     ex_progress:(d,t)=>`${d}/${t} Exercises`,
     ex_done_label:(d)=>`${d} completed`,
+    upd_title:'Update available!', upd_sub:'Refresh to get the latest version', upd_btn:'Refresh',
   }
 };
 
@@ -1051,6 +1079,11 @@ function applyLang(l) {
   const T = TRANSLATIONS[l];
   const $ = id => document.getElementById(id);
   const $$ = sel => document.querySelectorAll(sel);
+
+  // Update banner
+  const updText = document.querySelector('#update-banner .upd-text');
+  if (updText) updText.innerHTML = `${T.upd_title}<small>${T.upd_sub}</small>`;
+  if (_btnRefresh) _btnRefresh.textContent = T.upd_btn;
 
   // Toggle button
   $('langToggle').textContent = T.toggle;
@@ -1169,12 +1202,61 @@ function toggleLang() {
 }
 
 // Apply saved language now that all functions are defined
+// PWA element refs declared here so applyLang can access them
+const _updBanner  = document.getElementById('update-banner');
+const _btnRefresh = document.getElementById('btn-upd-refresh');
+const _btnUpdDism = document.getElementById('btn-upd-dismiss');
+let _newWorker = null;
+
 applyLang(_lang);
 
 // ─── PWA ─────────────────────────────────────────────────────────
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then(reg => {
+
+      // Check for updates every 60 seconds while app is open
+      setInterval(() => reg.update(), 60000);
+
+      // A new SW is waiting to activate
+      reg.addEventListener('updatefound', () => {
+        _newWorker = reg.installing;
+        _newWorker.addEventListener('statechange', () => {
+          if (_newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            // New version ready — show banner
+            _updBanner.classList.add('show');
+          }
+        });
+      });
+
+    }).catch(() => {});
+
+    // SW posted SW_UPDATED message (new version just activated)
+    navigator.serviceWorker.addEventListener('message', e => {
+      if (e.data?.type === 'SW_UPDATED') {
+        _updBanner.classList.add('show');
+      }
+    });
+
+    // After controllerchange, reload to get new content
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) { refreshing = true; window.location.reload(); }
+    });
+  });
 }
+
+_btnRefresh.addEventListener('click', () => {
+  _updBanner.classList.remove('show');
+  if (_newWorker) {
+    _newWorker.postMessage({ type: 'SKIP_WAITING' });
+  } else {
+    window.location.reload();
+  }
+});
+
+_btnUpdDism.addEventListener('click', () => _updBanner.classList.remove('show'));
 
 // Android / Desktop install prompt
 let _deferredPrompt;
