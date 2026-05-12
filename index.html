@@ -616,6 +616,176 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 </div>
 
 <script>
+// ─── LANGUAGE (must be first — used by all render functions) ──────
+// ─── LANGUAGE ─────────────────────────────────────────────────────
+const TRANSLATIONS = {
+  so:{
+    toggle:'🇸🇴 SO → EN',
+    nav:['Hore','Jimicsi','Miisaan','Cunto','Qorshe'],
+    ex_found:'jimicsi la helay', ex_start:'Bilow', ex_done_icon:'✅', ex_yt:'▶ YouTube',
+    ex_progress:(d,t)=>`${d}/${t} Jimicsi`,
+    ex_done_label:(d)=>`${d} la dhammeeyay`,
+    water_left:(n)=>n>0?`Wali ${n} koob baan u baahantahay`:'🎉 Mabrook! 8 koob la cabay!',
+    kcal_left:(n)=>n>0?`✅ ${n} kcal wali harta`:'🎉 Hadafka la gaartay!',
+    plan_empty:'Cunto lama doorin — Guji "Door"',
+    w_empty:'Wali miisaan lama diiwaan gelinin.\nGuji "+ Kudar" si aad u bilowdo!',
+    upd_title:'Update diyaar ah!', upd_sub:'Cusbooneysii si aad u hesho nooca cusub', upd_btn:'Cusbooneysii',
+    pwa_title:'HooyoFit ku rakib!', pwa_sub:'App-ka ku kaydi telefoonkaaga — bilaash!', pwa_install:'Rakib', pwa_later:'Hadda kuma baahno',
+  },
+  en:{
+    toggle:'🇬🇧 EN → SO',
+    nav:['Home','Exercise','Weight','Food','Planner'],
+    ex_found:'exercises found', ex_start:'Start', ex_done_icon:'✅', ex_yt:'▶ YouTube',
+    ex_progress:(d,t)=>`${d}/${t} Exercises`,
+    ex_done_label:(d)=>`${d} completed`,
+    water_left:(n)=>n>0?`Still need ${n} more cups`:'🎉 Great! 8 cups done!',
+    kcal_left:(n)=>n>0?`✅ ${n} kcal remaining`:'🎉 Goal reached!',
+    plan_empty:'No meal selected — tap "Pick"',
+    w_empty:'No weight entries yet.\nTap "+ Add" to get started!',
+    upd_title:'Update available!', upd_sub:'Refresh to get the latest version', upd_btn:'Refresh',
+    pwa_title:'Install HooyoFit!', pwa_sub:'Save to your phone — free & fast!', pwa_install:'Install', pwa_later:'Not now',
+  }
+};
+
+// All static text strings in HTML (id → [so, en])
+const STATIC_TEXT = {
+  'txt-hi':           ['Ahlan wasahlan 👋','Welcome 👋'],
+  'txt-h1':           ['Hooyada Caafimaadka','HooyoFit'],
+  'txt-small':        ['Jimicsi fudud. Cunto caafimaad leh. Nolol wanaagsan.','Easy workouts. Healthy food. Better life.'],
+  'txt-tip-label':    ['TALADA MAANTA','TIP OF THE DAY'],
+  'mc1t':             ['Jimicsiga','Exercises'],
+  'mc1s':             ['Jimicsi fudud oo guriga ah','Easy home workouts'],
+  'mc2t':             ['Miisaanka','Weight Tracker'],
+  'mc2s':             ['Dul socodsii miisaankaaga','Track your progress'],
+  'mc3t':             ['Cuntada','Food'],
+  'mc3s':             ['Cunto caafimaad ah oo Soomaali ah','Healthy Somali meals'],
+  'mc4t':             ['Qorshe Cunto','Meal Planner'],
+  'mc4s':             ['Door cuntada maalinlaha ah','Plan your daily meals'],
+  'ex-title':         ['Jimicsiga Guriga','Home Workouts'],
+  'ex-sub':           ['Hooyada Caafimaadka 💪','HooyoFit 💪'],
+  'ex-prog-label':    ['Horumarka Maanta',"Today's Progress"],
+  'heer-label':       ['Heerka Adkaanta','Difficulty Level'],
+  'nooc-label':       ['Nooca Jimicsiga','Exercise Type'],
+  'hp0':              ['Dhammaan','All'],
+  'hp1':              ['🌱 Fudud','🌱 Easy'],
+  'hp2':              ['🔥 Dhexdhexaad','🔥 Medium'],
+  'hp3':              ['💪 Adag','💪 Hard'],
+  'np0':              ['Nooc Kasta','All Types'],
+  'np1':              ['🫃 Caloosha','🫃 Core'],
+  'np2':              ['🦵 Lugaha','🦵 Legs'],
+  'np3':              ['🔙 Dhabarka','🔙 Back'],
+  'np4':              ['❤️ Xawaaraha','❤️ Cardio'],
+  'w-title':          ['Miisaanka','Weight Tracker'],
+  'w-sub':            ['Horumarkaaga la socod','Track your progress'],
+  'w-add-btn':        ['+ Kudar','+ Add'],
+  'w-history-label':  ['Taariikhda','History'],
+  'w-modal-title':    ['⚖️ Miisaanka Kudar','⚖️ Add Weight'],
+  'w-cancel':         ['Jooji','Cancel'],
+  'w-save':           ['Kaydi','Save'],
+  'f-title':          ['Cuntada Soomaalida','Somali Food'],
+  'f-sub':            ['Cunto caafimaad leh oo dhaqameedka ah 🍽️','Healthy traditional meals 🍽️'],
+  'mt0':              ['☀️ Quraac','☀️ Breakfast'],
+  'mt1':              ['🌤️ Qado','🌤️ Lunch'],
+  'mt2':              ['🌙 Casho','🌙 Dinner'],
+  'f-kcal-label':     ['Wadarta Kaloriyada:','Total Calories:'],
+  'q-title':          ['Qorshe Cunto','Meal Planner'],
+  'q-kcal-label':     ['🔥 Kaloriyada Maanta',"🔥 Today's Calories"],
+  'q-goal-label':     ['Hadaf: 1500 kcal','Goal: 1500 kcal'],
+  'water-label':      ['💧 Biyo Cabashada 💧','💧 Water Intake 💧'],
+  'water-tip':        ['💡 Biyo cab ka hor jimicsiga, intuu socdo, iyo ka dib','💡 Drink water before, during, and after exercise'],
+  'timing-label':     ['Cuntada & Jimicsiga 🏃‍♀️','Food & Exercise 🏃‍♀️'],
+  't1-title':         ['Ka Hor Jimicsiga (1-2 saac)','Before Exercise (1-2 hrs)'],
+  't1-body':          ['Cunto fudud oo kaloriyad yar. Ha cunin cunto culus.','Light, low-calorie meal. Avoid heavy food.'],
+  't2-title':         ['Ka Dib Jimicsiga (30 daqiiqo gudahood)','After Exercise (within 30 min)'],
+  't2-body':          ['Borotiinka iyo kaarbohaydreed fudud. Caano ama beed.','Protein and simple carbs. Milk or eggs.'],
+  'pq-label':         ['Quraac','Breakfast'],
+  'pqd-label':        ['Qado','Lunch'],
+  'pc-label':         ['Casho','Dinner'],
+  'pq-btn':           ['Door','Pick'],
+  'pqd-btn':          ['Door','Pick'],
+  'pc-btn':           ['Door','Pick'],
+  'food-close-btn':   ['Xir','Close'],
+  'nav0':             ['Hore','Home'],
+  'nav1':             ['Jimicsi','Exercise'],
+  'nav2':             ['Miisaan','Weight'],
+  'nav3':             ['Cunto','Food'],
+  'nav4':             ['Qorshe','Planner'],
+};
+
+const STATIC_HTML = {
+  'txt-reminder':[
+    '<strong>Xusuusnow:</strong> Xitaa 15 daqiiqo jimicsi maalin kasta waxay hagaajisaa caafimaadkaaga iyo xaaladaada maskaxeed!',
+    '<strong>Remember:</strong> Even 15 minutes of exercise daily improves your health and mental wellbeing!'
+  ],
+  'ex-tip':[
+    '💡 <strong>Talo:</strong> Bilowga waxaad ku bilaabi kartaa 10 daqiiqo maalin kasta. Si tartiib ah kor u qaad!',
+    '💡 <strong>Tip:</strong> Start with just 10 minutes a day. Gradually increase over time!'
+  ],
+  'f-tip':[
+    '💡 <strong>Talo:</strong> Ku dadaal inaad cuntada ku bilowdo xagga saadka. Cuntada casho waxay fiican tahay in ay fudud noqoto.',
+    '💡 <strong>Tip:</strong> Try to eat more at breakfast. Keep dinner light.'
+  ],
+  'q-tip':[
+    '💡 <strong>Hadaf:</strong> 1,500 kcal maalin kasta waa qiyaas caafimaadka leh dumarka.',
+    '💡 <strong>Goal:</strong> 1,500 kcal per day is a healthy target for women.'
+  ],
+};
+
+let _lang = localStorage.getItem('hf_lang') || 'so';
+
+function applyLang(l) {
+  const i = l==='so'?0:1;
+  const T = TRANSLATIONS[l];
+
+  // Static text
+  for(const [id,[so,en]] of Object.entries(STATIC_TEXT)){
+    const el=document.getElementById(id);
+    if(el) el.textContent = i===0?so:en;
+  }
+  // Static innerHTML
+  for(const [id,[so,en]] of Object.entries(STATIC_HTML)){
+    const el=document.getElementById(id);
+    if(el) el.innerHTML = i===0?so:en;
+  }
+
+  // Lang toggle button
+  document.getElementById('langToggle').textContent = T.toggle;
+
+  // Update banner
+  const ut=document.getElementById('upd-text');
+  const us=document.getElementById('upd-sub');
+  const ubr=document.getElementById('btn-upd-refresh');
+  if(ut) ut.childNodes[0].textContent = T.upd_title;
+  if(us) us.textContent = T.upd_sub;
+  if(ubr) ubr.textContent = T.upd_btn;
+
+  // PWA banner
+  const pt=document.getElementById('pwa-title');
+  const ps=document.getElementById('pwa-sub');
+  const pi=document.getElementById('btn-pwa-install');
+  const pd=document.getElementById('btn-pwa-dismiss');
+  if(pt) pt.textContent = T.pwa_title;
+  if(ps) ps.textContent = T.pwa_sub;
+  if(pi) pi.textContent = T.pwa_install;
+  if(pd) pd.textContent = T.pwa_later;
+
+  // Re-render dynamic content
+  updateProgress();
+  renderWater();
+  updateKcal();
+  renderPlan();
+  if(document.getElementById('page-jimicsi').classList.contains('active')) renderExercises();
+  if(document.getElementById('page-miisaan').classList.contains('active')) renderWeights();
+  if(document.getElementById('page-cunto').classList.contains('active'))   renderFood();
+}
+
+function toggleLang() {
+  _lang = _lang==='so'?'en':'so';
+  localStorage.setItem('hf_lang',_lang);
+  applyLang(_lang);
+  showToast(_lang==='en'?'🇬🇧 Switched to English':'🇸🇴 Soomaali la doortay');
+}
+
 // ─── DATA ─────────────────────────────────────────────────────────
 const EXERCISES = [
   {id:1,icon:'🧘‍♀️',name:'Saqaf-ku-joogsi (Plank)',heer:'fudud',nooc:['caloosha','dhabarka'],
@@ -966,175 +1136,6 @@ function init(){
   renderFood(); // ← FIX: render food on load so it's ready when tab opens
 }
 init();
-
-// ─── LANGUAGE ─────────────────────────────────────────────────────
-const TRANSLATIONS = {
-  so:{
-    toggle:'🇸🇴 SO → EN',
-    nav:['Hore','Jimicsi','Miisaan','Cunto','Qorshe'],
-    ex_found:'jimicsi la helay', ex_start:'Bilow', ex_done_icon:'✅', ex_yt:'▶ YouTube',
-    ex_progress:(d,t)=>`${d}/${t} Jimicsi`,
-    ex_done_label:(d)=>`${d} la dhammeeyay`,
-    water_left:(n)=>n>0?`Wali ${n} koob baan u baahantahay`:'🎉 Mabrook! 8 koob la cabay!',
-    kcal_left:(n)=>n>0?`✅ ${n} kcal wali harta`:'🎉 Hadafka la gaartay!',
-    plan_empty:'Cunto lama doorin — Guji "Door"',
-    w_empty:'Wali miisaan lama diiwaan gelinin.\nGuji "+ Kudar" si aad u bilowdo!',
-    upd_title:'Update diyaar ah!', upd_sub:'Cusbooneysii si aad u hesho nooca cusub', upd_btn:'Cusbooneysii',
-    pwa_title:'HooyoFit ku rakib!', pwa_sub:'App-ka ku kaydi telefoonkaaga — bilaash!', pwa_install:'Rakib', pwa_later:'Hadda kuma baahno',
-  },
-  en:{
-    toggle:'🇬🇧 EN → SO',
-    nav:['Home','Exercise','Weight','Food','Planner'],
-    ex_found:'exercises found', ex_start:'Start', ex_done_icon:'✅', ex_yt:'▶ YouTube',
-    ex_progress:(d,t)=>`${d}/${t} Exercises`,
-    ex_done_label:(d)=>`${d} completed`,
-    water_left:(n)=>n>0?`Still need ${n} more cups`:'🎉 Great! 8 cups done!',
-    kcal_left:(n)=>n>0?`✅ ${n} kcal remaining`:'🎉 Goal reached!',
-    plan_empty:'No meal selected — tap "Pick"',
-    w_empty:'No weight entries yet.\nTap "+ Add" to get started!',
-    upd_title:'Update available!', upd_sub:'Refresh to get the latest version', upd_btn:'Refresh',
-    pwa_title:'Install HooyoFit!', pwa_sub:'Save to your phone — free & fast!', pwa_install:'Install', pwa_later:'Not now',
-  }
-};
-
-// All static text strings in HTML (id → [so, en])
-const STATIC_TEXT = {
-  'txt-hi':           ['Ahlan wasahlan 👋','Welcome 👋'],
-  'txt-h1':           ['Hooyada Caafimaadka','HooyoFit'],
-  'txt-small':        ['Jimicsi fudud. Cunto caafimaad leh. Nolol wanaagsan.','Easy workouts. Healthy food. Better life.'],
-  'txt-tip-label':    ['TALADA MAANTA','TIP OF THE DAY'],
-  'mc1t':             ['Jimicsiga','Exercises'],
-  'mc1s':             ['Jimicsi fudud oo guriga ah','Easy home workouts'],
-  'mc2t':             ['Miisaanka','Weight Tracker'],
-  'mc2s':             ['Dul socodsii miisaankaaga','Track your progress'],
-  'mc3t':             ['Cuntada','Food'],
-  'mc3s':             ['Cunto caafimaad ah oo Soomaali ah','Healthy Somali meals'],
-  'mc4t':             ['Qorshe Cunto','Meal Planner'],
-  'mc4s':             ['Door cuntada maalinlaha ah','Plan your daily meals'],
-  'ex-title':         ['Jimicsiga Guriga','Home Workouts'],
-  'ex-sub':           ['Hooyada Caafimaadka 💪','HooyoFit 💪'],
-  'ex-prog-label':    ['Horumarka Maanta',"Today's Progress"],
-  'heer-label':       ['Heerka Adkaanta','Difficulty Level'],
-  'nooc-label':       ['Nooca Jimicsiga','Exercise Type'],
-  'hp0':              ['Dhammaan','All'],
-  'hp1':              ['🌱 Fudud','🌱 Easy'],
-  'hp2':              ['🔥 Dhexdhexaad','🔥 Medium'],
-  'hp3':              ['💪 Adag','💪 Hard'],
-  'np0':              ['Nooc Kasta','All Types'],
-  'np1':              ['🫃 Caloosha','🫃 Core'],
-  'np2':              ['🦵 Lugaha','🦵 Legs'],
-  'np3':              ['🔙 Dhabarka','🔙 Back'],
-  'np4':              ['❤️ Xawaaraha','❤️ Cardio'],
-  'w-title':          ['Miisaanka','Weight Tracker'],
-  'w-sub':            ['Horumarkaaga la socod','Track your progress'],
-  'w-add-btn':        ['+ Kudar','+ Add'],
-  'w-history-label':  ['Taariikhda','History'],
-  'w-modal-title':    ['⚖️ Miisaanka Kudar','⚖️ Add Weight'],
-  'w-cancel':         ['Jooji','Cancel'],
-  'w-save':           ['Kaydi','Save'],
-  'f-title':          ['Cuntada Soomaalida','Somali Food'],
-  'f-sub':            ['Cunto caafimaad leh oo dhaqameedka ah 🍽️','Healthy traditional meals 🍽️'],
-  'mt0':              ['☀️ Quraac','☀️ Breakfast'],
-  'mt1':              ['🌤️ Qado','🌤️ Lunch'],
-  'mt2':              ['🌙 Casho','🌙 Dinner'],
-  'f-kcal-label':     ['Wadarta Kaloriyada:','Total Calories:'],
-  'q-title':          ['Qorshe Cunto','Meal Planner'],
-  'q-kcal-label':     ['🔥 Kaloriyada Maanta',"🔥 Today's Calories"],
-  'q-goal-label':     ['Hadaf: 1500 kcal','Goal: 1500 kcal'],
-  'water-label':      ['💧 Biyo Cabashada 💧','💧 Water Intake 💧'],
-  'water-tip':        ['💡 Biyo cab ka hor jimicsiga, intuu socdo, iyo ka dib','💡 Drink water before, during, and after exercise'],
-  'timing-label':     ['Cuntada & Jimicsiga 🏃‍♀️','Food & Exercise 🏃‍♀️'],
-  't1-title':         ['Ka Hor Jimicsiga (1-2 saac)','Before Exercise (1-2 hrs)'],
-  't1-body':          ['Cunto fudud oo kaloriyad yar. Ha cunin cunto culus.','Light, low-calorie meal. Avoid heavy food.'],
-  't2-title':         ['Ka Dib Jimicsiga (30 daqiiqo gudahood)','After Exercise (within 30 min)'],
-  't2-body':          ['Borotiinka iyo kaarbohaydreed fudud. Caano ama beed.','Protein and simple carbs. Milk or eggs.'],
-  'pq-label':         ['Quraac','Breakfast'],
-  'pqd-label':        ['Qado','Lunch'],
-  'pc-label':         ['Casho','Dinner'],
-  'pq-btn':           ['Door','Pick'],
-  'pqd-btn':          ['Door','Pick'],
-  'pc-btn':           ['Door','Pick'],
-  'food-close-btn':   ['Xir','Close'],
-  'nav0':             ['Hore','Home'],
-  'nav1':             ['Jimicsi','Exercise'],
-  'nav2':             ['Miisaan','Weight'],
-  'nav3':             ['Cunto','Food'],
-  'nav4':             ['Qorshe','Planner'],
-};
-
-const STATIC_HTML = {
-  'txt-reminder':[
-    '<strong>Xusuusnow:</strong> Xitaa 15 daqiiqo jimicsi maalin kasta waxay hagaajisaa caafimaadkaaga iyo xaaladaada maskaxeed!',
-    '<strong>Remember:</strong> Even 15 minutes of exercise daily improves your health and mental wellbeing!'
-  ],
-  'ex-tip':[
-    '💡 <strong>Talo:</strong> Bilowga waxaad ku bilaabi kartaa 10 daqiiqo maalin kasta. Si tartiib ah kor u qaad!',
-    '💡 <strong>Tip:</strong> Start with just 10 minutes a day. Gradually increase over time!'
-  ],
-  'f-tip':[
-    '💡 <strong>Talo:</strong> Ku dadaal inaad cuntada ku bilowdo xagga saadka. Cuntada casho waxay fiican tahay in ay fudud noqoto.',
-    '💡 <strong>Tip:</strong> Try to eat more at breakfast. Keep dinner light.'
-  ],
-  'q-tip':[
-    '💡 <strong>Hadaf:</strong> 1,500 kcal maalin kasta waa qiyaas caafimaadka leh dumarka.',
-    '💡 <strong>Goal:</strong> 1,500 kcal per day is a healthy target for women.'
-  ],
-};
-
-let _lang = localStorage.getItem('hf_lang') || 'so';
-
-function applyLang(l) {
-  const i = l==='so'?0:1;
-  const T = TRANSLATIONS[l];
-
-  // Static text
-  for(const [id,[so,en]] of Object.entries(STATIC_TEXT)){
-    const el=document.getElementById(id);
-    if(el) el.textContent = i===0?so:en;
-  }
-  // Static innerHTML
-  for(const [id,[so,en]] of Object.entries(STATIC_HTML)){
-    const el=document.getElementById(id);
-    if(el) el.innerHTML = i===0?so:en;
-  }
-
-  // Lang toggle button
-  document.getElementById('langToggle').textContent = T.toggle;
-
-  // Update banner
-  const ut=document.getElementById('upd-text');
-  const us=document.getElementById('upd-sub');
-  const ubr=document.getElementById('btn-upd-refresh');
-  if(ut) ut.childNodes[0].textContent = T.upd_title;
-  if(us) us.textContent = T.upd_sub;
-  if(ubr) ubr.textContent = T.upd_btn;
-
-  // PWA banner
-  const pt=document.getElementById('pwa-title');
-  const ps=document.getElementById('pwa-sub');
-  const pi=document.getElementById('btn-pwa-install');
-  const pd=document.getElementById('btn-pwa-dismiss');
-  if(pt) pt.textContent = T.pwa_title;
-  if(ps) ps.textContent = T.pwa_sub;
-  if(pi) pi.textContent = T.pwa_install;
-  if(pd) pd.textContent = T.pwa_later;
-
-  // Re-render dynamic content
-  updateProgress();
-  renderWater();
-  updateKcal();
-  renderPlan();
-  if(document.getElementById('page-jimicsi').classList.contains('active')) renderExercises();
-  if(document.getElementById('page-miisaan').classList.contains('active')) renderWeights();
-  if(document.getElementById('page-cunto').classList.contains('active'))   renderFood();
-}
-
-function toggleLang() {
-  _lang = _lang==='so'?'en':'so';
-  localStorage.setItem('hf_lang',_lang);
-  applyLang(_lang);
-  showToast(_lang==='en'?'🇬🇧 Switched to English':'🇸🇴 Soomaali la doortay');
-}
 
 // ─── PWA REFS (must be before applyLang call) ─────────────────────
 const _updBanner  = document.getElementById('update-banner');
