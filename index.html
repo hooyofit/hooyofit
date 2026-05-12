@@ -571,7 +571,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
     </button>
   </nav>
 
-  <div class="lang-toggle">🇸🇴 SO → EN</div>
+  <div class="lang-toggle" id="langToggle" onclick="toggleLang()">🇸🇴 SO → EN</div>
 
   <!-- WEIGHT MODAL -->
   <div class="modal-overlay" id="weightModal" onclick="closeModal(event)">
@@ -946,6 +946,226 @@ function init(){
   updateProgress();
 }
 init();
+
+// ─── LANGUAGE ────────────────────────────────────────────────────
+const TRANSLATIONS = {
+  so:{
+    toggle:'🇸🇴 SO → EN',
+    nav:['Hore','Jimicsi','Miisaan','Cunto','Qorshe'],
+    greeting_hi:'Ahlan wasahlan 👋',
+    greeting_h1:'Hooyada Caafimaadka',
+    greeting_small:'Jimicsi fudud. Cunto caafimaad leh. Nolol wanaagsan.',
+    tip_label:'TALADA MAANTA',
+    menus:[
+      ['Jimicsiga','Jimicsi fudud oo guriga ah'],
+      ['Miisaanka','Dul socodsii miisaankaaga'],
+      ['Cuntada','Cunto caafimaad ah oo Soomaali ah'],
+      ['Qorshe Cunto','Door cuntada maalinlaha ah'],
+    ],
+    reminder:'<strong>Xusuusnow:</strong> Xitaa 15 daqiiqo jimicsi maalin kasta waxay hagaajisaa caafimaadkaaga iyo xaaladaada maskaxeed!',
+    ex_title:'Jimicsiga Guriga', ex_sub:'Hooyada Caafimaadka 💪',
+    ex_prog_label:'Horumarka Maanta',
+    ex_tip:'💡 <strong>Talo:</strong> Bilowga waxaad ku bilaabi kartaa 10 daqiiqo maalin kasta. Si tartiib ah kor u qaad!',
+    heer_label:'Heerka Adkaanta', nooc_label:'Nooca Jimicsiga',
+    heer_pills:['Dhammaan','🌱 Fudud','🔥 Dhexdhexaad','💪 Adag'],
+    nooc_pills:['Nooc Kasta','🫃 Caloosha','🦵 Lugaha','🔙 Dhabarka','❤️ Xawaaraha'],
+    ex_found:'jimicsi la helay', ex_start:'Bilow', ex_done:'✅', ex_yt:'▶ YouTube',
+    w_title:'Miisaanka', w_sub:'Horumarkaaga la socod',
+    w_add:'+ Kudar', w_history:'Taariikhda',
+    w_empty:'Wali miisaan lama diiwaan gelinin.<br><small style="margin-top:6px;display:block">Guji "+ Kudar" si aad u bilowdo!</small>',
+    w_modal_title:'⚖️ Miisaanka Kudar', w_placeholder:'Miisaankaaga (kg)',
+    btn_cancel:'Jooji', btn_save:'Kaydi',
+    f_title:'Cuntada Soomaalida', f_sub:'Cunto caafimaad leh oo dhaqameedka ah 🍽️',
+    meal_tabs:['☀️ Quraac','🌤️ Qado','🌙 Casho'],
+    f_tip:'💡 <strong>Talo:</strong> Ku dadaal inaad cuntada ku bilowdo xagga saadka. Cuntada casho waxay fiican tahay in ay fudud noqoto.',
+    f_kcal_label:'Wadarta Kaloriyada',
+    q_title:'Qorshe Cunto', q_sub:'Door cuntada maanta',
+    q_kcal:'🔥 Kaloriyada Maanta', q_goal:'Hadaf: 1500 kcal',
+    q_tip:'💡 <strong>Hadaf:</strong> 1,500 kcal maalin kasta waa qiyaas caafimaadka leh dumarka.',
+    water_label:'💧 Biyo Cabashada 💧',
+    water_tip:'💡 Biyo cab ka hor jimicsiga, intuu socdo, iyo ka dib',
+    timing_label:'Cuntada & Jimicsiga 🏃‍♀️',
+    t1_title:'Ka Hor Jimicsiga (1-2 saac)', t1_body:'Cunto fudud oo kaloriyad yar. Ha cunin cunto culus.',
+    t2_title:'Ka Dib Jimicsiga (30 daqiiqo gudahood)', t2_body:'Borotiinka iyo kaarbohaydreed fudud. Caano ama beed.',
+    plan_empty:'Cunto lama doorin — Guji "Door"',
+    btn_door:'Door', btn_xir:'Xir',
+    water_left:(n)=> n>0 ? `Wali ${n} koob baan u baahantahay` : '🎉 Mabrook! 8 koob la cabay!',
+    kcal_left:(n)=> n>0 ? `✅ ${n} kcal wali harta` : '🎉 Hadafka la gaartay!',
+    ex_progress:(d,t)=>`${d}/${t} Jimicsi`,
+    ex_done_label:(d)=>`${d} la dhammeeyay`,
+  },
+  en:{
+    toggle:'🇬🇧 EN → SO',
+    nav:['Home','Exercise','Weight','Food','Planner'],
+    greeting_hi:'Welcome 👋',
+    greeting_h1:'HooyoFit',
+    greeting_small:'Easy workouts. Healthy food. Better life.',
+    tip_label:'TIP OF THE DAY',
+    menus:[
+      ['Exercises','Easy home workouts'],
+      ['Weight Tracker','Track your progress'],
+      ['Food','Healthy Somali meals'],
+      ['Meal Planner','Plan your daily meals'],
+    ],
+    reminder:'<strong>Remember:</strong> Even 15 minutes of exercise daily improves your health and mental wellbeing!',
+    ex_title:'Home Workouts', ex_sub:'HooyoFit 💪',
+    ex_prog_label:"Today's Progress",
+    ex_tip:'💡 <strong>Tip:</strong> Start with just 10 minutes a day. Gradually increase over time!',
+    heer_label:'Difficulty Level', nooc_label:'Exercise Type',
+    heer_pills:['All','🌱 Easy','🔥 Medium','💪 Hard'],
+    nooc_pills:['All Types','🫃 Core','🦵 Legs','🔙 Back','❤️ Cardio'],
+    ex_found:'exercises found', ex_start:'Start', ex_done:'✅', ex_yt:'▶ YouTube',
+    w_title:'Weight Tracker', w_sub:'Track your progress',
+    w_add:'+ Add', w_history:'History',
+    w_empty:'No weight entries yet.<br><small style="margin-top:6px;display:block">Tap "+ Add" to get started!</small>',
+    w_modal_title:'⚖️ Add Weight', w_placeholder:'Your weight (kg)',
+    btn_cancel:'Cancel', btn_save:'Save',
+    f_title:'Somali Food', f_sub:'Healthy traditional meals 🍽️',
+    meal_tabs:['☀️ Breakfast','🌤️ Lunch','🌙 Dinner'],
+    f_tip:'💡 <strong>Tip:</strong> Try to eat more at breakfast. Keep dinner light.',
+    f_kcal_label:'Total Calories',
+    q_title:'Meal Planner', q_sub:"Plan today's meals",
+    q_kcal:"🔥 Today's Calories", q_goal:'Goal: 1500 kcal',
+    q_tip:'💡 <strong>Goal:</strong> 1,500 kcal per day is a healthy target for women.',
+    water_label:'💧 Water Intake 💧',
+    water_tip:'💡 Drink water before, during, and after exercise',
+    timing_label:'Food & Exercise 🏃‍♀️',
+    t1_title:'Before Exercise (1-2 hrs)', t1_body:'Light, low-calorie meal. Avoid heavy food.',
+    t2_title:'After Exercise (within 30 min)', t2_body:'Protein and simple carbs. Milk or eggs.',
+    plan_empty:'No meal selected — tap "Pick"',
+    btn_door:'Pick', btn_xir:'Close',
+    water_left:(n)=> n>0 ? `Still need ${n} more cups` : '🎉 Great! 8 cups done!',
+    kcal_left:(n)=> n>0 ? `✅ ${n} kcal remaining` : '🎉 Goal reached!',
+    ex_progress:(d,t)=>`${d}/${t} Exercises`,
+    ex_done_label:(d)=>`${d} completed`,
+  }
+};
+
+let _lang = localStorage.getItem('hf_lang') || 'so';
+
+function applyLang(l) {
+  const T = TRANSLATIONS[l];
+  const $ = id => document.getElementById(id);
+  const $$ = sel => document.querySelectorAll(sel);
+
+  // Toggle button
+  $('langToggle').textContent = T.toggle;
+
+  // Nav labels
+  $$('.nav-item').forEach((btn,i) => {
+    const txt = btn.childNodes[btn.childNodes.length-1];
+    if(txt && T.nav[i]) txt.textContent = T.nav[i];
+  });
+
+  // Home
+  const gp = document.querySelector('.home-greeting p');
+  const gh1 = document.querySelector('.home-greeting h1');
+  const gs = document.querySelector('.home-greeting small');
+  if(gp) gp.textContent = T.greeting_hi;
+  if(gh1) gh1.textContent = T.greeting_h1;
+  if(gs) gs.textContent = T.greeting_small;
+
+  const tipLbl = document.querySelector('.tip-card div div:first-child');
+  if(tipLbl) tipLbl.textContent = T.tip_label;
+
+  $$('.menu-card').forEach((card,i) => {
+    if(!T.menus[i]) return;
+    const title = card.querySelector('.menu-title');
+    const sub   = card.querySelector('.menu-sub');
+    if(title) title.textContent = T.menus[i][0];
+    if(sub)   sub.textContent   = T.menus[i][1];
+  });
+  const rem = document.querySelector('.reminder-card');
+  if(rem) rem.innerHTML = T.reminder;
+
+  // Exercise page
+  const exTitle = document.querySelector('#page-jimicsi .page-title');
+  const exSub   = document.querySelector('#page-jimicsi .page-sub');
+  if(exTitle) exTitle.textContent = T.ex_title;
+  if(exSub)   exSub.textContent   = T.ex_sub;
+
+  const progLbl = document.querySelector('#page-jimicsi .grad-card div div:first-child');
+  if(progLbl) progLbl.textContent = T.ex_prog_label;
+
+  const exTipEl = document.querySelector('#page-jimicsi .card-sm span');
+  if(exTipEl) exTipEl.innerHTML = T.ex_tip;
+
+  const secLabels = $$('#page-jimicsi .section-label');
+  if(secLabels[0]) secLabels[0].textContent = T.heer_label;
+  if(secLabels[1]) secLabels[1].textContent = T.nooc_label;
+
+  $$('#heerPills .pill').forEach((p,i) => { if(T.heer_pills[i]) p.textContent = T.heer_pills[i]; });
+  $$('#noocPills .pill').forEach((p,i) => { if(T.nooc_pills[i]) p.textContent = T.nooc_pills[i]; });
+
+  // Re-render exercises with new labels
+  if(document.getElementById('page-jimicsi').classList.contains('active')) renderExercises();
+
+  // Weight page
+  const wTitle = document.querySelector('#page-miisaan .page-title');
+  const wSub   = document.querySelector('#page-miisaan .page-sub');
+  if(wTitle) wTitle.textContent = T.w_title;
+  if(wSub)   wSub.textContent   = T.w_sub;
+  const wAddBtn = document.querySelector('.btn-kudar');
+  if(wAddBtn) wAddBtn.textContent = T.w_add;
+  const wHist = document.querySelector('#page-miisaan .section-label');
+  if(wHist) wHist.textContent = T.w_history;
+  const wModal = document.querySelector('#weightModal h3');
+  if(wModal) wModal.textContent = T.w_modal_title;
+  const wInput = $('weightInput');
+  if(wInput) wInput.placeholder = T.w_placeholder;
+  $$('.btn-cancel').forEach(b => b.textContent = T.btn_cancel);
+  $$('.btn-save').forEach(b => b.textContent = T.btn_save);
+
+  // Food page
+  const fTitle = document.querySelector('#page-cunto .page-title');
+  const fSub   = document.querySelector('#page-cunto .page-sub');
+  if(fTitle) fTitle.textContent = T.f_title;
+  if(fSub)   fSub.textContent   = T.f_sub;
+  $$('.meal-tab').forEach((t,i) => { if(T.meal_tabs[i]) t.textContent = T.meal_tabs[i]; });
+  const fTipEl = document.querySelector('#page-cunto .card-sm span');
+  if(fTipEl) fTipEl.innerHTML = T.f_tip;
+
+  // Planner page
+  const qTitle = document.querySelector('#page-qorshe .page-title');
+  if(qTitle) qTitle.textContent = T.q_title;
+  const qTipEl = document.querySelector('#page-qorshe .card-sm span');
+  if(qTipEl) qTipEl.innerHTML = T.q_tip;
+  const wTipEl = document.querySelector('#page-qorshe .card:last-of-type > div:last-child');
+  if(wTipEl) wTipEl.textContent = T.water_tip;
+  $$('.btn-door').forEach(b => b.textContent = T.btn_door);
+  const closeFoodBtn = document.querySelector('#foodModal .btn-cancel');
+  if(closeFoodBtn) closeFoodBtn.textContent = T.btn_xir;
+
+  // Planner empty state
+  $$('.plan-meal-body').forEach(el => {
+    if(!el.querySelector('.selected')) el.textContent = T.plan_empty;
+  });
+
+  // Live counters
+  const wLeft = 8 - state.water;
+  const waterMsg = $('waterMsg');
+  if(waterMsg) waterMsg.textContent = T.water_left(wLeft);
+
+  const kcalTotal = ['quraac','qado','casho'].reduce((s,m)=>s+(state.plan[m]?state.plan[m].kcal:0),0);
+  const kalLeft = $('kalLeft');
+  if(kalLeft) kalLeft.textContent = T.kcal_left(1500-kcalTotal);
+
+  const prog = state.doneEx.size;
+  const jimProg = $('jimicsiProgress');
+  const jimDone = $('jimicsiDone');
+  if(jimProg) jimProg.textContent = T.ex_progress(prog, EXERCISES.length);
+  if(jimDone) jimDone.textContent = T.ex_done_label(prog);
+}
+
+function toggleLang() {
+  _lang = _lang === 'so' ? 'en' : 'so';
+  localStorage.setItem('hf_lang', _lang);
+  applyLang(_lang);
+  showToast(_lang === 'en' ? '🇬🇧 Switched to English' : '🇸🇴 Soomaali la doortay');
+}
+
+// Apply saved language now that all functions are defined
+applyLang(_lang);
 
 // ─── PWA ─────────────────────────────────────────────────────────
 if('serviceWorker' in navigator){
