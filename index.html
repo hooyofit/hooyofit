@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="so">
+<html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>HooyoFit</title>
+<title>HooyoFit — Empowering Mothers, Healthy Families</title>
+<meta name="description" content="HooyoFit — Easy workouts, healthy Somali food, weight tracking for mothers and families."/>
 <meta name="theme-color" content="#f87171"/>
 <link rel="manifest" href="/manifest.json"/>
 <meta name="mobile-web-app-capable" content="yes"/>
@@ -11,96 +12,258 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
 <meta name="apple-mobile-web-app-title" content="HooyoFit"/>
 <link rel="apple-touch-icon" href="/icon-192.png"/>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-29RNY3J2BG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-29RNY3J2BG');
+</script>
 <style>
 :root{
-  --pink:#f87171;--pink2:#fb923c;--purple:#a855f7;--orange:#f97316;
-  --green:#22c55e;--blue:#3b82f6;--teal:#14b8a6;
-  --bg:#fdf8f6;--white:#fff;--text:#1a1a2e;--muted:#9ca3af;
-  --border:#f0e8e4;--card:#fff;
+  --pink:#f87171;--orange:#fb923c;--purple:#a855f7;--green:#22c55e;
+  --blue:#3b82f6;--teal:#14b8a6;--yellow:#f59e0b;--red:#ef4444;
+  --bg:#f8f9ff;--white:#fff;--text:#1a1a2e;--muted:#9ca3af;
+  --border:#eef0f8;--card:#fff;
   --grad:linear-gradient(135deg,#f87171,#fb923c);
+  --grad2:linear-gradient(135deg,#a855f7,#6366f1);
+  --grad3:linear-gradient(135deg,#14b8a6,#3b82f6);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
-.app{display:flex;flex-direction:column;height:100%;max-width:480px;margin:0 auto;position:relative;background:var(--bg)}
-.page-bg{position:absolute;top:0;left:0;right:0;height:220px;background:linear-gradient(160deg,#fde8e8 0%,#fef3e8 50%,#f5f0ff 100%);z-index:0;pointer-events:none}
-.scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:0 0 80px;position:relative;z-index:1}
+.app{display:flex;flex-direction:column;height:100%;max-width:480px;margin:0 auto;position:relative;background:var(--bg);box-shadow:0 0 40px rgba(0,0,0,.08)}
+.scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:0 0 85px;position:relative}
 .scroll::-webkit-scrollbar{display:none}
 
-/* NAV */
+/* ── NAV ── */
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom,0)}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;padding:10px 4px 8px;gap:4px;cursor:pointer;color:var(--muted);font-size:11px;font-weight:500;border:none;background:none;transition:color .2s}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;padding:9px 2px 7px;gap:3px;cursor:pointer;color:var(--muted);font-size:10px;font-weight:600;border:none;background:none;transition:color .2s;position:relative}
 .nav-item.active{color:var(--pink)}
-.nav-item svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav-item.active::after{content:'';position:absolute;top:0;left:25%;right:25%;height:2.5px;background:var(--grad);border-radius:0 0 3px 3px}
+.nav-item svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
-/* PAGES */
-.page{display:none}.page.active{display:block}
+/* ── PAGES ── */
+.page{display:none;min-height:100%}.page.active{display:block}
 
-/* PAGE HEADER */
-.page-header{padding:20px 20px 14px;display:flex;align-items:center;gap:14px}
-.page-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.page-title{font-size:22px;font-weight:800}
-.page-sub{font-size:13px;color:var(--muted);margin-top:2px}
+/* ── HERO HEADER ── */
+.hero{padding:0 16px 16px;margin-bottom:4px}
+.hero-inner{background:var(--grad);border-radius:24px;padding:20px 20px 18px;color:#fff;position:relative;overflow:hidden}
+.hero-inner::after{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:rgba(255,255,255,.1);border-radius:50%}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.hero-greeting{font-size:13px;opacity:.85}
+.hero-title{font-size:24px;font-weight:900;line-height:1.2;margin-top:2px}
+.hero-sub{font-size:12px;opacity:.8;margin-top:3px}
+.lang-btn{background:rgba(255,255,255,.2);border:none;border-radius:12px;padding:5px 10px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.hero-stats{display:flex;gap:10px;margin-top:14px}
+.hero-stat{background:rgba(255,255,255,.2);border-radius:12px;padding:8px 12px;flex:1;text-align:center}
+.hero-stat-val{font-size:18px;font-weight:900}
+.hero-stat-lbl{font-size:10px;opacity:.8;margin-top:1px}
 
-/* CARDS */
-.card{background:var(--white);border-radius:18px;padding:16px 18px;margin:0 16px 12px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
-.card-sm{background:var(--white);border-radius:14px;padding:13px 15px;margin:0 16px 10px;box-shadow:0 1px 8px rgba(0,0,0,.04)}
-.grad-card{background:var(--grad);border-radius:18px;padding:18px;margin:0 16px 12px;color:#fff}
-.section-label{font-size:11px;font-weight:700;letter-spacing:1px;color:var(--muted);text-transform:uppercase;padding:0 20px;margin:16px 0 8px}
+/* ── SECTION LABEL ── */
+.sec{font-size:11px;font-weight:800;letter-spacing:.8px;color:var(--muted);text-transform:uppercase;padding:16px 20px 8px;display:flex;justify-content:space-between;align-items:center}
+.sec-link{font-size:12px;color:var(--pink);font-weight:700;cursor:pointer;letter-spacing:0;text-transform:none}
 
-/* PILLS */
+/* ── CARDS ── */
+.card{background:var(--white);border-radius:18px;padding:16px 18px;margin:0 16px 12px;box-shadow:0 2px 16px rgba(0,0,0,.05)}
+.card-sm{background:var(--white);border-radius:14px;padding:12px 15px;margin:0 16px 10px;box-shadow:0 1px 8px rgba(0,0,0,.04)}
+.card-row{display:flex;gap:10px;padding:0 16px;margin-bottom:12px}
+.card-half{background:var(--white);border-radius:16px;padding:14px;flex:1;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+
+/* ── MENU CARDS (home) ── */
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px;margin-bottom:12px}
+.menu-tile{background:var(--white);border-radius:18px;padding:16px 14px;box-shadow:0 2px 12px rgba(0,0,0,.05);cursor:pointer;transition:transform .15s,box-shadow .15s;display:flex;flex-direction:column;gap:8px}
+.menu-tile:active{transform:scale(.96);box-shadow:0 1px 6px rgba(0,0,0,.08)}
+.menu-tile-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.menu-tile-title{font-size:14px;font-weight:800;color:var(--text)}
+.menu-tile-sub{font-size:11px;color:var(--muted);margin-top:1px;line-height:1.4}
+.tip-banner{background:linear-gradient(135deg,#fef9c3,#fef3c7);border:1px solid #fde68a;border-radius:16px;padding:13px 15px;margin:0 16px 12px;display:flex;gap:10px;align-items:flex-start}
+.reminder-banner{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:12px 16px;margin:0 16px 14px;font-size:13px;color:#15803d;line-height:1.5}
+
+/* ── WORKOUT CARDS ── */
+.workout-scroll{display:flex;gap:12px;padding:0 16px 4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-bottom:4px}
+.workout-scroll::-webkit-scrollbar{display:none}
+.plan-card{min-width:160px;border-radius:18px;padding:16px;color:#fff;flex-shrink:0;cursor:pointer;position:relative;overflow:hidden;transition:transform .15s}
+.plan-card:active{transform:scale(.96)}
+.plan-card-icon{font-size:28px;margin-bottom:8px}
+.plan-card-title{font-size:14px;font-weight:800;line-height:1.2;margin-bottom:4px}
+.plan-card-meta{font-size:11px;opacity:.85}
+.plan-card::after{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:rgba(255,255,255,.15);border-radius:50%}
+
+.ex-card{background:var(--white);border-radius:18px;margin:0 16px 12px;box-shadow:0 2px 12px rgba(0,0,0,.06);overflow:hidden}
+.ex-anim-area{width:100%;height:150px;position:relative;overflow:hidden;background:linear-gradient(160deg,#0f1e3a,#0a2a4a);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.yt-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);opacity:0;transition:opacity .2s;flex-direction:column;gap:6px}
+.ex-anim-area:hover .yt-overlay,.ex-anim-area:active .yt-overlay{opacity:1}
+.yt-play-btn{width:48px;height:48px;background:#ff0000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 16px rgba(255,0,0,.4)}
+.yt-hint{color:#fff;font-size:11px;font-weight:600}
+.ex-anim-label{position:absolute;bottom:8px;left:10px;background:rgba(0,0,0,.5);color:rgba(255,255,255,.85);font-size:10px;padding:3px 7px;border-radius:5px;pointer-events:none}
+.ex-level-badge{position:absolute;top:8px;left:10px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:7px}
+.badge-fudud,.badge-easy{background:rgba(34,197,94,.9);color:#fff}
+.badge-dhexdhexaad,.badge-medium{background:rgba(251,146,60,.9);color:#fff}
+.badge-adag,.badge-hard{background:rgba(239,68,68,.9);color:#fff}
+.ex-body{padding:12px 14px}
+.ex-name{font-size:15px;font-weight:800;margin-bottom:4px}
+.ex-desc{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:8px}
+.ex-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.ex-tag{font-size:11px;background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:6px}
+.ex-sets{display:flex;gap:8px;margin-bottom:8px}
+.ex-set-badge{background:#fef2f2;color:var(--pink);font-size:12px;font-weight:700;padding:4px 10px;border-radius:8px}
+.ex-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ex-time{font-size:12px;color:var(--muted)}
+.ex-actions{display:flex;gap:8px}
+.btn-yt{background:#ff0000;color:#fff;border:none;border-radius:9px;padding:7px 11px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:4px;text-decoration:none}
+.btn-start{background:var(--grad);color:#fff;border:none;border-radius:9px;padding:7px 13px;font-size:13px;font-weight:700;cursor:pointer}
+.btn-start.done{background:linear-gradient(135deg,#22c55e,#16a34a)}
+
+/* ── PILLS ── */
 .pills{display:flex;gap:8px;padding:0 16px;margin-bottom:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .pills::-webkit-scrollbar{display:none}
 .pill{padding:7px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--white);color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0}
 .pill.active{background:var(--pink);border-color:var(--pink);color:#fff}
 
-/* PROGRESS RING */
+/* ── PROGRESS RING ── */
 .ring-wrap{position:relative;width:52px;height:52px;flex-shrink:0}
 .ring-wrap svg{transform:rotate(-90deg)}
-.ring-wrap .ring-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.ring-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
 
-/* EXERCISE CARD */
-.ex-card{background:var(--white);border-radius:18px;margin:0 16px 12px;box-shadow:0 2px 12px rgba(0,0,0,.06);overflow:hidden}
-.ex-anim-area{width:100%;height:160px;position:relative;overflow:hidden;background:linear-gradient(160deg,#0f1e3a 0%,#0a2a4a 100%);display:flex;align-items:center;justify-content:center;cursor:pointer}
-.ex-anim-area .yt-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);opacity:0;transition:opacity .2s;flex-direction:column;gap:8px}
-.ex-anim-area:hover .yt-overlay,.ex-anim-area:active .yt-overlay{opacity:1}
-.yt-play-btn{width:52px;height:52px;background:#ff0000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 4px 16px rgba(255,0,0,.4)}
-.yt-hint{color:#fff;font-size:12px;font-weight:600}
-.ex-anim-label{position:absolute;bottom:10px;left:12px;background:rgba(0,0,0,.5);color:rgba(255,255,255,.8);font-size:11px;padding:3px 8px;border-radius:6px;pointer-events:none}
-.ex-level-badge{position:absolute;top:10px;left:12px;font-size:10px;font-weight:700;padding:3px 9px;border-radius:8px}
-.badge-fudud{background:rgba(34,197,94,.9);color:#fff}
-.badge-dhexdhexaad{background:rgba(251,146,60,.9);color:#fff}
-.badge-adag{background:rgba(239,68,68,.9);color:#fff}
-.ex-body{padding:14px 15px}
-.ex-name{font-size:15px;font-weight:800;margin-bottom:5px}
-.ex-desc{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:10px}
-.ex-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
-.ex-tag{font-size:11px;background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:6px}
-.ex-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.ex-time{font-size:12px;color:var(--muted)}
-.ex-actions{display:flex;gap:8px}
-.btn-yt{background:#ff0000;color:#fff;border:none;border-radius:10px;padding:8px 13px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;text-decoration:none}
-.btn-bilow{background:var(--grad);color:#fff;border:none;border-radius:10px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer}
-.btn-bilow.done{background:linear-gradient(135deg,#22c55e,#16a34a)}
+/* ── FOOD ── */
+.food-card{background:var(--white);border-radius:16px;padding:0;margin:0 16px 12px;box-shadow:0 2px 12px rgba(0,0,0,.05);overflow:hidden;cursor:pointer}
+.food-card-top{display:flex;gap:12px;align-items:center;padding:13px 15px 10px}
+.food-icon-box{font-size:30px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:#fafafa;border-radius:12px}
+.food-info{flex:1}
+.food-name{font-size:15px;font-weight:700;margin-bottom:4px}
+.food-goal-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:3px}
+.food-goal-tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px}
+.tag-wl{background:#fef2f2;color:#dc2626}
+.tag-mg{background:#eff6ff;color:#1d4ed8}
+.tag-hh{background:#fdf2f8;color:#be185d}
+.tag-pp{background:#f0fdf4;color:#16a34a}
+.food-kcal{font-size:16px;font-weight:900;color:var(--orange);white-space:nowrap}
+.food-macros{display:flex;gap:0;border-top:1px solid #f5f5f5;padding:8px 15px}
+.food-macro{flex:1;text-align:center;border-right:1px solid #f5f5f5}
+.food-macro:last-child{border-right:none}
+.food-macro-val{font-size:13px;font-weight:800;color:var(--text)}
+.food-macro-lbl{font-size:10px;color:var(--muted);margin-top:1px}
+.food-detail{padding:10px 15px 12px;border-top:1px solid #f5f5f5;display:none}
+.food-detail.open{display:block}
+.food-detail-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;color:var(--muted)}
+.food-detail-row span:last-child{color:var(--text);font-weight:600}
+.food-warning{background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:7px 10px;font-size:11px;color:#9a3412;margin-top:8px}
+.food-good{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:7px 10px;font-size:11px;color:#15803d;margin-top:6px}
+.meal-tabs{display:flex;gap:8px;margin:0 16px 12px}
+.meal-tab{flex:1;text-align:center;padding:10px 4px;border-radius:12px;border:1.5px solid var(--border);background:var(--white);cursor:pointer;font-size:12px;font-weight:700;color:var(--muted);transition:all .2s}
+.meal-tab.active{background:var(--pink);border-color:var(--pink);color:#fff}
 
-/* ═══ CSS EXERCISE ANIMATIONS ═══ */
+/* ── SCHEDULE ── */
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:0 16px;margin-bottom:14px}
+.day-cell{background:var(--white);border-radius:12px;padding:8px 4px;text-align:center;box-shadow:0 1px 6px rgba(0,0,0,.04);cursor:pointer;transition:all .2s;border:1.5px solid transparent}
+.day-cell.active{border-color:var(--pink);background:#fef2f2}
+.day-cell.rest{background:#f9fafb}
+.day-name{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.day-icon{font-size:16px}
+.day-type{font-size:8px;color:var(--muted);margin-top:3px;line-height:1.2}
+.schedule-card{background:var(--white);border-radius:16px;margin:0 16px 10px;box-shadow:0 1px 8px rgba(0,0,0,.05);overflow:hidden}
+.schedule-header{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #f5f5f5}
+.schedule-day-badge{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.schedule-body{padding:10px 14px 12px}
+.schedule-ex{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid #f9f9f9}
+.schedule-ex:last-child{border-bottom:none}
+.schedule-ex-num{width:22px;height:22px;border-radius:6px;background:var(--grad);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ── PROGRESS ── */
+.progress-hero{background:var(--grad2);border-radius:20px;padding:18px;margin:0 16px 14px;color:#fff}
+.streak-row{display:flex;gap:10px;padding:0 16px;margin-bottom:12px}
+.streak-card{background:var(--white);border-radius:16px;padding:14px;flex:1;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.streak-val{font-size:28px;font-weight:900}
+.streak-lbl{font-size:11px;color:var(--muted);margin-top:2px}
+.weight-chart-wrap{background:var(--white);border-radius:18px;padding:16px;margin:0 16px 12px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.weight-list{display:flex;flex-direction:column;gap:8px;padding:0 16px}
+.weight-entry{background:var(--white);border-radius:12px;padding:11px 15px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.weight-kg{font-size:20px;font-weight:800}
+.weight-date{font-size:11px;color:var(--muted)}
+.weight-diff{font-size:12px;font-weight:700;padding:3px 8px;border-radius:8px}
+.diff-up{background:#fee2e2;color:#dc2626}
+.diff-down{background:#dcfce7;color:#16a34a}
+.weight-empty{text-align:center;padding:40px 20px;color:var(--muted)}
+
+/* ── PLANNER ── */
+.kal-bar{height:8px;background:#f3f4f6;border-radius:4px;overflow:hidden;margin:8px 0}
+.kal-fill{height:100%;background:var(--grad);border-radius:4px;transition:width .5s}
+.kal-stats{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px}
+.water-drops{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.drop{font-size:22px;opacity:.2;cursor:pointer;transition:opacity .2s}
+.drop.filled{opacity:1}
+.counter-row{display:flex;align-items:center;gap:12px;justify-content:center;margin-top:8px}
+.counter-btn{width:34px;height:34px;border-radius:50%;border:2px solid var(--border);background:var(--white);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.counter-val{font-size:13px;color:var(--muted);font-weight:500;min-width:160px;text-align:center}
+.plan-meal{background:var(--white);border-radius:14px;margin:0 16px 8px;box-shadow:0 1px 6px rgba(0,0,0,.04);overflow:hidden}
+.plan-meal-header{padding:11px 14px;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;border-bottom:1px solid #f9f0ee}
+.plan-meal-body{padding:11px 14px;font-size:13px;color:var(--muted)}
+.plan-meal-body .selected{color:var(--text);font-weight:600}
+.btn-pick{background:#fef2f2;color:var(--pink);border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;margin-left:auto}
+.timing-card{background:var(--white);border-radius:14px;padding:11px 15px;margin:0 16px 8px;display:flex;gap:10px;align-items:flex-start;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.timing-text{font-size:13px;color:var(--muted);line-height:1.5;flex:1}
+.timing-text strong{color:var(--text);display:block;margin-bottom:2px}
+
+/* ── MODALS ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-end;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:24px 24px 0 0;padding:22px 20px 40px;width:100%;max-width:480px;transform:translateY(100%);transition:transform .3s ease}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal h3{font-size:17px;font-weight:800;margin-bottom:14px}
+.modal input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:12px;font-size:16px;margin-bottom:12px;outline:none;background:#fafafa}
+.modal input:focus{border-color:var(--pink)}
+.modal-btns{display:flex;gap:10px}
+.modal-btns button{flex:1;padding:12px;border-radius:12px;border:none;font-size:15px;font-weight:700;cursor:pointer}
+.btn-cancel{background:#f3f4f6;color:var(--muted)}
+.btn-save{background:var(--grad);color:#fff}
+.food-select-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--border);cursor:pointer;transition:border-color .15s,background .15s;margin-bottom:8px}
+.food-select-item:hover,.food-select-item:active{border-color:var(--pink);background:#fef9f9}
+
+/* ── BUTTONS ── */
+.btn-primary{background:var(--grad);color:#fff;border:none;border-radius:12px;padding:12px 20px;font-size:14px;font-weight:700;cursor:pointer;width:100%}
+.btn-secondary{background:#f3f4f6;color:var(--text);border:none;border-radius:12px;padding:12px 20px;font-size:14px;font-weight:700;cursor:pointer;width:100%}
+.btn-kudar{background:var(--grad);color:#fff;border:none;border-radius:11px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:95px;left:50%;transform:translateX(-50%) translateY(30px);background:#1a1a2e;color:#fff;padding:10px 20px;border-radius:12px;font-size:13px;font-weight:600;z-index:400;opacity:0;transition:all .3s;white-space:nowrap;pointer-events:none;max-width:90vw}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── UPDATE BANNER ── */
+#update-banner{position:fixed;top:0;left:50%;transform:translateX(-50%) translateY(-100%);width:100%;max-width:480px;z-index:1000;background:linear-gradient(135deg,#1a1a2e,#2d1b4e);color:#fff;padding:11px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:transform .4s cubic-bezier(.4,0,.2,1)}
+#update-banner.show{transform:translateX(-50%) translateY(0)}
+.btn-upd-refresh{background:#f87171;color:#fff;border:none;border-radius:8px;padding:6px 13px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.btn-upd-dismiss{background:none;border:none;color:rgba(255,255,255,.5);font-size:18px;cursor:pointer;padding:0 4px;flex-shrink:0}
+
+/* ── PWA BANNER ── */
+#pwa-banner{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:480px;z-index:999;background:#fff;border-top:2px solid var(--pink);border-radius:20px 20px 0 0;box-shadow:0 -4px 24px rgba(248,113,113,.2);padding:14px 18px 22px;display:flex;align-items:center;gap:12px;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+#pwa-banner.show{transform:translateX(-50%) translateY(0)}
+.pwa-btns{display:flex;flex-direction:column;gap:6px;flex-shrink:0}
+.btn-pwa-install{background:var(--grad);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.btn-pwa-dismiss{background:none;border:none;color:#9ca3af;font-size:12px;cursor:pointer}
+
+/* ── iOS HINT ── */
+#ios-hint{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:480px;z-index:999;background:#1a1a2e;color:#fff;border-radius:20px 20px 0 0;box-shadow:0 -4px 24px rgba(0,0,0,.35);padding:18px 20px 30px;transition:transform .4s cubic-bezier(.4,0,.2,1);display:none}
+#ios-hint.show{transform:translateX(-50%) translateY(0)}
+.ios-close{float:right;background:none;border:none;color:#9ca3af;font-size:22px;cursor:pointer}
+.ios-arrow{text-align:center;font-size:24px;margin-top:8px;animation:ios-bounce .8s ease-in-out infinite alternate}
+@keyframes ios-bounce{from{transform:translateY(0)}to{transform:translateY(6px)}}
+
+/* ══ CSS ANIMATIONS ══ */
 .w-bg{position:absolute;inset:0;background:linear-gradient(180deg,#0f1e3a,#0d2a4a)}
-/* PLANK */
 .anim-plank{width:200px;height:80px;position:relative;margin:auto}
-.plank-body{position:absolute;width:100px;height:18px;background:linear-gradient(90deg,#f87171,#fb923c);border-radius:8px;top:30px;left:50px;animation:plank-shake 3s ease-in-out infinite}
+.plank-body{position:absolute;width:100px;height:18px;background:var(--grad);border-radius:8px;top:30px;left:50px;animation:plank-shake 3s ease-in-out infinite}
 .plank-head{position:absolute;width:22px;height:22px;background:#f5c5a0;border-radius:50%;top:25px;left:28px;border:3px solid #f87171}
 .plank-arm1,.plank-arm2{position:absolute;width:28px;height:8px;background:#c0392b;border-radius:4px}
 .plank-arm1{top:44px;left:34px;transform:rotate(-40deg);transform-origin:right}
 .plank-arm2{top:44px;left:62px;transform:rotate(40deg);transform-origin:left}
 .plank-leg{position:absolute;width:50px;height:8px;background:#e74c3c;border-radius:4px;top:44px;left:148px}
 .plank-toes{position:absolute;width:8px;height:16px;background:#c0392b;border-radius:4px;top:36px;left:192px}
-@keyframes plank-shake{0%,100%{transform:rotate(0deg)}50%{transform:rotate(1deg)}}
-.plank-sweat{position:absolute;width:5px;height:5px;background:#60a5fa;border-radius:50%;top:20px;left:36px;animation:sweat 2s infinite}
-@keyframes sweat{0%{opacity:0;transform:translateY(0)}50%{opacity:1}100%{opacity:0;transform:translateY(15px)}}
-/* SQUATS */
+@keyframes plank-shake{0%,100%{transform:rotate(0)}50%{transform:rotate(1deg)}}
 .anim-squat{width:80px;height:100px;position:relative;margin:auto;animation:squat-move 1.8s ease-in-out infinite}
 @keyframes squat-move{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.72) translateY(14px)}}
 .sq-head{position:absolute;width:22px;height:22px;background:#f5c5a0;border-radius:50%;top:0;left:29px;border:3px solid #f87171}
-.sq-body{position:absolute;width:30px;height:32px;background:linear-gradient(180deg,#f87171,#fb923c);border-radius:8px;top:22px;left:25px}
+.sq-body{position:absolute;width:30px;height:32px;background:var(--grad);border-radius:8px;top:22px;left:25px}
 .sq-arm1,.sq-arm2{position:absolute;width:18px;height:8px;background:#e74c3c;border-radius:4px;top:28px}
 .sq-arm1{left:8px;transform:rotate(20deg)}.sq-arm2{left:54px;transform:rotate(-20deg)}
 .sq-leg1,.sq-leg2{position:absolute;width:12px;height:40px;background:#c0392b;border-radius:6px;top:52px}
@@ -108,19 +271,16 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .sq-leg2{left:40px;transform-origin:top;animation:sqleg2 1.8s ease-in-out infinite}
 @keyframes sqleg1{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(-40deg)}}
 @keyframes sqleg2{0%,100%{transform:rotate(5deg)}50%{transform:rotate(40deg)}}
-/* CRUNCHES */
 .anim-crunch{width:160px;height:80px;position:relative;margin:auto}
-.cr-torso{position:absolute;width:60px;height:16px;background:linear-gradient(90deg,#f87171,#fb923c);border-radius:8px;top:30px;left:50px;animation:crunch-move 1.5s ease-in-out infinite;transform-origin:right}
-@keyframes crunch-move{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-35deg)}}
+.cr-torso{position:absolute;width:60px;height:16px;background:var(--grad);border-radius:8px;top:30px;left:50px;animation:crunch-move 1.5s ease-in-out infinite;transform-origin:right}
+@keyframes crunch-move{0%,100%{transform:rotate(0)}50%{transform:rotate(-35deg)}}
 .cr-head{position:absolute;width:20px;height:20px;background:#f5c5a0;border-radius:50%;top:25px;left:34px;animation:crunch-head 1.5s ease-in-out infinite}
 @keyframes crunch-head{0%,100%{top:25px}50%{top:12px}}
 .cr-legs{position:absolute;width:70px;height:14px;background:#e74c3c;border-radius:6px;top:40px;left:108px;transform:rotate(-15deg)}
 .cr-lower{position:absolute;width:50px;height:14px;background:#c0392b;border-radius:6px;top:50px;left:138px}
-.cr-floor{position:absolute;bottom:10px;left:0;right:0;height:3px;background:rgba(255,255,255,.15);border-radius:2px}
-/* MARCHING */
 .anim-march{width:60px;height:100px;position:relative;margin:auto}
 .ma-head{position:absolute;width:20px;height:20px;background:#f5c5a0;border-radius:50%;top:2px;left:20px;border:3px solid #f87171}
-.ma-body{position:absolute;width:24px;height:28px;background:linear-gradient(180deg,#f87171,#fb923c);border-radius:6px;top:22px;left:18px}
+.ma-body{position:absolute;width:24px;height:28px;background:var(--grad);border-radius:6px;top:22px;left:18px}
 .ma-arm1,.ma-arm2{position:absolute;width:10px;height:22px;background:#e74c3c;border-radius:5px;top:24px}
 .ma-arm1{left:8px;transform-origin:top;animation:march-arm1 .6s ease-in-out infinite}
 .ma-arm2{left:42px;transform-origin:top;animation:march-arm2 .6s ease-in-out infinite}
@@ -131,41 +291,36 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .ma-leg2{left:28px;transform-origin:top;animation:march-leg2 .6s ease-in-out infinite}
 @keyframes march-leg1{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(35deg)}}
 @keyframes march-leg2{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-35deg)}}
-/* PUSHUP */
 .anim-pushup{width:200px;height:80px;position:relative;margin:auto;animation:pushup-move 1.5s ease-in-out infinite}
 @keyframes pushup-move{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}
 .pu-head{position:absolute;width:20px;height:20px;background:#f5c5a0;border-radius:50%;top:12px;left:16px;border:3px solid #f87171}
-.pu-body{position:absolute;width:90px;height:16px;background:linear-gradient(90deg,#f87171,#fb923c);border-radius:8px;top:22px;left:36px}
+.pu-body{position:absolute;width:90px;height:16px;background:var(--grad);border-radius:8px;top:22px;left:36px}
 .pu-arm1,.pu-arm2{position:absolute;width:26px;height:8px;background:#e74c3c;border-radius:4px;top:32px;transform:rotate(-50deg);transform-origin:right;animation:pu-arm 1.5s ease-in-out infinite}
 .pu-arm1{left:22px}.pu-arm2{left:60px}
 @keyframes pu-arm{0%,100%{transform:rotate(-50deg)}50%{transform:rotate(-70deg)}}
 .pu-legs{position:absolute;width:70px;height:14px;background:#c0392b;border-radius:6px;top:26px;left:124px}
 .pu-feet{position:absolute;width:10px;height:20px;background:#a93226;border-radius:4px;top:15px;left:186px}
-/* JUMPING JACKS */
 .anim-jj{width:80px;height:110px;position:relative;margin:auto;animation:jj-bounce .6s ease-in-out infinite}
 @keyframes jj-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .jj-head{position:absolute;width:22px;height:22px;background:#f5c5a0;border-radius:50%;top:0;left:29px;border:3px solid #a855f7}
-.jj-body{position:absolute;width:24px;height:28px;background:linear-gradient(180deg,#a855f7,#7c3aed);border-radius:6px;top:22px;left:28px}
+.jj-body{position:absolute;width:24px;height:28px;background:var(--grad2);border-radius:6px;top:22px;left:28px}
 .jj-arm1,.jj-arm2{position:absolute;width:28px;height:8px;background:#7c3aed;border-radius:4px;top:26px;transform-origin:center;animation:jj-arms .6s ease-in-out infinite}
 .jj-arm1{left:2px}.jj-arm2{left:50px}
-@keyframes jj-arms{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-50deg)}}
+@keyframes jj-arms{0%,100%{transform:rotate(0)}50%{transform:rotate(-50deg)}}
 .jj-leg1,.jj-leg2{position:absolute;width:12px;height:38px;background:#6d28d9;border-radius:5px;top:48px;transform-origin:top}
 .jj-leg1{left:20px;animation:jj-leg1a .6s ease-in-out infinite}
 .jj-leg2{left:48px;animation:jj-leg2a .6s ease-in-out infinite}
-@keyframes jj-leg1a{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-30deg)}}
-@keyframes jj-leg2a{0%,100%{transform:rotate(0deg)}50%{transform:rotate(30deg)}}
-/* LEG RAISES */
+@keyframes jj-leg1a{0%,100%{transform:rotate(0)}50%{transform:rotate(-30deg)}}
+@keyframes jj-leg2a{0%,100%{transform:rotate(0)}50%{transform:rotate(30deg)}}
 .anim-legraise{width:180px;height:80px;position:relative;margin:auto}
-.lr-body{position:absolute;width:80px;height:16px;background:linear-gradient(90deg,#a855f7,#7c3aed);border-radius:8px;top:35px;left:40px}
+.lr-body{position:absolute;width:80px;height:16px;background:var(--grad2);border-radius:8px;top:35px;left:40px}
 .lr-head{position:absolute;width:20px;height:20px;background:#f5c5a0;border-radius:50%;top:25px;left:24px;border:3px solid #a855f7}
 .lr-legs{position:absolute;width:60px;height:14px;background:#7c3aed;border-radius:6px;top:35px;left:118px;transform-origin:left;animation:legraise 1.8s ease-in-out infinite}
-@keyframes legraise{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-60deg)}}
-.lr-floor{position:absolute;bottom:8px;left:0;right:0;height:3px;background:rgba(255,255,255,.15);border-radius:2px}
-/* BRISK WALK */
+@keyframes legraise{0%,100%{transform:rotate(0)}50%{transform:rotate(-60deg)}}
 .anim-walk{width:60px;height:100px;position:relative;margin:auto;animation:walk-sway 1s ease-in-out infinite}
 @keyframes walk-sway{0%,100%{transform:translateX(-8px)}50%{transform:translateX(8px)}}
 .wk-head{position:absolute;width:20px;height:20px;background:#f5c5a0;border-radius:50%;top:0;left:20px;border:3px solid #14b8a6}
-.wk-body{position:absolute;width:22px;height:26px;background:linear-gradient(180deg,#14b8a6,#0d9488);border-radius:6px;top:20px;left:19px}
+.wk-body{position:absolute;width:22px;height:26px;background:var(--grad3);border-radius:6px;top:20px;left:19px}
 .wk-arm1,.wk-arm2{position:absolute;width:8px;height:20px;background:#0d9488;border-radius:4px;top:22px}
 .wk-arm1{left:11px;transform-origin:top;animation:wkarm1 .5s ease-in-out infinite}
 .wk-arm2{left:41px;transform-origin:top;animation:wkarm2 .5s ease-in-out infinite}
@@ -176,15 +331,12 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .wk-leg2{left:27px;transform-origin:top;animation:wkleg2 .5s ease-in-out infinite}
 @keyframes wkleg1{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(25deg)}}
 @keyframes wkleg2{0%,100%{transform:rotate(20deg)}50%{transform:rotate(-25deg)}}
-/* SUPERMAN */
 .anim-superman{width:180px;height:70px;position:relative;margin:auto}
 .sm-body{position:absolute;width:80px;height:16px;background:linear-gradient(90deg,#3b82f6,#6366f1);border-radius:8px;top:28px;left:50px;animation:superman-lift 2s ease-in-out infinite}
 @keyframes superman-lift{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .sm-head{position:absolute;width:20px;height:20px;background:#f5c5a0;border-radius:50%;top:22px;left:34px;animation:superman-lift 2s ease-in-out infinite}
 .sm-arms{position:absolute;width:50px;height:10px;background:#4f46e5;border-radius:5px;top:28px;left:0;animation:superman-lift 2s ease-in-out infinite}
 .sm-legs{position:absolute;width:50px;height:12px;background:#4338ca;border-radius:6px;top:28px;left:128px;animation:superman-lift 2s ease-in-out infinite}
-.sm-floor{position:absolute;bottom:6px;left:0;right:0;height:3px;background:rgba(255,255,255,.15);border-radius:2px}
-/* LUNGES */
 .anim-lunge{width:80px;height:100px;position:relative;margin:auto;animation:lunge-switch 1.8s ease-in-out infinite}
 @keyframes lunge-switch{0%,100%{transform:scaleX(1)}50%{transform:scaleX(-1)}}
 .lu-head{position:absolute;width:20px;height:20px;background:#f5c5a0;border-radius:50%;top:0;left:30px;border:3px solid #fb923c}
@@ -193,7 +345,6 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .lu-bleg{position:absolute;width:12px;height:36px;background:#c2410c;border-radius:5px;top:44px;left:40px;transform:rotate(25deg);transform-origin:top}
 .lu-arm1,.lu-arm2{position:absolute;width:8px;height:20px;background:#f97316;border-radius:4px;top:24px}
 .lu-arm1{left:21px;transform:rotate(20deg)}.lu-arm2{left:51px;transform:rotate(-20deg)}
-/* MOUNTAIN CLIMBERS */
 .anim-mc{width:200px;height:80px;position:relative;margin:auto}
 .mc-body{position:absolute;width:90px;height:16px;background:linear-gradient(90deg,#ef4444,#f97316);border-radius:8px;top:20px;left:54px}
 .mc-head{position:absolute;width:20px;height:20px;background:#f5c5a0;border-radius:50%;top:14px;left:36px;border:3px solid #ef4444}
@@ -203,748 +354,637 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .mc-leg2{position:absolute;width:30px;height:11px;background:#a93226;border-radius:6px;top:26px;left:90px;transform-origin:right;animation:mcleg2 .5s ease-in-out infinite}
 @keyframes mcleg1{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-25deg)}}
 @keyframes mcleg2{0%,100%{transform:rotate(-20deg)}50%{transform:rotate(20deg)}}
-/* BURPEES */
 .anim-burpee{width:80px;height:110px;position:relative;margin:auto;animation:burpee-cycle 2.4s ease-in-out infinite}
-@keyframes burpee-cycle{
-  0%,10%{transform:translateY(0) scaleY(1)}
-  25%,35%{transform:translateY(30px) scaleY(.5)}
-  50%,60%{transform:translateY(28px) scaleY(.45)}
-  75%,85%{transform:translateY(30px) scaleY(.5)}
-  100%{transform:translateY(-18px) scaleY(1.05)}
-}
+@keyframes burpee-cycle{0%,10%{transform:translateY(0) scaleY(1)}25%,35%{transform:translateY(30px) scaleY(.5)}50%,60%{transform:translateY(28px) scaleY(.45)}75%,85%{transform:translateY(30px) scaleY(.5)}100%{transform:translateY(-18px) scaleY(1.05)}}
 .bu-head{position:absolute;width:22px;height:22px;background:#f5c5a0;border-radius:50%;top:0;left:29px;border:3px solid #ef4444}
 .bu-body{position:absolute;width:24px;height:28px;background:linear-gradient(180deg,#ef4444,#f97316);border-radius:6px;top:22px;left:28px}
 .bu-leg1,.bu-leg2{position:absolute;width:12px;height:36px;background:#c0392b;border-radius:5px;top:48px}
 .bu-leg1{left:22px}.bu-leg2{left:46px}
 .bu-arms{position:absolute;width:50px;height:8px;background:#dc2626;border-radius:4px;top:28px;left:15px;animation:bu-arms 2.4s ease-in-out infinite}
-@keyframes bu-arms{0%,85%,100%{transform:rotate(0deg)}50%{transform:rotate(90deg)}}
-.bu-star{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:16px;animation:star-show 2.4s infinite}
-@keyframes star-show{0%,80%{opacity:0;transform:translateX(-50%) translateY(0)}88%,95%{opacity:1;transform:translateX(-50%) translateY(-8px)}100%{opacity:0}}
-
-/* FOOD */
-.food-card{background:var(--white);border-radius:16px;padding:13px 15px;margin:0 16px 10px;box-shadow:0 1px 8px rgba(0,0,0,.04);display:flex;gap:12px;align-items:center}
-.food-icon{font-size:32px;width:46px;height:46px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:#fafafa;border-radius:12px}
-.food-body{flex:1}
-.food-name{font-size:15px;font-weight:700;margin-bottom:3px}
-.food-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px}
-.badge-caafimaad{background:#dcfce7;color:#16a34a}
-.badge-borotiinka{background:#dbeafe;color:#1d4ed8}
-.badge-fudud2{background:#fef9c3;color:#a16207}
-.food-desc{font-size:12px;color:var(--muted);line-height:1.4}
-.food-kcal{font-size:15px;font-weight:800;color:var(--orange);display:flex;align-items:center;gap:3px;white-space:nowrap}
-.meal-tabs{display:flex;gap:8px;margin:0 16px 12px}
-.meal-tab{flex:1;text-align:center;padding:10px 6px;border-radius:12px;border:1.5px solid var(--border);background:var(--white);cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:all .2s}
-.meal-tab.active{background:var(--pink);border-color:var(--pink);color:#fff}
-
-/* WATER */
-.water-drops{display:flex;gap:8px;justify-content:center;margin:10px 0}
-.drop{font-size:24px;opacity:.25;cursor:pointer;transition:opacity .2s}
-.drop.filled{opacity:1}
-.counter-row{display:flex;align-items:center;gap:14px;justify-content:center;margin-top:10px}
-.counter-btn{width:36px;height:36px;border-radius:50%;border:2px solid var(--border);background:var(--white);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted)}
-.counter-val{font-size:14px;color:var(--muted);font-weight:500;min-width:180px;text-align:center}
-
-/* WEIGHT */
-.weight-empty{text-align:center;padding:50px 20px;color:var(--muted)}
-.weight-empty .big-icon{font-size:48px;margin-bottom:14px;opacity:.4}
-.btn-kudar{background:var(--grad);color:#fff;border:none;border-radius:12px;padding:10px 20px;font-size:14px;font-weight:700;cursor:pointer}
-.weight-list{display:flex;flex-direction:column;gap:8px;padding:0 16px}
-.weight-entry{background:var(--white);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 6px rgba(0,0,0,.04)}
-.weight-kg{font-size:22px;font-weight:800}
-.weight-date{font-size:12px;color:var(--muted)}
-.weight-diff{font-size:12px;font-weight:700;padding:3px 8px;border-radius:8px}
-.diff-up{background:#fee2e2;color:#dc2626}
-.diff-down{background:#dcfce7;color:#16a34a}
-
-/* HOME */
-.home-greeting{padding:24px 20px 8px}
-.home-greeting-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.home-greeting-text p{font-size:15px;color:var(--muted)}
-.home-greeting-text h1{font-size:28px;font-weight:900}
-.home-greeting-text small{font-size:13px;color:var(--muted);display:block;margin-top:3px}
-.tip-card{background:var(--grad);border-radius:18px;padding:16px 18px;margin:0 16px 14px;color:#fff;display:flex;gap:12px;align-items:flex-start}
-.menu-card{background:var(--white);border-radius:18px;padding:15px 18px;margin:0 16px 10px;box-shadow:0 1px 8px rgba(0,0,0,.05);display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .2s}
-.menu-card:active{transform:scale(.98)}
-.menu-icon-box{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.menu-title{font-size:16px;font-weight:700}
-.menu-sub{font-size:12px;color:var(--muted);margin-top:2px}
-.reminder-card{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:16px;padding:14px 18px;margin:0 16px 14px;font-size:13px;color:#15803d;line-height:1.5}
-
-/* QORSHE */
-.kal-bar{height:8px;background:#f3f4f6;border-radius:4px;overflow:hidden;margin:8px 0}
-.kal-fill{height:100%;background:var(--grad);border-radius:4px;transition:width .5s}
-.kal-stats{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px}
-.plan-meal{background:var(--white);border-radius:14px;margin:0 16px 8px;box-shadow:0 1px 6px rgba(0,0,0,.04);overflow:hidden}
-.plan-meal-header{padding:12px 14px;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;border-bottom:1px solid #f9f0ee}
-.plan-meal-body{padding:12px 14px;font-size:13px;color:var(--muted)}
-.plan-meal-body .selected{color:var(--text);font-weight:600}
-.btn-door{background:#fef2f2;color:var(--pink);border:none;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;margin-left:auto}
-.timing-card{background:var(--white);border-radius:14px;padding:12px 16px;margin:0 16px 8px;display:flex;gap:10px;align-items:flex-start;box-shadow:0 1px 6px rgba(0,0,0,.04)}
-.timing-text{font-size:13px;color:var(--muted);line-height:1.5}
-.timing-text strong{color:var(--text);display:block;margin-bottom:2px}
-
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-end;justify-content:center}
-.modal-overlay.open{display:flex}
-.modal{background:#fff;border-radius:24px 24px 0 0;padding:24px 20px 40px;width:100%;max-width:480px;transform:translateY(100%);transition:transform .3s ease}
-.modal-overlay.open .modal{transform:translateY(0)}
-.modal h3{font-size:18px;font-weight:800;margin-bottom:14px}
-.modal input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:12px;font-size:16px;margin-bottom:12px;outline:none;background:#fafafa}
-.modal input:focus{border-color:var(--pink)}
-.modal-btns{display:flex;gap:10px}
-.modal-btns button{flex:1;padding:12px;border-radius:12px;border:none;font-size:15px;font-weight:700;cursor:pointer}
-.btn-cancel{background:#f3f4f6;color:var(--muted)}
-.btn-save{background:var(--grad);color:#fff}
-
-/* LANG TOGGLE */
-.lang-toggle{background:rgba(255,255,255,.9);border:1.5px solid var(--border);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.07);display:flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0;margin-top:4px}
-
-/* TOAST */
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(40px);background:#1a1a2e;color:#fff;padding:10px 20px;border-radius:12px;font-size:13px;font-weight:600;z-index:300;opacity:0;transition:all .3s;white-space:nowrap;pointer-events:none}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* UPDATE BANNER */
-#update-banner{
-  position:fixed;top:0;left:50%;transform:translateX(-50%) translateY(-100%);
-  width:100%;max-width:480px;z-index:1000;
-  background:linear-gradient(135deg,#1a1a2e,#2d1b4e);
-  color:#fff;padding:12px 16px;
-  display:flex;align-items:center;gap:10px;
-  box-shadow:0 4px 20px rgba(0,0,0,.3);
-  transition:transform .4s cubic-bezier(.4,0,.2,1);
-}
-#update-banner.show{transform:translateX(-50%) translateY(0)}
-#update-banner .upd-icon{font-size:20px;flex-shrink:0}
-#update-banner .upd-text{flex:1;font-size:13px;font-weight:600}
-#update-banner .upd-text small{display:block;font-size:11px;opacity:.7;font-weight:400;margin-top:1px}
-.btn-upd-refresh{background:#f87171;color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
-.btn-upd-dismiss{background:none;border:none;color:rgba(255,255,255,.5);font-size:18px;cursor:pointer;padding:0 4px;flex-shrink:0}
-
-/* PWA INSTALL BANNER */
-#pwa-banner{
-  position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);
-  width:100%;max-width:480px;z-index:999;
-  background:#fff;border-top:2px solid var(--pink);
-  border-radius:20px 20px 0 0;
-  box-shadow:0 -4px 24px rgba(248,113,113,.2);
-  padding:14px 18px 22px;
-  display:flex;align-items:center;gap:12px;
-  transition:transform .4s cubic-bezier(.4,0,.2,1);
-}
-#pwa-banner.show{transform:translateX(-50%) translateY(0)}
-#pwa-banner .pwa-icon{font-size:38px;flex-shrink:0}
-#pwa-banner .pwa-text{flex:1}
-#pwa-banner .pwa-title{font-size:15px;font-weight:800;color:#1a1a2e}
-#pwa-banner .pwa-sub{font-size:12px;color:#9ca3af;margin-top:2px}
-#pwa-banner .pwa-btns{display:flex;flex-direction:column;gap:7px;flex-shrink:0}
-.btn-pwa-install{background:var(--grad);color:#fff;border:none;border-radius:10px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
-.btn-pwa-dismiss{background:none;border:none;color:#9ca3af;font-size:12px;cursor:pointer;text-align:center}
-
-/* iOS HINT */
-#ios-hint{
-  position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);
-  width:100%;max-width:480px;z-index:999;
-  background:#1a1a2e;color:#fff;
-  border-radius:20px 20px 0 0;
-  box-shadow:0 -4px 24px rgba(0,0,0,.35);
-  padding:18px 20px 30px;
-  transition:transform .4s cubic-bezier(.4,0,.2,1);
-  display:none;
-}
-#ios-hint.show{transform:translateX(-50%) translateY(0)}
-.ios-close{float:right;background:none;border:none;color:#9ca3af;font-size:22px;cursor:pointer;margin-top:-4px}
-.ios-title{font-size:15px;font-weight:800;color:#f87171;margin-bottom:10px}
-.ios-step{font-size:14px;line-height:2;color:#e5e7eb}
-.ios-step strong{color:#fff}
-.ios-arrow{text-align:center;font-size:26px;margin-top:8px;animation:ios-bounce .8s ease-in-out infinite alternate}
-@keyframes ios-bounce{from{transform:translateY(0)}to{transform:translateY(7px)}}
+@keyframes bu-arms{0%,85%,100%{transform:rotate(0)}50%{transform:rotate(90deg)}}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="page-bg"></div>
-  <div class="scroll" id="mainScroll">
+<div class="scroll" id="mainScroll">
 
-    <!-- HOME -->
-    <div class="page active" id="page-home">
-      <div class="home-greeting">
-        <div class="home-greeting-top">
-          <div class="home-greeting-text">
-            <p id="txt-hi">Ahlan wasahlan 👋</p>
-            <h1 id="txt-h1">Hooyada Caafimaadka</h1>
-            <small id="txt-small">Jimicsi fudud. Cunto caafimaad leh. Nolol wanaagsan.</small>
-          </div>
-          <div class="lang-toggle" id="langToggle" onclick="toggleLang()">🇸🇴 SO → EN</div>
-        </div>
-      </div>
-      <div class="tip-card">
-        <div style="font-size:22px;margin-top:2px">⭐</div>
+<!-- ══ HOME ══ -->
+<div class="page active" id="page-home">
+  <div style="height:16px"></div>
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-top">
         <div>
-          <div id="txt-tip-label" style="font-size:10px;font-weight:800;letter-spacing:1.5px;opacity:.8;margin-bottom:4px">TALADA MAANTA</div>
-          <div style="font-size:14px;font-weight:600;line-height:1.5" id="dailyTip"></div>
+          <div class="hero-greeting" id="txt-hi">Welcome 👋</div>
+          <div class="hero-title" id="txt-h1">HooyoFit</div>
+          <div class="hero-sub" id="txt-small">Easy workouts. Healthy food. Better life.</div>
         </div>
+        <button class="lang-btn" id="langToggle" onclick="toggleLang()">🇸🇴 Somali</button>
       </div>
-      <div class="menu-card" onclick="goPage('jimicsi')">
-        <div class="menu-icon-box" style="background:linear-gradient(135deg,#fde8e8,#fef3e8)">💪</div>
-        <div style="flex:1"><div class="menu-title" id="mc1t">Jimicsiga</div><div class="menu-sub" id="mc1s">Jimicsi fudud oo guriga ah</div></div>
-        <div style="color:var(--muted);font-size:20px">›</div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-val" id="h-streak">0🔥</div><div class="hero-stat-lbl" id="h-streak-lbl">Day Streak</div></div>
+        <div class="hero-stat"><div class="hero-stat-val" id="h-done">0💪</div><div class="hero-stat-lbl" id="h-done-lbl">Done Today</div></div>
+        <div class="hero-stat"><div class="hero-stat-val" id="h-water">0💧</div><div class="hero-stat-lbl" id="h-water-lbl">Cups Water</div></div>
       </div>
-      <div class="menu-card" onclick="goPage('miisaan')">
-        <div class="menu-icon-box" style="background:linear-gradient(135deg,#f3e8ff,#e0d2fe)">⚖️</div>
-        <div style="flex:1"><div class="menu-title" id="mc2t">Miisaanka</div><div class="menu-sub" id="mc2s">Dul socodsii miisaankaaga</div></div>
-        <div style="color:var(--muted);font-size:20px">›</div>
-      </div>
-      <div class="menu-card" onclick="goPage('cunto')">
-        <div class="menu-icon-box" style="background:linear-gradient(135deg,#fef3e8,#fde8c8)">🍽️</div>
-        <div style="flex:1"><div class="menu-title" id="mc3t">Cuntada</div><div class="menu-sub" id="mc3s">Cunto caafimaad ah oo Soomaali ah</div></div>
-        <div style="color:var(--muted);font-size:20px">›</div>
-      </div>
-      <div class="menu-card" onclick="goPage('qorshe')">
-        <div class="menu-icon-box" style="background:linear-gradient(135deg,#e0f2fe,#bae6fd)">📅</div>
-        <div style="flex:1"><div class="menu-title" id="mc4t">Qorshe Cunto</div><div class="menu-sub" id="mc4s">Door cuntada maalinlaha ah</div></div>
-        <div style="color:var(--muted);font-size:20px">›</div>
-      </div>
-      <div class="reminder-card" id="txt-reminder"><strong>Xusuusnow:</strong> Xitaa 15 daqiiqo jimicsi maalin kasta waxay hagaajisaa caafimaadkaaga iyo xaaladaada maskaxeed!</div>
     </div>
+  </div>
+  <div class="tip-banner">
+    <div style="font-size:20px;flex-shrink:0">⭐</div>
+    <div><div style="font-size:10px;font-weight:800;letter-spacing:1px;color:#92400e;margin-bottom:3px" id="txt-tip-label">TIP OF THE DAY</div><div style="font-size:13px;font-weight:600;color:#78350f;line-height:1.5" id="dailyTip"></div></div>
+  </div>
+  <div class="sec" id="txt-quick-nav">QUICK ACCESS</div>
+  <div class="menu-grid">
+    <div class="menu-tile" onclick="goPage('workouts')">
+      <div class="menu-tile-icon" style="background:linear-gradient(135deg,#fde8e8,#fef3e8)">💪</div>
+      <div><div class="menu-tile-title" id="mn-w">Workouts</div><div class="menu-tile-sub" id="mn-ws">Programs & exercises</div></div>
+    </div>
+    <div class="menu-tile" onclick="goPage('nutrition')">
+      <div class="menu-tile-icon" style="background:linear-gradient(135deg,#fef3e8,#fde8c8)">🍽️</div>
+      <div><div class="menu-tile-title" id="mn-n">Nutrition</div><div class="menu-tile-sub" id="mn-ns">Healthy Somali food</div></div>
+    </div>
+    <div class="menu-tile" onclick="goPage('progress')">
+      <div class="menu-tile-icon" style="background:linear-gradient(135deg,#f3e8ff,#e0d2fe)">📈</div>
+      <div><div class="menu-tile-title" id="mn-p">Progress</div><div class="menu-tile-sub" id="mn-ps">Weight & streaks</div></div>
+    </div>
+    <div class="menu-tile" onclick="goPage('schedule')">
+      <div class="menu-tile-icon" style="background:linear-gradient(135deg,#e0f2fe,#bae6fd)">📅</div>
+      <div><div class="menu-tile-title" id="mn-s">Schedule</div><div class="menu-tile-sub" id="mn-ss">Weekly plan & meals</div></div>
+    </div>
+  </div>
+  <div class="reminder-banner" id="txt-reminder"><strong>Remember:</strong> Even 15 minutes of exercise daily improves your health and mental wellbeing!</div>
+</div>
 
-    <!-- JIMICSI -->
-    <div class="page" id="page-jimicsi">
-      <div class="page-header">
-        <div class="page-icon" style="background:linear-gradient(135deg,#fde8e8,#fef3e8)">💪</div>
-        <div><div class="page-title" id="ex-title">Jimicsiga Guriga</div><div class="page-sub" id="ex-sub">Hooyada Caafimaadka 💪</div></div>
-      </div>
-      <div class="grad-card" style="display:flex;align-items:center;gap:16px">
-        <div style="flex:1">
-          <div style="font-size:13px;opacity:.85;margin-bottom:6px" id="ex-prog-label">Horumarka Maanta</div>
-          <div style="font-size:26px;font-weight:900" id="jimicsiProgress">0/12 Jimicsi</div>
-          <div style="font-size:13px;opacity:.8;margin-top:4px">⏰ <span id="jimicsiDone">0 la dhammeeyay</span></div>
+<!-- ══ WORKOUTS ══ -->
+<div class="page" id="page-workouts">
+  <div style="height:16px"></div>
+  <div class="hero" style="padding-bottom:12px">
+    <div class="hero-inner" style="padding:16px 18px">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:13px;opacity:.85" id="ex-sub">HooyoFit 💪</div>
+          <div style="font-size:20px;font-weight:900" id="ex-title">Home Workouts</div>
         </div>
         <div class="ring-wrap">
-          <svg width="52" height="52" viewBox="0 0 52 52">
-            <circle cx="26" cy="26" r="22" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="4"/>
-            <circle cx="26" cy="26" r="22" fill="none" stroke="#fff" stroke-width="4"
-              stroke-dasharray="138.2" id="ringDash" stroke-dashoffset="138.2" stroke-linecap="round"/>
-          </svg>
+          <svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="22" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="4"/><circle cx="26" cy="26" r="22" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="138.2" id="ringDash" stroke-dashoffset="138.2" stroke-linecap="round"/></svg>
           <div class="ring-pct" id="ringPct">0%</div>
         </div>
       </div>
-      <div class="card-sm" style="background:#fffbeb;border:1px solid #fef08a">
-        <span id="ex-tip" style="font-size:13px;color:#92400e">💡 <strong>Talo:</strong> Bilowga waxaad ku bilaabi kartaa 10 daqiiqo maalin kasta. Si tartiib ah kor u qaad!</span>
-      </div>
-      <div class="section-label" id="heer-label">Heerka Adkaanta</div>
-      <div class="pills" id="heerPills">
-        <div class="pill active" onclick="filterEx('heer','dhammaan',this)" id="hp0">Dhammaan</div>
-        <div class="pill" onclick="filterEx('heer','fudud',this)" id="hp1">🌱 Fudud</div>
-        <div class="pill" onclick="filterEx('heer','dhexdhexaad',this)" id="hp2">🔥 Dhexdhexaad</div>
-        <div class="pill" onclick="filterEx('heer','adag',this)" id="hp3">💪 Adag</div>
-      </div>
-      <div class="section-label" id="nooc-label">Nooca Jimicsiga</div>
-      <div class="pills" id="noocPills">
-        <div class="pill active" onclick="filterEx('nooc','all',this)" id="np0">Nooc Kasta</div>
-        <div class="pill" onclick="filterEx('nooc','caloosha',this)" id="np1">🫃 Caloosha</div>
-        <div class="pill" onclick="filterEx('nooc','lugaha',this)" id="np2">🦵 Lugaha</div>
-        <div class="pill" onclick="filterEx('nooc','dhabarka',this)" id="np3">🔙 Dhabarka</div>
-        <div class="pill" onclick="filterEx('nooc','xawaaraha',this)" id="np4">❤️ Xawaaraha</div>
-      </div>
-      <div id="exerciseList"></div>
-    </div>
-
-    <!-- MIISAAN -->
-    <div class="page" id="page-miisaan">
-      <div class="page-header">
-        <div class="page-icon" style="background:linear-gradient(135deg,#f3e8ff,#e0d2fe)">⚖️</div>
-        <div style="flex:1"><div class="page-title" id="w-title">Miisaanka</div><div class="page-sub" id="w-sub">Horumarkaaga la socod</div></div>
-        <button class="btn-kudar" id="w-add-btn" onclick="openWeightModal()">+ Kudar</button>
-      </div>
-      <div class="section-label" id="w-history-label">Taariikhda</div>
-      <div id="weightContent"></div>
-    </div>
-
-    <!-- CUNTO -->
-    <div class="page" id="page-cunto">
-      <div class="page-header">
-        <div class="page-icon" style="background:linear-gradient(135deg,#fef3e8,#fde8c8)">🍽️</div>
-        <div><div class="page-title" id="f-title">Cuntada Soomaalida</div><div class="page-sub" id="f-sub">Cunto caafimaad leh oo dhaqameedka ah 🍽️</div></div>
-      </div>
-      <div class="meal-tabs">
-        <div class="meal-tab active" onclick="switchMeal('quraac',this)" id="mt0">☀️ Quraac</div>
-        <div class="meal-tab" onclick="switchMeal('qado',this)" id="mt1">🌤️ Qado</div>
-        <div class="meal-tab" onclick="switchMeal('casho',this)" id="mt2">🌙 Casho</div>
-      </div>
-      <div class="card-sm" style="background:#fff7ed;border:1px solid #fed7aa;display:flex;justify-content:space-between;align-items:center">
-        <span style="font-size:13px;color:#9a3412" id="f-kcal-label">Wadarta Kaloriyada:</span>
-        <span style="font-size:18px;font-weight:800;color:var(--orange)">🔥 <span id="totalKcal">0</span> kcal</span>
-      </div>
-      <div class="card-sm" style="background:#f0fdf4;border:1px solid #bbf7d0">
-        <span id="f-tip" style="font-size:13px;color:#15803d">💡 <strong>Talo:</strong> Ku dadaal inaad cuntada ku bilowdo xagga saadka. Cuntada casho waxay fiican tahay in ay fudud noqoto.</span>
-      </div>
-      <div id="foodList"></div>
-    </div>
-
-    <!-- QORSHE -->
-    <div class="page" id="page-qorshe">
-      <div class="page-header">
-        <div class="page-icon" style="background:linear-gradient(135deg,#e0f2fe,#bae6fd)">📅</div>
-        <div><div class="page-title" id="q-title">Qorshe Cunto</div><div class="page-sub" id="qorsheDateSub">Door cuntada maanta</div></div>
-      </div>
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-          <span style="font-size:15px;font-weight:700" id="q-kcal-label">🔥 Kaloriyada Maanta</span>
-          <span style="font-size:15px;font-weight:800;color:var(--orange)" id="qorsheKcal">0 / 1500 kcal</span>
-        </div>
-        <div class="kal-bar"><div class="kal-fill" id="kalFill" style="width:0%"></div></div>
-        <div class="kal-stats"><span id="kalLeft">✅ 1500 kcal wali harta</span><span id="q-goal-label">Hadaf: 1500 kcal</span></div>
-      </div>
-      <div class="card-sm" style="background:#fefce8;border:1px solid #fef08a">
-        <span id="q-tip" style="font-size:13px;color:#713f12">💡 <strong>Hadaf:</strong> 1,500 kcal maalin kasta waa qiyaas caafimaadka leh dumarka.</span>
-      </div>
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <span style="font-size:15px;font-weight:700" id="water-label">💧 Biyo Cabashada 💧</span>
-          <span style="font-size:14px;font-weight:700;color:var(--blue)" id="waterCount">0/8 koob</span>
-        </div>
-        <div class="water-drops" id="waterDrops"></div>
-        <div class="kal-bar"><div class="kal-fill" id="waterFill" style="width:0%;background:linear-gradient(90deg,#60a5fa,#3b82f6)"></div></div>
-        <div class="counter-row">
-          <button class="counter-btn" onclick="changeWater(-1)">−</button>
-          <span class="counter-val" id="waterMsg">Wali 8 koob baan u baahantahay</span>
-          <button class="counter-btn" onclick="changeWater(1)">+</button>
-        </div>
-        <div style="text-align:center;font-size:12px;color:var(--blue);margin-top:8px" id="water-tip">💡 Biyo cab ka hor jimicsiga, intuu socdo, iyo ka dib</div>
-      </div>
-      <div class="section-label" id="timing-label">Cuntada &amp; Jimicsiga 🏃‍♀️</div>
-      <div class="timing-card">
-        <div style="font-size:20px">⏰</div>
-        <div class="timing-text"><strong id="t1-title">Ka Hor Jimicsiga (1-2 saac)</strong><span id="t1-body">Cunto fudud oo kaloriyad yar. Ha cunin cunto culus.</span></div>
-      </div>
-      <div class="timing-card">
-        <div style="font-size:20px">🏁</div>
-        <div class="timing-text"><strong id="t2-title">Ka Dib Jimicsiga (30 daqiiqo gudahood)</strong><span id="t2-body">Borotiinka iyo kaarbohaydreed fudud. Caano ama beed.</span></div>
-      </div>
-      <div class="plan-meal">
-        <div class="plan-meal-header">☀️ <span id="pq-label">Quraac</span><button class="btn-door" id="pq-btn" onclick="planSelect('quraac')">Door</button></div>
-        <div class="plan-meal-body" id="planQuraac">Cunto lama doorin — Guji "Door"</div>
-      </div>
-      <div class="plan-meal">
-        <div class="plan-meal-header">🌤️ <span id="pqd-label">Qado</span><button class="btn-door" id="pqd-btn" onclick="planSelect('qado')">Door</button></div>
-        <div class="plan-meal-body" id="planQado">Cunto lama doorin — Guji "Door"</div>
-      </div>
-      <div class="plan-meal" style="margin-bottom:16px">
-        <div class="plan-meal-header">🌙 <span id="pc-label">Casho</span><button class="btn-door" id="pc-btn" onclick="planSelect('casho')">Door</button></div>
-        <div class="plan-meal-body" id="planCasho">Cunto lama doorin — Guji "Door"</div>
-      </div>
-    </div>
-
-  </div><!-- /scroll -->
-
-  <nav class="nav">
-    <button class="nav-item active" data-page="home" onclick="goPage('home')">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span id="nav0">Hore</span>
-    </button>
-    <button class="nav-item" data-page="jimicsi" onclick="goPage('jimicsi')">
-      <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-      <span id="nav1">Jimicsi</span>
-    </button>
-    <button class="nav-item" data-page="miisaan" onclick="goPage('miisaan')">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      <span id="nav2">Miisaan</span>
-    </button>
-    <button class="nav-item" data-page="cunto" onclick="goPage('cunto')">
-      <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
-      <span id="nav3">Cunto</span>
-    </button>
-    <button class="nav-item" data-page="qorshe" onclick="goPage('qorshe')">
-      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      <span id="nav4">Qorshe</span>
-    </button>
-  </nav>
-
-  <!-- WEIGHT MODAL -->
-  <div class="modal-overlay" id="weightModal" onclick="closeModal(event)">
-    <div class="modal">
-      <h3 id="w-modal-title">⚖️ Miisaanka Kudar</h3>
-      <input type="number" id="weightInput" placeholder="Miisaankaaga (kg)" step="0.1" min="20" max="300"/>
-      <div class="modal-btns">
-        <button class="btn-cancel" id="w-cancel" onclick="closeWeightModal()">Jooji</button>
-        <button class="btn-save" id="w-save" onclick="saveWeight()">Kaydi</button>
-      </div>
+      <div style="margin-top:10px;font-size:13px;opacity:.85">💪 <span id="jimicsiProgress">0/12</span> · ⏰ <span id="jimicsiDone">0 done today</span></div>
     </div>
   </div>
 
-  <!-- FOOD SELECT MODAL -->
-  <div class="modal-overlay" id="foodModal" onclick="closeModal(event)">
-    <div class="modal">
-      <h3 id="foodModalTitle">☀️ Quraac Door</h3>
-      <div id="foodSelectList" style="max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-bottom:14px"></div>
-      <button class="btn-cancel" id="food-close-btn" style="width:100%" onclick="closeFoodModal()">Xir</button>
+  <div class="sec" id="lbl-programs">WORKOUT PROGRAMS</div>
+  <div class="workout-scroll" id="planScroll"></div>
+
+  <div class="sec" id="lbl-exercises">ALL EXERCISES</div>
+  <div class="pills" id="heerPills">
+    <div class="pill active" onclick="filterEx('heer','all',this)" id="hp0">All</div>
+    <div class="pill" onclick="filterEx('heer','easy',this)" id="hp1">🌱 Easy</div>
+    <div class="pill" onclick="filterEx('heer','medium',this)" id="hp2">🔥 Medium</div>
+    <div class="pill" onclick="filterEx('heer','hard',this)" id="hp3">💪 Hard</div>
+  </div>
+  <div class="pills" id="noocPills">
+    <div class="pill active" onclick="filterEx('nooc','all',this)" id="np0">All Types</div>
+    <div class="pill" onclick="filterEx('nooc','core',this)" id="np1">🫃 Core</div>
+    <div class="pill" onclick="filterEx('nooc','legs',this)" id="np2">🦵 Legs</div>
+    <div class="pill" onclick="filterEx('nooc','back',this)" id="np3">🔙 Back</div>
+    <div class="pill" onclick="filterEx('nooc','cardio',this)" id="np4">❤️ Cardio</div>
+  </div>
+  <div id="exerciseList"></div>
+</div>
+
+<!-- ══ PROGRESS ══ -->
+<div class="page" id="page-progress">
+  <div style="height:16px"></div>
+  <div style="padding:0 16px 14px">
+    <div class="progress-hero">
+      <div style="font-size:13px;opacity:.85;margin-bottom:4px" id="prog-sub">Your Progress</div>
+      <div style="font-size:22px;font-weight:900" id="prog-title">Weight Tracker</div>
+      <div style="font-size:13px;opacity:.8;margin-top:6px" id="prog-tip">Track your weight to see your journey 📈</div>
     </div>
   </div>
+  <div class="streak-row">
+    <div class="streak-card"><div class="streak-val" id="streak-val">0🔥</div><div class="streak-lbl" id="streak-lbl">Day Streak</div></div>
+    <div class="streak-card"><div class="streak-val" id="total-done-val">0</div><div class="streak-lbl" id="total-done-lbl">Total Workouts</div></div>
+    <div class="streak-card"><div class="streak-val" id="weight-count-val">0</div><div class="streak-lbl" id="weight-count-lbl">Entries</div></div>
+  </div>
+  <div class="weight-chart-wrap" id="weightChartWrap">
+    <div style="font-size:14px;font-weight:700;margin-bottom:10px" id="chart-lbl">Weight History</div>
+    <canvas id="weightChart" height="120"></canvas>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:0 20px;margin-bottom:8px">
+    <div class="sec" style="padding:0" id="w-history-label">HISTORY</div>
+    <button class="btn-kudar" id="w-add-btn" onclick="openWeightModal()">+ Add Weight</button>
+  </div>
+  <div id="weightContent"></div>
+</div>
 
-  <div class="toast" id="toast"></div>
+<!-- ══ NUTRITION ══ -->
+<div class="page" id="page-nutrition">
+  <div style="height:16px"></div>
+  <div style="padding:0 16px 12px">
+    <div style="background:linear-gradient(135deg,#fff7ed,#fef3c7);border-radius:20px;padding:18px 18px 14px">
+      <div style="font-size:13px;color:#92400e;margin-bottom:3px" id="f-sub">HooyoFit 🍽️</div>
+      <div style="font-size:20px;font-weight:900;color:#78350f" id="f-title">Somali Nutrition</div>
+    </div>
+  </div>
+  <div class="meal-tabs">
+    <div class="meal-tab active" onclick="switchMeal('breakfast',this)" id="mt0">☀️ Breakfast</div>
+    <div class="meal-tab" onclick="switchMeal('lunch',this)" id="mt1">🌤️ Lunch</div>
+    <div class="meal-tab" onclick="switchMeal('dinner',this)" id="mt2">🌙 Dinner</div>
+  </div>
+  <div class="card-sm" style="background:#fff7ed;border:1px solid #fed7aa;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <span style="font-size:13px;color:#9a3412" id="f-kcal-label">Avg Calories:</span>
+    <span style="font-size:17px;font-weight:800;color:var(--orange)">🔥 <span id="totalKcal">0</span> kcal</span>
+  </div>
+  <div class="card-sm" style="background:#f0fdf4;border:1px solid #bbf7d0;margin-bottom:4px">
+    <span id="f-tip" style="font-size:13px;color:#15803d">💡 <strong>Tip:</strong> Try to eat more at breakfast. Keep dinner light.</span>
+  </div>
+  <div id="foodList"></div>
+</div>
+
+<!-- ══ SCHEDULE ══ -->
+<div class="page" id="page-schedule">
+  <div style="height:16px"></div>
+  <div style="padding:0 16px 12px">
+    <div style="background:linear-gradient(135deg,#e0f2fe,#ddd6fe);border-radius:20px;padding:18px">
+      <div style="font-size:13px;color:#1e40af;margin-bottom:3px" id="q-sub">Plan your week</div>
+      <div style="font-size:20px;font-weight:900;color:#1e3a8a" id="q-title">Weekly Schedule</div>
+    </div>
+  </div>
+  <div class="sec" id="lbl-week">THIS WEEK</div>
+  <div class="week-grid" id="weekGrid"></div>
+  <div class="sec" id="lbl-today-plan">TODAY'S PLAN</div>
+  <div id="todaySchedule"></div>
+
+  <div class="sec" id="lbl-meals">MEAL PLANNER</div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+      <span style="font-size:14px;font-weight:700" id="q-kcal-label">🔥 Today's Calories</span>
+      <span style="font-size:14px;font-weight:800;color:var(--orange)" id="qorsheKcal">0 / 1500 kcal</span>
+    </div>
+    <div class="kal-bar"><div class="kal-fill" id="kalFill" style="width:0%"></div></div>
+    <div class="kal-stats"><span id="kalLeft">✅ 1500 kcal remaining</span><span id="q-goal-label">Goal: 1500 kcal</span></div>
+  </div>
+  <div class="plan-meal">
+    <div class="plan-meal-header">☀️ <span id="pq-label">Breakfast</span><button class="btn-pick" id="pq-btn" onclick="planSelect('breakfast')">Pick</button></div>
+    <div class="plan-meal-body" id="planBreakfast">No meal selected — tap "Pick"</div>
+  </div>
+  <div class="plan-meal">
+    <div class="plan-meal-header">🌤️ <span id="pqd-label">Lunch</span><button class="btn-pick" id="pqd-btn" onclick="planSelect('lunch')">Pick</button></div>
+    <div class="plan-meal-body" id="planLunch">No meal selected — tap "Pick"</div>
+  </div>
+  <div class="plan-meal" style="margin-bottom:12px">
+    <div class="plan-meal-header">🌙 <span id="pc-label">Dinner</span><button class="btn-pick" id="pc-btn" onclick="planSelect('dinner')">Pick</button></div>
+    <div class="plan-meal-body" id="planDinner">No meal selected — tap "Pick"</div>
+  </div>
+
+  <div class="card" style="margin-bottom:12px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <span style="font-size:14px;font-weight:700" id="water-label">💧 Water Intake</span>
+      <span style="font-size:13px;font-weight:700;color:var(--blue)" id="waterCount">0/8 cups</span>
+    </div>
+    <div class="water-drops" id="waterDrops"></div>
+    <div class="kal-bar"><div class="kal-fill" id="waterFill" style="width:0%;background:linear-gradient(90deg,#60a5fa,#3b82f6)"></div></div>
+    <div class="counter-row">
+      <button class="counter-btn" onclick="changeWater(-1)">−</button>
+      <span class="counter-val" id="waterMsg">Need 8 more cups</span>
+      <button class="counter-btn" onclick="changeWater(1)">+</button>
+    </div>
+  </div>
+  <div class="timing-card"><div style="font-size:20px">⏰</div><div class="timing-text"><strong id="t1-title">Before Exercise (1-2 hrs)</strong><span id="t1-body">Light, low-calorie meal. Avoid heavy food.</span></div></div>
+  <div class="timing-card" style="margin-bottom:16px"><div style="font-size:20px">🏁</div><div class="timing-text"><strong id="t2-title">After Exercise (within 30 min)</strong><span id="t2-body">Protein and simple carbs. Milk or eggs.</span></div></div>
+</div>
+
+</div><!-- /scroll -->
+
+<!-- ── BOTTOM NAV ── -->
+<nav class="nav">
+  <button class="nav-item active" data-page="home" onclick="goPage('home')">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span id="nav0">Home</span>
+  </button>
+  <button class="nav-item" data-page="workouts" onclick="goPage('workouts')">
+    <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    <span id="nav1">Workouts</span>
+  </button>
+  <button class="nav-item" data-page="progress" onclick="goPage('progress')">
+    <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    <span id="nav2">Progress</span>
+  </button>
+  <button class="nav-item" data-page="nutrition" onclick="goPage('nutrition')">
+    <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
+    <span id="nav3">Nutrition</span>
+  </button>
+  <button class="nav-item" data-page="schedule" onclick="goPage('schedule')">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <span id="nav4">Schedule</span>
+  </button>
+</nav>
+
+<!-- WEIGHT MODAL -->
+<div class="modal-overlay" id="weightModal" onclick="closeModal(event)">
+  <div class="modal">
+    <h3 id="w-modal-title">⚖️ Add Weight</h3>
+    <input type="number" id="weightInput" placeholder="Your weight (kg)" step="0.1" min="20" max="300"/>
+    <div class="modal-btns">
+      <button class="btn-cancel" id="w-cancel" onclick="closeWeightModal()">Cancel</button>
+      <button class="btn-save" id="w-save" onclick="saveWeight()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOD PICK MODAL -->
+<div class="modal-overlay" id="foodModal" onclick="closeModal(event)">
+  <div class="modal">
+    <h3 id="foodModalTitle">Pick a Meal</h3>
+    <div id="foodSelectList" style="max-height:320px;overflow-y:auto;margin-bottom:14px"></div>
+    <button class="btn-cancel" id="food-close-btn" style="width:100%;padding:12px;border-radius:12px;border:none;font-size:15px;font-weight:700;cursor:pointer;background:#f3f4f6;color:var(--muted)" onclick="closeFoodModal()">Close</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
 </div>
 
 <!-- UPDATE BANNER -->
 <div id="update-banner">
-  <div class="upd-icon">🆕</div>
-  <div class="upd-text" id="upd-text">Update diyaar ah!<small id="upd-sub">Cusbooneysii si aad u hesho nooca cusub</small></div>
-  <button class="btn-upd-refresh" id="btn-upd-refresh">Cusbooneysii</button>
+  <div style="font-size:18px;flex-shrink:0">🆕</div>
+  <div style="flex:1;font-size:13px;font-weight:600" id="upd-text">Update ready! <small style="display:block;font-size:11px;opacity:.7;font-weight:400" id="upd-sub">Refresh to get the latest version</small></div>
+  <button class="btn-upd-refresh" id="btn-upd-refresh">Refresh</button>
   <button class="btn-upd-dismiss" id="btn-upd-dismiss">✕</button>
 </div>
 
-<!-- PWA INSTALL BANNER -->
+<!-- PWA BANNER -->
 <div id="pwa-banner">
-  <div class="pwa-icon">💪</div>
-  <div class="pwa-text">
-    <div class="pwa-title" id="pwa-title">HooyoFit ku rakib!</div>
-    <div class="pwa-sub" id="pwa-sub">App-ka ku kaydi telefoonkaaga — bilaash!</div>
-  </div>
+  <div style="font-size:36px;flex-shrink:0">💪</div>
+  <div style="flex:1"><div style="font-size:14px;font-weight:800;color:#1a1a2e" id="pwa-title">Install HooyoFit!</div><div style="font-size:12px;color:#9ca3af;margin-top:2px" id="pwa-sub">Save to your phone — free & fast!</div></div>
   <div class="pwa-btns">
-    <button class="btn-pwa-install" id="btn-pwa-install">Rakib</button>
-    <button class="btn-pwa-dismiss" id="btn-pwa-dismiss">Hadda kuma baahno</button>
+    <button class="btn-pwa-install" id="btn-pwa-install">Install</button>
+    <button class="btn-pwa-dismiss" id="btn-pwa-dismiss">Not now</button>
   </div>
 </div>
 
 <!-- iOS HINT -->
 <div id="ios-hint">
   <button class="ios-close" id="ios-close">✕</button>
-  <div class="ios-title">📲 HooyoFit ku rakib iPhone-kaaga</div>
-  <div class="ios-step">1. Taabo <strong>☐ Share</strong> badhanka hoosta</div>
-  <div class="ios-step">2. Dooro <strong>"Add to Home Screen"</strong></div>
-  <div class="ios-step">3. Taabo <strong>"Add"</strong> — diyaar! 🎉</div>
+  <div style="font-size:15px;font-weight:800;color:#f87171;margin-bottom:10px">📲 Install HooyoFit on iPhone</div>
+  <div style="font-size:14px;line-height:2;color:#e5e7eb">1. Tap <strong style="color:#fff">☐ Share</strong> button below<br>2. Choose <strong style="color:#fff">"Add to Home Screen"</strong><br>3. Tap <strong style="color:#fff">"Add"</strong> — done! 🎉</div>
   <div class="ios-arrow">👇</div>
 </div>
 
 <script>
-// ─── LANGUAGE (must be first — used by all render functions) ──────
-// ─── LANGUAGE ─────────────────────────────────────────────────────
-const TRANSLATIONS = {
-  so:{
-    toggle:'🇸🇴 SO → EN',
-    nav:['Hore','Jimicsi','Miisaan','Cunto','Qorshe'],
-    ex_found:'jimicsi la helay', ex_start:'Bilow', ex_done_icon:'✅', ex_yt:'▶ YouTube',
-    ex_progress:(d,t)=>`${d}/${t} Jimicsi`,
-    ex_done_label:(d)=>`${d} la dhammeeyay`,
-    water_left:(n)=>n>0?`Wali ${n} koob baan u baahantahay`:'🎉 Mabrook! 8 koob la cabay!',
-    kcal_left:(n)=>n>0?`✅ ${n} kcal wali harta`:'🎉 Hadafka la gaartay!',
-    plan_empty:'Cunto lama doorin — Guji "Door"',
-    w_empty:'Wali miisaan lama diiwaan gelinin.\nGuji "+ Kudar" si aad u bilowdo!',
-    upd_title:'Update diyaar ah!', upd_sub:'Cusbooneysii si aad u hesho nooca cusub', upd_btn:'Cusbooneysii',
-    pwa_title:'HooyoFit ku rakib!', pwa_sub:'App-ka ku kaydi telefoonkaaga — bilaash!', pwa_install:'Rakib', pwa_later:'Hadda kuma baahno',
-  },
+// ══════════════════════════════════════════════════════════════════
+// TRANSLATIONS — defined first so all functions can use them
+// ══════════════════════════════════════════════════════════════════
+const T = {
   en:{
-    toggle:'🇬🇧 EN → SO',
-    nav:['Home','Exercise','Weight','Food','Planner'],
-    ex_found:'exercises found', ex_start:'Start', ex_done_icon:'✅', ex_yt:'▶ YouTube',
-    ex_progress:(d,t)=>`${d}/${t} Exercises`,
-    ex_done_label:(d)=>`${d} completed`,
-    water_left:(n)=>n>0?`Still need ${n} more cups`:'🎉 Great! 8 cups done!',
+    toggle:'🇸🇴 Somali',
+    hi:'Welcome 👋', h1:'HooyoFit', small:'Easy workouts. Healthy food. Better life.',
+    tip_lbl:'TIP OF THE DAY', quick_nav:'QUICK ACCESS',
+    mn_w:'Workouts', mn_ws:'Programs & exercises',
+    mn_n:'Nutrition', mn_ns:'Healthy Somali food',
+    mn_p:'Progress', mn_ps:'Weight & streaks',
+    mn_s:'Schedule', mn_ss:'Weekly plan & meals',
+    reminder:'<strong>Remember:</strong> Even 15 minutes of exercise daily improves your health and mental wellbeing!',
+    streak_lbl:'Day Streak', done_lbl:'Done Today', water_lbl_h:'Cups Water',
+    lbl_programs:'WORKOUT PROGRAMS', lbl_exercises:'ALL EXERCISES',
+    ex_title:'Home Workouts', ex_sub:'HooyoFit 💪',
+    hp:['All','🌱 Easy','🔥 Medium','💪 Hard'],
+    np:['All Types','🫃 Core','🦵 Legs','🔙 Back','❤️ Cardio'],
+    ex_found:'exercises', ex_start:'Start', ex_yt:'▶ YouTube',
+    ex_progress:(d,t)=>`${d}/${t}`, ex_done:(d)=>`${d} done today`,
+    prog_sub:'Your Progress', prog_title:'Weight Tracker', prog_tip:'Track your weight to see your journey 📈',
+    streak_lbl2:'Day Streak', total_done_lbl:'Total Workouts', weight_count_lbl:'Entries',
+    chart_lbl:'Weight History', w_history:'HISTORY', w_add:'+ Add Weight',
+    w_modal_title:'⚖️ Add Weight', w_placeholder:'Your weight (kg)', w_cancel:'Cancel', w_save:'Save',
+    w_empty:'No entries yet. Tap "+ Add Weight" to start!',
+    f_sub:'HooyoFit 🍽️', f_title:'Somali Nutrition',
+    mt:['☀️ Breakfast','🌤️ Lunch','🌙 Dinner'],
+    f_kcal_lbl:'Avg Calories:', f_tip:'💡 <strong>Tip:</strong> Try to eat more at breakfast. Keep dinner light.',
+    q_sub:'Plan your week', q_title:'Weekly Schedule',
+    lbl_week:'THIS WEEK', lbl_today:'TODAY\'S PLAN', lbl_meals:'MEAL PLANNER',
+    q_kcal_lbl:'🔥 Today\'s Calories', q_goal:'Goal: 1500 kcal',
     kcal_left:(n)=>n>0?`✅ ${n} kcal remaining`:'🎉 Goal reached!',
+    water_label:'💧 Water Intake', water_cups:(n)=>`${n}/8 cups`,
+    water_left:(n)=>n>0?`Need ${n} more cups`:'🎉 8 cups done!',
+    t1_title:'Before Exercise (1-2 hrs)', t1_body:'Light, low-calorie meal. Avoid heavy food.',
+    t2_title:'After Exercise (within 30 min)', t2_body:'Protein and simple carbs. Milk or eggs.',
+    pq:'Breakfast', pqd:'Lunch', pc:'Dinner', pick:'Pick', close:'Close',
     plan_empty:'No meal selected — tap "Pick"',
-    w_empty:'No weight entries yet.\nTap "+ Add" to get started!',
-    upd_title:'Update available!', upd_sub:'Refresh to get the latest version', upd_btn:'Refresh',
+    nav:['Home','Workouts','Progress','Nutrition','Schedule'],
     pwa_title:'Install HooyoFit!', pwa_sub:'Save to your phone — free & fast!', pwa_install:'Install', pwa_later:'Not now',
+    upd_title:'Update ready!', upd_sub:'Refresh to get the latest version', upd_btn:'Refresh',
+    days_short:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    rest:'Rest', tag_wl:'🔥 Weight Loss', tag_mg:'💪 Muscle', tag_hh:'❤️ Heart', tag_pp:'👶 Postpartum',
+    good_for:'Good for:', warning:'⚠️ Note:', portion:'Portion:', sets:'sets', reps:'reps',
+  },
+  so:{
+    toggle:'🇬🇧 English',
+    hi:'Ahlan wasahlan 👋', h1:'Hooyada Caafimaadka', small:'Jimicsi fudud. Cunto caafimaad leh. Nolol wanaagsan.',
+    tip_lbl:'TALADA MAANTA', quick_nav:'FARAGELIN DEGDEG',
+    mn_w:'Jimicsiga', mn_ws:'Barnaamijyada & jimicsiyada',
+    mn_n:'Nafaqada', mn_ns:'Cuntada Soomaalida',
+    mn_p:'Horumar', mn_ps:'Miisaan & isu xigxiga',
+    mn_s:'Jadwal', mn_ss:'Qorshe toddobaadlah & cunto',
+    reminder:'<strong>Xusuusnow:</strong> Xitaa 15 daqiiqo jimicsi maalin kasta waxay hagaajisaa caafimaadkaaga iyo xaaladaada maskaxeed!',
+    streak_lbl:'Maalmo Joogto', done_lbl:'Maanta Dhamaystay', water_lbl_h:'Koob Biyo',
+    lbl_programs:'BARNAAMIJYADA JIMICSIGA', lbl_exercises:'DHAMMAAN JIMICSIYADA',
+    ex_title:'Jimicsiga Guriga', ex_sub:'Hooyada Caafimaadka 💪',
+    hp:['Dhammaan','🌱 Fudud','🔥 Dhexdhexaad','💪 Adag'],
+    np:['Nooc Kasta','🫃 Caloosha','🦵 Lugaha','🔙 Dhabarka','❤️ Xawaaraha'],
+    ex_found:'jimicsi', ex_start:'Bilow', ex_yt:'▶ YouTube',
+    ex_progress:(d,t)=>`${d}/${t}`, ex_done:(d)=>`${d} la dhamaystay`,
+    prog_sub:'Horumarkaaga', prog_title:'Miisaanka', prog_tip:'Raad-raac miisaankaaga 📈',
+    streak_lbl2:'Maalmo Joogto', total_done_lbl:'Jimicsi Guud', weight_count_lbl:'Diiwaanka',
+    chart_lbl:'Taariikhda Miisaanka', w_history:'TAARIIKHDA', w_add:'+ Kudar',
+    w_modal_title:'⚖️ Miisaanka Kudar', w_placeholder:'Miisaankaaga (kg)', w_cancel:'Jooji', w_save:'Kaydi',
+    w_empty:'Wali lama gelin. Taabo "+ Kudar" si aad u bilowdo!',
+    f_sub:'Hooyada Caafimaadka 🍽️', f_title:'Nafaqada Soomaalida',
+    mt:['☀️ Quraac','🌤️ Qado','🌙 Casho'],
+    f_kcal_lbl:'Kaloriyada Celceliska:', f_tip:'💡 <strong>Talo:</strong> Ku dadaal inaad cuntada ku bilowdo xagga saadka. Cuntada casho waxay fiican tahay in ay fudud noqoto.',
+    q_sub:'Qorshee toddobaadkaaga', q_title:'Jadwalka Toddobaadlaha',
+    lbl_week:'TODDOBAADKAN', lbl_today:'QORSHE MAANTA', lbl_meals:'QORSHE CUNTO',
+    q_kcal_lbl:'🔥 Kaloriyada Maanta', q_goal:'Hadaf: 1500 kcal',
+    kcal_left:(n)=>n>0?`✅ ${n} kcal wali harta`:'🎉 Hadafka la gaartay!',
+    water_label:'💧 Biyo Cabashada', water_cups:(n)=>`${n}/8 koob`,
+    water_left:(n)=>n>0?`Wali ${n} koob baan u baahantahay`:'🎉 8 koob la cabay!',
+    t1_title:'Ka Hor Jimicsiga (1-2 saac)', t1_body:'Cunto fudud oo kaloriyad yar. Ha cunin cunto culus.',
+    t2_title:'Ka Dib Jimicsiga (30 daqiiqo gudahood)', t2_body:'Borotiinka iyo kaarbohaydreed fudud. Caano ama beed.',
+    pq:'Quraac', pqd:'Qado', pc:'Casho', pick:'Door', close:'Xir',
+    plan_empty:'Cunto lama doorin — Guji "Door"',
+    nav:['Hore','Jimicsi','Horumar','Nafaqo','Jadwal'],
+    pwa_title:'HooyoFit ku rakib!', pwa_sub:'App-ka ku kaydi — bilaash!', pwa_install:'Rakib', pwa_later:'Hadda kuma baahno',
+    upd_title:'Update diyaar ah!', upd_sub:'Cusbooneysii si aad u hesho nooca cusub', upd_btn:'Cusbooneysii',
+    days_short:['Isn','Tls','Arb','Kha','Jim','Sab','Axd'],
+    rest:'Nasasho', tag_wl:'🔥 Miisaan Dhimis', tag_mg:'💪 Muruqyada', tag_hh:'❤️ Wadnaha', tag_pp:'👶 Dhalasho Kadib',
+    good_for:'Waxay u bashan tahay:', warning:'⚠️ Digniin:', portion:'Qadarka:', sets:'jeer', reps:'mar',
   }
 };
 
-// All static text strings in HTML (id → [so, en])
-const STATIC_TEXT = {
-  'txt-hi':           ['Ahlan wasahlan 👋','Welcome 👋'],
-  'txt-h1':           ['Hooyada Caafimaadka','HooyoFit'],
-  'txt-small':        ['Jimicsi fudud. Cunto caafimaad leh. Nolol wanaagsan.','Easy workouts. Healthy food. Better life.'],
-  'txt-tip-label':    ['TALADA MAANTA','TIP OF THE DAY'],
-  'mc1t':             ['Jimicsiga','Exercises'],
-  'mc1s':             ['Jimicsi fudud oo guriga ah','Easy home workouts'],
-  'mc2t':             ['Miisaanka','Weight Tracker'],
-  'mc2s':             ['Dul socodsii miisaankaaga','Track your progress'],
-  'mc3t':             ['Cuntada','Food'],
-  'mc3s':             ['Cunto caafimaad ah oo Soomaali ah','Healthy Somali meals'],
-  'mc4t':             ['Qorshe Cunto','Meal Planner'],
-  'mc4s':             ['Door cuntada maalinlaha ah','Plan your daily meals'],
-  'ex-title':         ['Jimicsiga Guriga','Home Workouts'],
-  'ex-sub':           ['Hooyada Caafimaadka 💪','HooyoFit 💪'],
-  'ex-prog-label':    ['Horumarka Maanta',"Today's Progress"],
-  'heer-label':       ['Heerka Adkaanta','Difficulty Level'],
-  'nooc-label':       ['Nooca Jimicsiga','Exercise Type'],
-  'hp0':              ['Dhammaan','All'],
-  'hp1':              ['🌱 Fudud','🌱 Easy'],
-  'hp2':              ['🔥 Dhexdhexaad','🔥 Medium'],
-  'hp3':              ['💪 Adag','💪 Hard'],
-  'np0':              ['Nooc Kasta','All Types'],
-  'np1':              ['🫃 Caloosha','🫃 Core'],
-  'np2':              ['🦵 Lugaha','🦵 Legs'],
-  'np3':              ['🔙 Dhabarka','🔙 Back'],
-  'np4':              ['❤️ Xawaaraha','❤️ Cardio'],
-  'w-title':          ['Miisaanka','Weight Tracker'],
-  'w-sub':            ['Horumarkaaga la socod','Track your progress'],
-  'w-add-btn':        ['+ Kudar','+ Add'],
-  'w-history-label':  ['Taariikhda','History'],
-  'w-modal-title':    ['⚖️ Miisaanka Kudar','⚖️ Add Weight'],
-  'w-cancel':         ['Jooji','Cancel'],
-  'w-save':           ['Kaydi','Save'],
-  'f-title':          ['Cuntada Soomaalida','Somali Food'],
-  'f-sub':            ['Cunto caafimaad leh oo dhaqameedka ah 🍽️','Healthy traditional meals 🍽️'],
-  'mt0':              ['☀️ Quraac','☀️ Breakfast'],
-  'mt1':              ['🌤️ Qado','🌤️ Lunch'],
-  'mt2':              ['🌙 Casho','🌙 Dinner'],
-  'f-kcal-label':     ['Wadarta Kaloriyada:','Total Calories:'],
-  'q-title':          ['Qorshe Cunto','Meal Planner'],
-  'q-kcal-label':     ['🔥 Kaloriyada Maanta',"🔥 Today's Calories"],
-  'q-goal-label':     ['Hadaf: 1500 kcal','Goal: 1500 kcal'],
-  'water-label':      ['💧 Biyo Cabashada 💧','💧 Water Intake 💧'],
-  'water-tip':        ['💡 Biyo cab ka hor jimicsiga, intuu socdo, iyo ka dib','💡 Drink water before, during, and after exercise'],
-  'timing-label':     ['Cuntada & Jimicsiga 🏃‍♀️','Food & Exercise 🏃‍♀️'],
-  't1-title':         ['Ka Hor Jimicsiga (1-2 saac)','Before Exercise (1-2 hrs)'],
-  't1-body':          ['Cunto fudud oo kaloriyad yar. Ha cunin cunto culus.','Light, low-calorie meal. Avoid heavy food.'],
-  't2-title':         ['Ka Dib Jimicsiga (30 daqiiqo gudahood)','After Exercise (within 30 min)'],
-  't2-body':          ['Borotiinka iyo kaarbohaydreed fudud. Caano ama beed.','Protein and simple carbs. Milk or eggs.'],
-  'pq-label':         ['Quraac','Breakfast'],
-  'pqd-label':        ['Qado','Lunch'],
-  'pc-label':         ['Casho','Dinner'],
-  'pq-btn':           ['Door','Pick'],
-  'pqd-btn':          ['Door','Pick'],
-  'pc-btn':           ['Door','Pick'],
-  'food-close-btn':   ['Xir','Close'],
-  'nav0':             ['Hore','Home'],
-  'nav1':             ['Jimicsi','Exercise'],
-  'nav2':             ['Miisaan','Weight'],
-  'nav3':             ['Cunto','Food'],
-  'nav4':             ['Qorshe','Planner'],
-};
+let _lang = localStorage.getItem('hf_lang') || 'en';
+const L = () => T[_lang];
 
-const STATIC_HTML = {
-  'txt-reminder':[
-    '<strong>Xusuusnow:</strong> Xitaa 15 daqiiqo jimicsi maalin kasta waxay hagaajisaa caafimaadkaaga iyo xaaladaada maskaxeed!',
-    '<strong>Remember:</strong> Even 15 minutes of exercise daily improves your health and mental wellbeing!'
-  ],
-  'ex-tip':[
-    '💡 <strong>Talo:</strong> Bilowga waxaad ku bilaabi kartaa 10 daqiiqo maalin kasta. Si tartiib ah kor u qaad!',
-    '💡 <strong>Tip:</strong> Start with just 10 minutes a day. Gradually increase over time!'
-  ],
-  'f-tip':[
-    '💡 <strong>Talo:</strong> Ku dadaal inaad cuntada ku bilowdo xagga saadka. Cuntada casho waxay fiican tahay in ay fudud noqoto.',
-    '💡 <strong>Tip:</strong> Try to eat more at breakfast. Keep dinner light.'
-  ],
-  'q-tip':[
-    '💡 <strong>Hadaf:</strong> 1,500 kcal maalin kasta waa qiyaas caafimaadka leh dumarka.',
-    '💡 <strong>Goal:</strong> 1,500 kcal per day is a healthy target for women.'
-  ],
-};
-
-let _lang = localStorage.getItem('hf_lang') || 'so';
-
-function applyLang(l) {
-  const i = l==='so'?0:1;
-  const T = TRANSLATIONS[l];
-
-  // Static text
-  for(const [id,[so,en]] of Object.entries(STATIC_TEXT)){
-    const el=document.getElementById(id);
-    if(el) el.textContent = i===0?so:en;
-  }
-  // Static innerHTML
-  for(const [id,[so,en]] of Object.entries(STATIC_HTML)){
-    const el=document.getElementById(id);
-    if(el) el.innerHTML = i===0?so:en;
-  }
-
-  // Lang toggle button
-  document.getElementById('langToggle').textContent = T.toggle;
-
-  // Update banner
-  const ut=document.getElementById('upd-text');
-  const us=document.getElementById('upd-sub');
-  const ubr=document.getElementById('btn-upd-refresh');
-  if(ut) ut.childNodes[0].textContent = T.upd_title;
-  if(us) us.textContent = T.upd_sub;
-  if(ubr) ubr.textContent = T.upd_btn;
-
-  // PWA banner
-  const pt=document.getElementById('pwa-title');
-  const ps=document.getElementById('pwa-sub');
-  const pi=document.getElementById('btn-pwa-install');
-  const pd=document.getElementById('btn-pwa-dismiss');
-  if(pt) pt.textContent = T.pwa_title;
-  if(ps) ps.textContent = T.pwa_sub;
-  if(pi) pi.textContent = T.pwa_install;
-  if(pd) pd.textContent = T.pwa_later;
-
-  // Re-render dynamic content
-  updateProgress();
-  renderWater();
-  updateKcal();
-  renderPlan();
-  if(document.getElementById('page-jimicsi').classList.contains('active')) renderExercises();
-  if(document.getElementById('page-miisaan').classList.contains('active')) renderWeights();
-  if(document.getElementById('page-cunto').classList.contains('active'))   renderFood();
-}
-
-function toggleLang() {
-  _lang = _lang==='so'?'en':'so';
-  localStorage.setItem('hf_lang',_lang);
-  applyLang(_lang);
-  showToast(_lang==='en'?'🇬🇧 Switched to English':'🇸🇴 Soomaali la doortay');
-}
-
-// ─── DATA ─────────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════════════════════════
 const EXERCISES = [
-  {id:1,icon:'🧘‍♀️',name:'Saqaf-ku-joogsi (Plank)',heer:'fudud',nooc:['caloosha','dhabarka'],
-   desc:'Jiif oo gacmahaaga iyo faraha cagahaaga ku taag. Jirkaaga toosee. Waxay xoojisaa dhabarka iyo caloosha.',
-   tags:['Caloosha','Dhabarka','Gacmaha'],time:'2:00',dur:'2 daqiiqo',
-   animKey:'plank',ytId:'ASdvN_XEl_c',animLabel:'Plank — Caloosha xooji'},
-  {id:2,icon:'🦵',name:'Jilba-joogsi (Squats)',heer:'fudud',nooc:['lugaha'],
-   desc:'Taag oo lugahaaga kala baadh. Ka fadhiiso sida kursiga. Ku soo noqo. Ku celcel 15 jeer.',
-   tags:['Lugaha','Boodiyaasha','Caloosha Hoose'],time:'5:00',dur:'5 daqiiqo',
-   animKey:'squat',ytId:'EbOPpWi4L8s',animLabel:'Squats — Lugaha xooji'},
-  {id:3,icon:'🫃',name:'Caloosha-taabo (Crunches)',heer:'fudud',nooc:['caloosha'],
-   desc:'Jiif oo lugahaaga laab. Gacmahaaga madaxa dhig. Caloosha la adkee oo madaxa kor u qaad. 20 jeer.',
-   tags:['Caloosha','Dexdexaadka'],time:'5:00',dur:'5 daqiiqo',
-   animKey:'crunch',ytId:'3KnTmnwcFgg',animLabel:'Crunches — Caloosha hoose'},
-  {id:4,icon:'🚶‍♀️',name:'Orida Meelaha (Marching)',heer:'fudud',nooc:['xawaaraha'],
-   desc:'Taag oo lugahaaga kor u qaad sida orodka, laakiin meeshaaada joog. Gacmahaaga la taabo.',
-   tags:['Wadnaha','Lugaha','Xawaaraha'],time:'10:00',dur:'10 daqiiqo',
-   animKey:'march',ytId:'ZeJLIdQenTo',animLabel:'Marching — Xawaaraha kor u qaad'},
-  {id:5,icon:'💪',name:'Gacmo-garaac (Push-ups)',heer:'dhexdhexaad',nooc:['dhabarka'],
-   desc:'Jiif oo gacmahaaga dhig. Jirkaaga kor u qaad oo hoos u dhig. Haddaad u adkaaneyso, jilbahaaga dhig. 10 jeer.',
-   tags:['Gacmaha','Dhabarka','Caloosha'],time:'5:00',dur:'5 daqiiqo',
-   animKey:'pushup',ytId:'Vj4VNpA_kjw',animLabel:'Push-ups — Dhabarka & Gacmaha'},
-  {id:6,icon:'⭐',name:'Jumping Jacks',heer:'dhexdhexaad',nooc:['xawaaraha'],
-   desc:'Taag. Boodi oo lugahaaga kala baadh iyadoo gacmahaagu kor u yimaadaan. Dib u noqo. 20 jeer.',
-   tags:['Wadnaha','Dhammaan Jirka','Xawaaraha'],time:'5:00',dur:'5 daqiiqo',
-   animKey:'jj',ytId:'X7P5YuFu9bU',animLabel:'Jumping Jacks — Jirka oo dhan'},
-  {id:7,icon:'🦵',name:'Caloosha Hoose (Leg Raises)',heer:'dhexdhexaad',nooc:['caloosha','lugaha'],
-   desc:'Jiif oo lugahaaga isku taag. Lugaha kor u qaad ilaa 90 degree. Si tartiib ah hoos u dhig. 15 jeer.',
-   tags:['Caloosha Hoose','Xididdada','Dhabarka'],time:'5:00',dur:'5 daqiiqo',
-   animKey:'legraise',ytId:'Vj4VNpA_kjw',animLabel:'Leg Raises — Caloosha hoose'},
-  {id:8,icon:'🚶‍♀️',name:'Socodka Xawaaraha (Brisk Walk)',heer:'fudud',nooc:['xawaaraha'],
-   desc:'Guriga dhex mari ama albaabka dibadda. Xawaaraha kor u qaad. Gacmahaaga la gaadhsiiye.',
-   tags:['Wadnaha','Lugaha','Caafimaadka'],time:'15:00',dur:'15 daqiiqo',
-   animKey:'walk',ytId:'ZeJLIdQenTo',animLabel:'Brisk Walk — Wadnaha caafimaad'},
-  {id:9,icon:'🦸‍♀️',name:'Dhabarka Taabo (Superman)',heer:'fudud',nooc:['dhabarka'],
-   desc:'Jiif oo caloosha ku jif. Gacmahaaga iyo lugahaaga isla mar kor u qaad. 3 ilbiriqsi jooji. 10 jeer.',
-   tags:['Dhabarka','Boodiyaasha','Qoorta'],time:'3:00',dur:'3 daqiiqo',
-   animKey:'superman',ytId:'Vj4VNpA_kjw',animLabel:'Superman — Dhabarka xooji'},
-  {id:10,icon:'🦵',name:'Lunges',heer:'dhexdhexaad',nooc:['lugaha'],
-   desc:'Taag. Mid ka mid ah lugahaaga hore u qaado oo ka fadhiiso. Dib u kaalay. 10 jeer mid kasta.',
-   tags:['Lugaha','Boodiyaasha','Dheelitirka'],time:'5:00',dur:'5 daqiiqo',
-   animKey:'lunge',ytId:'EbOPpWi4L8s',animLabel:'Lunges — Lugaha & Dheelitirka'},
-  {id:11,icon:'⛰️',name:'Caloosha Wareeg (Mountain Climbers)',heer:'adag',nooc:['caloosha','xawaaraha'],
-   desc:'Gacmahaaga dhig oo jirkaaga toosi. Si dhaqso ah lugaha ku wareejiso sida orodka. 30 ilbiriqsi.',
-   tags:['Caloosha','Gacmaha','Xawaaraha'],time:'3:00',dur:'3 daqiiqo',
-   animKey:'mc',ytId:'cnyTQDSE884',animLabel:'Mountain Climbers — Xawaaraha sare'},
-  {id:12,icon:'🔥',name:'Burpees',heer:'adag',nooc:['xawaaraha'],
-   desc:'Taag, ka fadhiiso, lugaha dib u dhaadhici, gacmo-garaac samee, dib u yimaad, boodi kor. 10 jeer.',
-   tags:['Dhammaan Jirka','Wadnaha','Xawaaraha'],time:'3:00',dur:'3 daqiiqo',
-   animKey:'burpee',ytId:'xRdGC6cFY0s',animLabel:'Burpees — Jimicsiga ugu adag!'},
+  {id:1,icon:'🧘‍♀️',name:'Plank',level:'easy',types:['core','back'],
+   desc:'Hold your body straight on forearms and toes. Strengthens core and back.',
+   tags:['Core','Back','Arms'],sets:3,reps:30,repsUnit:'sec',time:'2:00',kcal:15,
+   animKey:'plank',ytId:'ASdvN_XEl_c',animLabel:'Plank'},
+  {id:2,icon:'🦵',name:'Squats',level:'easy',types:['legs'],
+   desc:'Stand, feet apart, lower like sitting on a chair. 15 reps.',
+   tags:['Legs','Glutes','Core'],sets:3,reps:15,repsUnit:'reps',time:'5:00',kcal:50,
+   animKey:'squat',ytId:'EbOPpWi4L8s',animLabel:'Squats'},
+  {id:3,icon:'🫃',name:'Crunches',level:'easy',types:['core'],
+   desc:'Lie down, knees bent, hands behind head, lift upper body. 20 reps.',
+   tags:['Core','Abs'],sets:3,reps:20,repsUnit:'reps',time:'5:00',kcal:30,
+   animKey:'crunch',ytId:'3KnTmnwcFgg',animLabel:'Crunches'},
+  {id:4,icon:'🚶‍♀️',name:'Marching in Place',level:'easy',types:['cardio'],
+   desc:'March in place lifting knees high, swinging arms. Great warm-up.',
+   tags:['Cardio','Legs'],sets:1,reps:10,repsUnit:'min',time:'10:00',kcal:60,
+   animKey:'march',ytId:'ZeJLIdQenTo',animLabel:'Marching'},
+  {id:5,icon:'💪',name:'Push-ups',level:'medium',types:['back'],
+   desc:'Hands on floor, lower body and push up. Use knees if needed. 10 reps.',
+   tags:['Arms','Back','Core'],sets:3,reps:10,repsUnit:'reps',time:'5:00',kcal:40,
+   animKey:'pushup',ytId:'Vj4VNpA_kjw',animLabel:'Push-ups'},
+  {id:6,icon:'⭐',name:'Jumping Jacks',level:'medium',types:['cardio'],
+   desc:'Jump feet apart while raising arms overhead. 20 reps.',
+   tags:['Cardio','Full Body'],sets:3,reps:20,repsUnit:'reps',time:'5:00',kcal:55,
+   animKey:'jj',ytId:'X7P5YuFu9bU',animLabel:'Jumping Jacks'},
+  {id:7,icon:'🦵',name:'Leg Raises',level:'medium',types:['core','legs'],
+   desc:'Lie flat, lift both legs to 90°, lower slowly. 15 reps.',
+   tags:['Lower Core','Legs'],sets:3,reps:15,repsUnit:'reps',time:'5:00',kcal:35,
+   animKey:'legraise',ytId:'Vj4VNpA_kjw',animLabel:'Leg Raises'},
+  {id:8,icon:'🚶‍♀️',name:'Brisk Walk',level:'easy',types:['cardio'],
+   desc:'Walk around your home or outside at a fast pace. Arms swinging.',
+   tags:['Cardio','Legs','Heart'],sets:1,reps:15,repsUnit:'min',time:'15:00',kcal:80,
+   animKey:'walk',ytId:'ZeJLIdQenTo',animLabel:'Brisk Walk'},
+  {id:9,icon:'🦸‍♀️',name:'Superman',level:'easy',types:['back'],
+   desc:'Lie face down, lift arms and legs simultaneously. Hold 3 sec. 10 reps.',
+   tags:['Back','Glutes','Neck'],sets:3,reps:10,repsUnit:'reps',time:'3:00',kcal:20,
+   animKey:'superman',ytId:'Vj4VNpA_kjw',animLabel:'Superman'},
+  {id:10,icon:'🦵',name:'Lunges',level:'medium',types:['legs'],
+   desc:'Step forward and lower knee. Return. 10 each leg.',
+   tags:['Legs','Glutes','Balance'],sets:3,reps:10,repsUnit:'reps',time:'5:00',kcal:45,
+   animKey:'lunge',ytId:'EbOPpWi4L8s',animLabel:'Lunges'},
+  {id:11,icon:'⛰️',name:'Mountain Climbers',level:'hard',types:['core','cardio'],
+   desc:'Plank position, alternate driving knees to chest fast. 30 sec.',
+   tags:['Core','Arms','Cardio'],sets:3,reps:30,repsUnit:'sec',time:'3:00',kcal:70,
+   animKey:'mc',ytId:'cnyTQDSE884',animLabel:'Mountain Climbers'},
+  {id:12,icon:'🔥',name:'Burpees',level:'hard',types:['cardio'],
+   desc:'Squat, jump back to plank, push-up, jump forward, jump up. 10 reps.',
+   tags:['Full Body','Cardio'],sets:3,reps:10,repsUnit:'reps',time:'3:00',kcal:100,
+   animKey:'burpee',ytId:'xRdGC6cFY0s',animLabel:'Burpees'},
+];
+
+const PROGRAMS = [
+  {id:'beginner',icon:'🌱',title:'Beginner Plan',duration:'4 weeks',level:'Easy',kcal:150,
+   color:'linear-gradient(135deg,#22c55e,#16a34a)',
+   exercises:[1,2,3,4,8],desc:'Perfect for starting your fitness journey. Gentle daily workouts.'},
+  {id:'weightloss',icon:'🔥',title:'Weight Loss',duration:'6 weeks',level:'Medium',kcal:300,
+   color:'linear-gradient(135deg,#f87171,#fb923c)',
+   exercises:[4,6,8,11,12],desc:'Cardio-focused program to burn fat and boost metabolism.'},
+  {id:'postpartum',icon:'👶',title:'Hooyo Recovery',duration:'8 weeks',level:'Easy',kcal:100,
+   color:'linear-gradient(135deg,#a855f7,#6366f1)',
+   exercises:[1,3,7,8,9],desc:'Safe gentle recovery program for new mothers. Consult doctor first.'},
+  {id:'intermediate',icon:'💪',title:'Intermediate',duration:'6 weeks',level:'Medium',kcal:250,
+   color:'linear-gradient(135deg,#14b8a6,#3b82f6)',
+   exercises:[2,5,6,7,10,11],desc:'Build strength and endurance with balanced full-body workouts.'},
+  {id:'quick',icon:'⚡',title:'Quick 10-15 min',duration:'Daily',level:'Mixed',kcal:120,
+   color:'linear-gradient(135deg,#f59e0b,#ef4444)',
+   exercises:[1,2,3,6],desc:'Short effective daily workouts for busy mothers.'},
+];
+
+const WEEKLY_SCHEDULE = [
+  {day:0,type:'Cardio',icon:'🏃‍♀️',color:'#f87171',exercises:[4,6,8]},
+  {day:1,type:'Full Body',icon:'💪',color:'#fb923c',exercises:[2,5,6,10]},
+  {day:2,type:'Rest',icon:'😴',color:'#9ca3af',exercises:[]},
+  {day:3,type:'Core',icon:'🫃',color:'#a855f7',exercises:[1,3,7,11]},
+  {day:4,type:'Lower Body',icon:'🦵',color:'#3b82f6',exercises:[2,7,10]},
+  {day:5,type:'Walk & Stretch',icon:'🚶‍♀️',color:'#14b8a6',exercises:[8,9]},
+  {day:6,type:'Rest',icon:'😴',color:'#9ca3af',exercises:[]},
 ];
 
 const FOODS = {
-  quraac:[
-    {icon:'🫓',name:'Canjeero + Maraq Digir',badge:'caafimaad',desc:'Canjeero 2 + maraq digir oo fudud. Ha ku darin saliid badan.',kcal:320},
-    {icon:'🥐',name:'Bur Saliid Yar + Shaah',badge:'caafimaad',desc:'Bur la diyaariyey oo saliidda la yaraynayo. Shaah la caano yar.',kcal:280},
-    {icon:'🍌',name:'Caano + Moos + Timir',badge:'fudud2',desc:'Smoothie fudud oo caano iyo moos la qoray. Timir 2 ku dar.',kcal:250},
-    {icon:'🥚',name:'Beed La Kariyey + Tamaandho',badge:'borotiinka',desc:'Beed laba ah oo la kariyey. Tamaandho iyo basbaas.',kcal:200},
+  breakfast:[
+    {icon:'🫓',name:'Canjeero + Lentil Soup',kcal:320,protein:14,carbs:52,fat:6,fiber:8,
+     tags:['hh','pp'],goodFor:['Energy','Iron','Fiber'],warning:'Eat 1-2 pieces to avoid overeating.',
+     portion:'2 canjeero + 1 cup soup',vitamins:'Iron, Folate, B-vitamins'},
+    {icon:'🥚',name:'Boiled Eggs + Tomatoes',kcal:200,protein:18,carbs:8,fat:12,fiber:2,
+     tags:['mg','pp'],goodFor:['Protein','Recovery','Muscle'],warning:null,
+     portion:'2 eggs + 1 medium tomato',vitamins:'Vitamin D, B12, Choline'},
+    {icon:'🍌',name:'Milk + Banana + Dates',kcal:250,protein:8,carbs:45,fat:4,fiber:4,
+     tags:['pp','hh'],goodFor:['Energy','Calcium','Potassium'],warning:'High sugar — limit to morning.',
+     portion:'1 cup milk + 1 banana + 2 dates',vitamins:'Calcium, Potassium, Magnesium'},
+    {icon:'🥐',name:'Bread + Olive Oil + Tea',kcal:280,protein:6,carbs:42,fat:10,fiber:3,
+     tags:['hh'],goodFor:['Energy','Heart health'],warning:'Use olive oil sparingly.',
+     portion:'2 slices + 1 tsp olive oil',vitamins:'Vitamin E, healthy fats'},
   ],
-  qado:[
-    {icon:'🍚',name:'Bariis + Hilib Digaag',badge:'caafimaad',desc:'Bariis cas oo la kariyey iyo hilib digaag la shiilay.',kcal:450},
-    {icon:'🥗',name:"Salad + Hilib Lo'aad",badge:'caafimaad',desc:"Khudaar la jaro, tamaandho, gadaal. Hilib lo'aad la kariyey.",kcal:380},
-    {icon:'🍲',name:'Maraq Digir + Rooti',badge:'fudud2',desc:'Maraq digir la isugu jiriyey oo xawaash leh. Rooti yar.',kcal:320},
-    {icon:'🫘',name:'Cambuulo + Caano Geel',badge:'caafimaad',desc:'Cambuulo si fiican u kariyey. Caano geel dhinac ah.',kcal:350},
+  lunch:[
+    {icon:'🍚',name:'Rice + Chicken (Bariis + Digaag)',kcal:450,protein:35,carbs:55,fat:8,fiber:3,
+     tags:['mg','pp'],goodFor:['Protein','Energy','Recovery'],warning:'Large portions may slow weight loss.',
+     portion:'1 cup rice + 150g chicken',vitamins:'Iron, Zinc, B12, Niacin'},
+    {icon:'🥗',name:'Salad + Lean Beef',kcal:380,protein:32,carbs:20,fat:14,fiber:6,
+     tags:['wl','mg'],goodFor:['Weight loss','Protein','Vitamins'],warning:null,
+     portion:'Large bowl salad + 120g beef',vitamins:'Vitamin C, Iron, Folate'},
+    {icon:'🍲',name:'Lentil Soup + Bread',kcal:320,protein:16,carbs:52,fat:5,fiber:12,
+     tags:['wl','hh','pp'],goodFor:['Fiber','Iron','Heart'],warning:null,
+     portion:'2 cups soup + 1 slice bread',vitamins:'Iron, Folate, Potassium'},
+    {icon:'🫘',name:'Cambuulo (Adzuki Beans)',kcal:350,protein:18,carbs:60,fat:3,fiber:14,
+     tags:['hh','wl'],goodFor:['Fiber','Iron','Protein'],warning:'Avoid adding too much oil.',
+     portion:'1.5 cups cooked beans',vitamins:'Iron, Magnesium, Folate'},
   ],
-  casho:[
-    {icon:'🍵',name:'Suqaar + Bariis Yar',badge:'fudud2',desc:'Suqaar hilib ah oo xawaash leh. Bariis yar ama rooti.',kcal:380},
-    {icon:'🥣',name:'Canjeero + Maraq Fudud',badge:'caafimaad',desc:'Canjeero 1-2 + maraq digir oo khafiif ah.',kcal:290},
-    {icon:'🐟',name:'Kalluun + Khudaar',badge:'borotiinka',desc:'Kalluun la kariyey. Khudaar la shiilay.',kcal:320},
-    {icon:'🫓',name:'Rooti + Buuro',badge:'fudud2',desc:'Rooti 2 + buuro macaan. Shaah xaajis ah.',kcal:240},
-  ]
+  dinner:[
+    {icon:'🐟',name:'Fish + Vegetables',kcal:320,protein:30,carbs:18,fat:12,fiber:5,
+     tags:['wl','hh','mg'],goodFor:['Omega-3','Protein','Heart'],warning:null,
+     portion:'150g fish + 2 cups veg',vitamins:'Omega-3, Vitamin D, B12'},
+    {icon:'🍵',name:'Beef Stew + Small Rice (Suqaar)',kcal:380,protein:28,carbs:35,fat:12,fiber:4,
+     tags:['mg'],goodFor:['Iron','Protein','Energy'],warning:'Keep rice portion small at dinner.',
+     portion:'120g beef + ½ cup rice',vitamins:'Iron, Zinc, B vitamins'},
+    {icon:'🥣',name:'Light Canjeero + Thin Soup',kcal:290,protein:10,carbs:48,fat:5,fiber:6,
+     tags:['wl','pp'],goodFor:['Easy digestion','Light meal'],warning:null,
+     portion:'1-2 canjeero + 1 cup light soup',vitamins:'B-vitamins, Iron'},
+    {icon:'🫓',name:'Bread + Honey + Herbal Tea',kcal:240,protein:5,carbs:46,fat:3,fiber:2,
+     tags:['hh'],goodFor:['Relaxation','Light sleep'],warning:'Avoid large portions before bed.',
+     portion:'1-2 slices + 1 tsp honey',vitamins:'Antioxidants, trace minerals'},
+  ],
 };
 
-const TIPS = [
+const TIPS_EN = [
+  'Sleep well — 7-8 hours of sleep supports weight loss and recovery.',
+  'Drink water before meals to naturally reduce appetite.',
+  'Even 10 minutes of exercise has real health benefits!',
+  'Eat slowly — it takes 20 minutes for your brain to feel full.',
+  'Exercise 3-4 times per week improves heart health significantly.',
+  'Avoid eating large meals at night. Your body needs rest too.',
+  'Breakfast is the most important meal — never skip it!',
+];
+const TIPS_SO = [
   'Hurdo wanaagsan — 7-8 saacadood hurdo miisaankaaga way wax ka beddelaysaa.',
-  'Biyo cab — 8 koob biyo maalin kasta waxay caawinaanaysaa miisaankaaga.',
+  'Biyo cab ka hor cuntada si aad u yarayso himilada.',
   "Xitaa 10 daqiiqo jimicsi waxay faa'iido leedahay!",
   'Cunto si tartiib ah u cun — maskaxda waxay qaadanaysaa 20 daqiiqo inay ogaato dhereg.',
   'Jimicsi 3-4 jeer toddobaadkii waxay hagaajisaa wadnaha.',
   'Ha cunin cunto badan habeenkii. Caloosha waxay u baahantahay nasasho.',
-  'Qado cunto nidaamsan — quraac waa muhiim!',
+  'Quraac waa muhiim — marna ha ka tegin!',
 ];
 
-// ─── STATE ────────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════════
 const state = {
-  exHeer:'dhammaan', exNooc:'all',
+  exLevel:'all', exType:'all',
   doneEx: new Set(JSON.parse(localStorage.getItem('hf_doneEx')||'[]')),
   weights: JSON.parse(localStorage.getItem('hf_weights')||'[]'),
   water: parseInt(localStorage.getItem('hf_water')||'0'),
-  currentMeal:'quraac',
-  plan: JSON.parse(localStorage.getItem('hf_plan')||'{"quraac":null,"qado":null,"casho":null}'),
+  currentMeal:'breakfast',
+  plan: JSON.parse(localStorage.getItem('hf_plan')||'{"breakfast":null,"lunch":null,"dinner":null}'),
   planTarget: null,
+  streak: parseInt(localStorage.getItem('hf_streak')||'0'),
+  totalDone: parseInt(localStorage.getItem('hf_totalDone')||'0'),
+  selectedDay: new Date().getDay()===0?6:new Date().getDay()-1,
 };
 
-// ─── ANIMATION BUILDER ────────────────────────────────────────────
-function buildAnim(key) {
-  const m = {
-    plank:`<div class="anim-plank"><div class="plank-body"></div><div class="plank-head"></div><div class="plank-arm1"></div><div class="plank-arm2"></div><div class="plank-leg"></div><div class="plank-toes"></div><div class="plank-sweat"></div></div>`,
+// ══════════════════════════════════════════════════════════════════
+// ANIMATION BUILDER
+// ══════════════════════════════════════════════════════════════════
+function buildAnim(key){
+  const m={
+    plank:`<div class="anim-plank"><div class="plank-body"></div><div class="plank-head"></div><div class="plank-arm1"></div><div class="plank-arm2"></div><div class="plank-leg"></div><div class="plank-toes"></div></div>`,
     squat:`<div class="anim-squat"><div class="sq-head"></div><div class="sq-body"></div><div class="sq-arm1"></div><div class="sq-arm2"></div><div class="sq-leg1"></div><div class="sq-leg2"></div></div>`,
-    crunch:`<div class="anim-crunch"><div class="cr-torso"></div><div class="cr-head"></div><div class="cr-legs"></div><div class="cr-lower"></div><div class="cr-floor"></div></div>`,
+    crunch:`<div class="anim-crunch"><div class="cr-torso"></div><div class="cr-head"></div><div class="cr-legs"></div><div class="cr-lower"></div></div>`,
     march:`<div class="anim-march"><div class="ma-head"></div><div class="ma-body"></div><div class="ma-arm1"></div><div class="ma-arm2"></div><div class="ma-leg1"></div><div class="ma-leg2"></div></div>`,
     pushup:`<div class="anim-pushup"><div class="pu-head"></div><div class="pu-body"></div><div class="pu-arm1"></div><div class="pu-arm2"></div><div class="pu-legs"></div><div class="pu-feet"></div></div>`,
     jj:`<div class="anim-jj"><div class="jj-head"></div><div class="jj-body"></div><div class="jj-arm1"></div><div class="jj-arm2"></div><div class="jj-leg1"></div><div class="jj-leg2"></div></div>`,
-    legraise:`<div class="anim-legraise"><div class="lr-body"></div><div class="lr-head"></div><div class="lr-legs"></div><div class="lr-floor"></div></div>`,
+    legraise:`<div class="anim-legraise"><div class="lr-body"></div><div class="lr-head"></div><div class="lr-legs"></div></div>`,
     walk:`<div class="anim-walk"><div class="wk-head"></div><div class="wk-body"></div><div class="wk-arm1"></div><div class="wk-arm2"></div><div class="wk-leg1"></div><div class="wk-leg2"></div></div>`,
-    superman:`<div class="anim-superman"><div class="sm-body"></div><div class="sm-head"></div><div class="sm-arms"></div><div class="sm-legs"></div><div class="sm-floor"></div></div>`,
+    superman:`<div class="anim-superman"><div class="sm-body"></div><div class="sm-head"></div><div class="sm-arms"></div><div class="sm-legs"></div></div>`,
     lunge:`<div class="anim-lunge"><div class="lu-head"></div><div class="lu-body"></div><div class="lu-arm1"></div><div class="lu-arm2"></div><div class="lu-fleg"></div><div class="lu-bleg"></div></div>`,
     mc:`<div class="anim-mc"><div class="mc-body"></div><div class="mc-head"></div><div class="mc-arm1"></div><div class="mc-arm2"></div><div class="mc-leg1"></div><div class="mc-leg2"></div></div>`,
-    burpee:`<div class="anim-burpee"><div class="bu-star">🌟</div><div class="bu-head"></div><div class="bu-body"></div><div class="bu-arms"></div><div class="bu-leg1"></div><div class="bu-leg2"></div></div>`,
+    burpee:`<div class="anim-burpee"><div class="bu-head"></div><div class="bu-body"></div><div class="bu-arms"></div><div class="bu-leg1"></div><div class="bu-leg2"></div></div>`,
   };
   return m[key]||'';
 }
 
-// ─── NAV ──────────────────────────────────────────────────────────
-function goPage(p) {
+// ══════════════════════════════════════════════════════════════════
+// NAV & GA TRACKING
+// ══════════════════════════════════════════════════════════════════
+function goPage(p){
   document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
   document.getElementById('page-'+p).classList.add('active');
-  document.querySelector(`.nav-item[data-page="${p}"]`).classList.add('active');
+  const navBtn=document.querySelector(`.nav-item[data-page="${p}"]`);
+  if(navBtn) navBtn.classList.add('active');
   document.getElementById('mainScroll').scrollTop=0;
-  if(p==='jimicsi') renderExercises();
-  if(p==='miisaan') renderWeights();
-  if(p==='cunto')   renderFood();
-  if(p==='qorshe')  renderQorshe();
+  if(p==='workouts'){renderPrograms();renderExercises();}
+  if(p==='progress'){renderWeights();renderChart();}
+  if(p==='nutrition') renderFood();
+  if(p==='schedule'){renderWeekGrid();renderTodaySchedule();renderPlan();updateKcal();renderWater();}
+  // GA page tracking
+  if(typeof gtag!=='undefined') gtag('event','page_view',{page_title:p,page_path:'/'+p});
 }
 
-// ─── EXERCISES ────────────────────────────────────────────────────
-function renderExercises() {
-  const T = TRANSLATIONS[_lang];
-  const filtered = EXERCISES.filter(e=>{
-    const hOk = state.exHeer==='dhammaan'||e.heer===state.exHeer;
-    const nOk = state.exNooc==='all'||e.nooc.includes(state.exNooc);
-    return hOk && nOk;
+// ══════════════════════════════════════════════════════════════════
+// PROGRAMS
+// ══════════════════════════════════════════════════════════════════
+function renderPrograms(){
+  const el=document.getElementById('planScroll');
+  if(!el) return;
+  el.innerHTML=PROGRAMS.map(p=>`
+    <div class="plan-card" style="background:${p.color}" onclick="showProgramDetail('${p.id}')">
+      <div class="plan-card-icon">${p.icon}</div>
+      <div class="plan-card-title">${p.title}</div>
+      <div class="plan-card-meta">${p.duration} · ${p.level}<br>~${p.kcal} kcal/session</div>
+    </div>`).join('');
+}
+
+function showProgramDetail(id){
+  const p=PROGRAMS.find(x=>x.id===id);
+  if(!p) return;
+  const exList=p.exercises.map(eid=>{
+    const e=EXERCISES.find(x=>x.id===eid);
+    return e?`<div class="schedule-ex"><div class="schedule-ex-num">${p.exercises.indexOf(eid)+1}</div><div style="flex:1;font-size:13px;font-weight:600">${e.icon} ${e.name}</div><div style="font-size:12px;color:var(--muted)">${e.sets}×${e.reps} ${e.repsUnit}</div></div>`:''}).join('');
+  showToast(`${p.icon} ${p.title} — ${p.desc.substring(0,50)}…`);
+  if(typeof gtag!=='undefined') gtag('event','program_view',{program:p.id});
+}
+
+// ══════════════════════════════════════════════════════════════════
+// EXERCISES
+// ══════════════════════════════════════════════════════════════════
+function renderExercises(){
+  const Lx=L();
+  const filtered=EXERCISES.filter(e=>{
+    const lOk=state.exLevel==='all'||e.level===state.exLevel;
+    const tOk=state.exType==='all'||e.types.includes(state.exType);
+    return lOk&&tOk;
   });
-  const list = document.getElementById('exerciseList');
+  const list=document.getElementById('exerciseList');
   if(!list) return;
-  list.innerHTML = `<div style="padding:2px 20px 8px;font-size:13px;color:var(--muted)">${filtered.length} ${T.ex_found}</div>`
-    + filtered.map(e=>{
-      const done = state.doneEx.has(e.id);
+  list.innerHTML=`<div style="padding:2px 20px 6px;font-size:13px;color:var(--muted)">${filtered.length} ${Lx.ex_found}</div>`
+    +filtered.map(e=>{
+      const done=state.doneEx.has(e.id);
       return `<div class="ex-card">
         <div class="ex-anim-area" onclick="openYt('${e.ytId}')">
-          <div class="w-bg"></div>
-          ${buildAnim(e.animKey)}
-          <div class="ex-level-badge badge-${e.heer}">${e.heer}</div>
+          <div class="w-bg"></div>${buildAnim(e.animKey)}
+          <div class="ex-level-badge badge-${e.level}">${e.level}</div>
           <div class="ex-anim-label">🎬 ${e.animLabel}</div>
-          <div class="yt-overlay">
-            <div class="yt-play-btn">▶</div>
-            <div class="yt-hint">YouTube-ka ku eeg</div>
-          </div>
+          <div class="yt-overlay"><div class="yt-play-btn">▶</div><div class="yt-hint">Watch on YouTube</div></div>
         </div>
         <div class="ex-body">
           <div class="ex-name">${e.icon} ${e.name}</div>
           <div class="ex-desc">${e.desc}</div>
+          <div class="ex-sets">
+            <span class="ex-set-badge">${e.sets} ${Lx.sets}</span>
+            <span class="ex-set-badge">${e.reps} ${e.repsUnit}</span>
+            <span class="ex-set-badge">🔥 ${e.kcal} kcal</span>
+          </div>
           <div class="ex-tags">${e.tags.map(t=>`<span class="ex-tag">${t}</span>`).join('')}</div>
           <div class="ex-footer">
-            <div class="ex-time">⏱ ${e.time} · ${e.dur}</div>
+            <div class="ex-time">⏱ ${e.time}</div>
             <div class="ex-actions">
-              <a class="btn-yt" href="https://www.youtube.com/watch?v=${e.ytId}" target="_blank" rel="noopener">${T.ex_yt}</a>
-              <button class="btn-bilow${done?' done':''}" onclick="toggleEx(${e.id})">${done?'✅':T.ex_start}</button>
+              <a class="btn-yt" href="https://www.youtube.com/watch?v=${e.ytId}" target="_blank" rel="noopener">${Lx.ex_yt}</a>
+              <button class="btn-start${done?' done':''}" onclick="toggleEx(${e.id})">${done?'✅':Lx.ex_start}</button>
             </div>
           </div>
         </div>
@@ -953,42 +993,108 @@ function renderExercises() {
   updateProgress();
 }
 
-function openYt(id){ window.open('https://www.youtube.com/watch?v='+id,'_blank'); }
+function openYt(id){
+  window.open('https://www.youtube.com/watch?v='+id,'_blank');
+  if(typeof gtag!=='undefined') gtag('event','youtube_open',{exercise_id:id});
+}
 
-function toggleEx(id) {
-  if(state.doneEx.has(id)) state.doneEx.delete(id);
-  else { state.doneEx.add(id); showToast('💪 Jimicsi la dhammeeyay!'); }
+function toggleEx(id){
+  if(state.doneEx.has(id)){state.doneEx.delete(id);}
+  else{
+    state.doneEx.add(id);
+    state.totalDone++;
+    localStorage.setItem('hf_totalDone',state.totalDone);
+    showToast('💪 '+(L().ex_start==='Bilow'?'Jimicsi la dhammeeyay!':'Exercise completed!'));
+    if(typeof gtag!=='undefined') gtag('event','exercise_complete',{exercise_id:id});
+  }
   localStorage.setItem('hf_doneEx',JSON.stringify([...state.doneEx]));
   renderExercises();
 }
 
-function filterEx(type,val,el) {
-  if(type==='heer'){state.exHeer=val;document.querySelectorAll('#heerPills .pill').forEach(p=>p.classList.remove('active'));}
-  else{state.exNooc=val;document.querySelectorAll('#noocPills .pill').forEach(p=>p.classList.remove('active'));}
+function filterEx(type,val,el){
+  if(type==='heer'){state.exLevel=val;document.querySelectorAll('#heerPills .pill').forEach(p=>p.classList.remove('active'));}
+  else{state.exType=val;document.querySelectorAll('#noocPills .pill').forEach(p=>p.classList.remove('active'));}
   el.classList.add('active');
   renderExercises();
 }
 
-function updateProgress() {
-  const T = TRANSLATIONS[_lang];
-  const total=EXERCISES.length, done=state.doneEx.size, pct=Math.round(done/total*100);
-  const jp=document.getElementById('jimicsiProgress');
-  const jd=document.getElementById('jimicsiDone');
-  const rp=document.getElementById('ringPct');
+function updateProgress(){
+  const Lx=L();
+  const total=EXERCISES.length,done=state.doneEx.size,pct=Math.round(done/total*100);
+  const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
+  set('jimicsiProgress',Lx.ex_progress(done,total));
+  set('jimicsiDone',Lx.ex_done(done));
+  set('ringPct',pct+'%');
   const rd=document.getElementById('ringDash');
-  if(jp) jp.textContent=T.ex_progress(done,total);
-  if(jd) jd.textContent=T.ex_done_label(done);
-  if(rp) rp.textContent=pct+'%';
   if(rd) rd.style.strokeDashoffset=138.2-(138.2*pct/100);
+  set('h-done',done+'💪');
+  set('h-streak',state.streak+'🔥');
+  set('h-water',state.water+'💧');
+  set('streak-val',state.streak+'🔥');
+  set('total-done-val',state.totalDone);
+  set('weight-count-val',state.weights.length);
 }
 
-// ─── WEIGHTS ──────────────────────────────────────────────────────
-function renderWeights() {
-  const T = TRANSLATIONS[_lang];
+// ══════════════════════════════════════════════════════════════════
+// WEEKLY SCHEDULE
+// ══════════════════════════════════════════════════════════════════
+function renderWeekGrid(){
+  const Lx=L();
+  const el=document.getElementById('weekGrid');
+  if(!el) return;
+  el.innerHTML=WEEKLY_SCHEDULE.map((d,i)=>{
+    const isRest=d.exercises.length===0;
+    const isToday=i===state.selectedDay;
+    return `<div class="day-cell${isToday?' active':''}${isRest?' rest':''}" onclick="selectDay(${i})">
+      <div class="day-name">${Lx.days_short[i]}</div>
+      <div class="day-icon">${d.icon}</div>
+      <div class="day-type">${isRest?Lx.rest:d.type}</div>
+    </div>`;
+  }).join('');
+  renderTodaySchedule();
+}
+
+function selectDay(i){
+  state.selectedDay=i;
+  renderWeekGrid();
+}
+
+function renderTodaySchedule(){
+  const Lx=L();
+  const el=document.getElementById('todaySchedule');
+  if(!el) return;
+  const day=WEEKLY_SCHEDULE[state.selectedDay];
+  if(!day||day.exercises.length===0){
+    el.innerHTML=`<div class="card" style="text-align:center;padding:20px"><div style="font-size:36px;margin-bottom:8px">😴</div><div style="font-size:15px;font-weight:700">${Lx.rest}</div><div style="font-size:13px;color:var(--muted);margin-top:4px">Recovery is part of the plan!</div></div>`;
+    return;
+  }
+  const exItems=day.exercises.map((eid,idx)=>{
+    const e=EXERCISES.find(x=>x.id===eid);
+    if(!e) return '';
+    return `<div class="schedule-ex">
+      <div class="schedule-ex-num">${idx+1}</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:700">${e.icon} ${e.name}</div><div style="font-size:11px;color:var(--muted)">${e.sets} ${Lx.sets} × ${e.reps} ${e.repsUnit}</div></div>
+      <div style="font-size:12px;color:var(--muted)">🔥${e.kcal}</div>
+    </div>`;
+  }).join('');
+  el.innerHTML=`<div class="schedule-card">
+    <div class="schedule-header">
+      <div class="schedule-day-badge" style="background:${day.color}20">${day.icon}</div>
+      <div><div style="font-size:15px;font-weight:800">${day.type}</div><div style="font-size:12px;color:var(--muted)">${day.exercises.length} exercises</div></div>
+    </div>
+    <div class="schedule-body">${exItems}</div>
+  </div>`;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// WEIGHTS
+// ══════════════════════════════════════════════════════════════════
+function renderWeights(){
+  const Lx=L();
   const el=document.getElementById('weightContent');
   if(!el) return;
   if(!state.weights.length){
-    el.innerHTML=`<div class="weight-empty"><div class="big-icon">⚖️</div><p>${T.w_empty}</p></div>`;
+    el.innerHTML=`<div class="weight-empty"><div style="font-size:48px;opacity:.3;margin-bottom:12px">⚖️</div><p>${Lx.w_empty}</p></div>`;
     return;
   }
   el.innerHTML=`<div class="weight-list">${state.weights.slice().reverse().map((w,i,arr)=>{
@@ -999,41 +1105,97 @@ function renderWeights() {
   }).join('')}</div>`;
 }
 
+function renderChart(){
+  const canvas=document.getElementById('weightChart');
+  if(!canvas||!state.weights.length) return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.offsetWidth||300,H=120;
+  canvas.width=W;canvas.height=H;
+  ctx.clearRect(0,0,W,H);
+  const weights=state.weights.slice(-8);
+  if(weights.length<2) return;
+  const vals=weights.map(w=>w.kg);
+  const min=Math.min(...vals)-2,max=Math.max(...vals)+2;
+  const xStep=(W-40)/(weights.length-1);
+  const yScale=(H-30)/(max-min);
+  ctx.beginPath();ctx.strokeStyle='#f87171';ctx.lineWidth=2.5;ctx.lineJoin='round';
+  weights.forEach((w,i)=>{
+    const x=20+i*xStep,y=H-15-(w.kg-min)*yScale;
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  // Gradient fill
+  const grad=ctx.createLinearGradient(0,0,0,H);
+  grad.addColorStop(0,'rgba(248,113,113,.2)');grad.addColorStop(1,'rgba(248,113,113,0)');
+  ctx.lineTo(20+(weights.length-1)*xStep,H-15);ctx.lineTo(20,H-15);ctx.closePath();
+  ctx.fillStyle=grad;ctx.fill();
+  // Dots
+  weights.forEach((w,i)=>{
+    const x=20+i*xStep,y=H-15-(w.kg-min)*yScale;
+    ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fillStyle='#f87171';ctx.fill();
+    ctx.fillStyle='#1a1a2e';ctx.font='10px system-ui';ctx.textAlign='center';
+    ctx.fillText(w.kg,x,y-8);
+  });
+}
+
 function openWeightModal(){document.getElementById('weightModal').classList.add('open');setTimeout(()=>document.getElementById('weightInput').focus(),300);}
 function closeWeightModal(){document.getElementById('weightModal').classList.remove('open');document.getElementById('weightInput').value='';}
 function saveWeight(){
   const v=parseFloat(document.getElementById('weightInput').value);
-  if(!v||v<20||v>300){showToast('❌ Miisaan saxsan geli');return;}
+  if(!v||v<20||v>300){showToast('❌ Enter a valid weight');return;}
   const now=new Date();
   state.weights.push({kg:v,date:now.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})});
   localStorage.setItem('hf_weights',JSON.stringify(state.weights));
-  closeWeightModal(); renderWeights(); showToast('✅ Miisaan la kaydiyay!');
+  closeWeightModal();renderWeights();renderChart();updateProgress();
+  showToast('✅ Weight saved!');
+  if(typeof gtag!=='undefined') gtag('event','weight_logged',{value:v});
 }
 
-// ─── FOOD ─────────────────────────────────────────────────────────
-function badgeLabel(b){
-  return b==='caafimaad'?'Caafimaad':b==='borotiinka'?'Borotiinka':'Fudud';
+// ══════════════════════════════════════════════════════════════════
+// FOOD / NUTRITION
+// ══════════════════════════════════════════════════════════════════
+function goalTagHTML(tags){
+  const Lx=L();
+  const map={wl:['tag-wl',Lx.tag_wl],mg:['tag-mg',Lx.tag_mg],hh:['tag-hh',Lx.tag_hh],pp:['tag-pp',Lx.tag_pp]};
+  return tags.map(t=>map[t]?`<span class="food-goal-tag ${map[t][0]}">${map[t][1]}</span>`:'').join('');
 }
 
 function renderFood(){
   const foods=FOODS[state.currentMeal];
-  const total=foods.reduce((s,f)=>s+f.kcal,0);
-  const kcalEl=document.getElementById('totalKcal');
-  const mlEl=document.getElementById('mealLabel');
+  const avg=Math.round(foods.reduce((s,f)=>s+f.kcal,0)/foods.length);
+  const el=document.getElementById('totalKcal');
+  if(el) el.textContent=avg;
   const listEl=document.getElementById('foodList');
-  if(kcalEl) kcalEl.textContent=total;
-  if(mlEl) mlEl.textContent=state.currentMeal;
   if(!listEl) return;
-  listEl.innerHTML=foods.map(f=>`
+  listEl.innerHTML=foods.map((f,idx)=>`
     <div class="food-card">
-      <div class="food-icon">${f.icon}</div>
-      <div class="food-body">
-        <div class="food-name">${f.name}</div>
-        <span class="food-badge badge-${f.badge}">${badgeLabel(f.badge)}</span>
-        <div class="food-desc">${f.desc}</div>
+      <div class="food-card-top" onclick="toggleFoodDetail(${idx})">
+        <div class="food-icon-box">${f.icon}</div>
+        <div class="food-info">
+          <div class="food-name">${f.name}</div>
+          <div class="food-goal-tags">${goalTagHTML(f.tags)}</div>
+        </div>
+        <div class="food-kcal">🔥${f.kcal}<div style="font-size:10px;color:var(--muted);font-weight:500;margin-top:2px">kcal</div></div>
       </div>
-      <div class="food-kcal">🔥${f.kcal}</div>
+      <div class="food-macros">
+        <div class="food-macro"><div class="food-macro-val">${f.protein}g</div><div class="food-macro-lbl">Protein</div></div>
+        <div class="food-macro"><div class="food-macro-val">${f.carbs}g</div><div class="food-macro-lbl">Carbs</div></div>
+        <div class="food-macro"><div class="food-macro-val">${f.fat}g</div><div class="food-macro-lbl">Fat</div></div>
+        <div class="food-macro"><div class="food-macro-val">${f.fiber}g</div><div class="food-macro-lbl">Fiber</div></div>
+      </div>
+      <div class="food-detail" id="fd-${idx}">
+        <div class="food-detail-row"><span>${L().portion}</span><span>${f.portion}</span></div>
+        <div class="food-detail-row"><span>Vitamins</span><span>${f.vitamins}</span></div>
+        <div class="food-good">✅ ${L().good_for} ${f.goodFor.join(', ')}</div>
+        ${f.warning?`<div class="food-warning">⚠️ ${f.warning}</div>`:''}
+      </div>
     </div>`).join('');
+}
+
+function toggleFoodDetail(idx){
+  const el=document.getElementById('fd-'+idx);
+  if(el) el.classList.toggle('open');
+  if(typeof gtag!=='undefined') gtag('event','food_detail_view',{food_index:idx,meal:state.currentMeal});
 }
 
 function switchMeal(meal,el){
@@ -1043,135 +1205,218 @@ function switchMeal(meal,el){
   renderFood();
 }
 
-// ─── QORSHE ───────────────────────────────────────────────────────
-function renderQorshe(){
-  const d=new Date();
-  const dateSub=document.getElementById('qorsheDateSub');
-  if(dateSub) dateSub.textContent=d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+' · Door cuntada maanta';
-  renderWater(); renderPlan(); updateKcal();
-}
-
+// ══════════════════════════════════════════════════════════════════
+// PLANNER / WATER / KCAL
+// ══════════════════════════════════════════════════════════════════
 function renderWater(){
-  const T=TRANSLATIONS[_lang];
+  const Lx=L();
   const drops=document.getElementById('waterDrops');
   const wc=document.getElementById('waterCount');
   const wf=document.getElementById('waterFill');
   const wm=document.getElementById('waterMsg');
   if(drops) drops.innerHTML=Array.from({length:8},(_,i)=>`<span class="drop${i<state.water?' filled':''}" onclick="setWater(${i+1})">💧</span>`).join('');
-  if(wc) wc.textContent=`${state.water}/8 koob`;
+  if(wc) wc.textContent=Lx.water_cups(state.water);
   if(wf) wf.style.width=(state.water/8*100)+'%';
-  if(wm) wm.textContent=T.water_left(8-state.water);
+  if(wm) wm.textContent=Lx.water_left(8-state.water);
+  document.getElementById('h-water').textContent=state.water+'💧';
 }
 function setWater(n){state.water=n;localStorage.setItem('hf_water',n);renderWater();}
 function changeWater(d){setWater(Math.max(0,Math.min(8,state.water+d)));}
 
 function renderPlan(){
-  const T=TRANSLATIONS[_lang];
-  ['quraac','qado','casho'].forEach(m=>{
+  const Lx=L();
+  ['breakfast','lunch','dinner'].forEach(m=>{
     const sel=state.plan[m];
-    const id='plan'+m.charAt(0).toUpperCase()+m.slice(1);
-    const el=document.getElementById(id);
+    const idMap={breakfast:'planBreakfast',lunch:'planLunch',dinner:'planDinner'};
+    const el=document.getElementById(idMap[m]);
     if(!el) return;
     if(sel) el.innerHTML=`<span class="selected">${sel.icon} ${sel.name} — ${sel.kcal} kcal</span>`;
-    else el.textContent=T.plan_empty;
+    else el.textContent=Lx.plan_empty;
   });
   updateKcal();
 }
 
 function updateKcal(){
-  const T=TRANSLATIONS[_lang];
-  const total=['quraac','qado','casho'].reduce((s,m)=>s+(state.plan[m]?state.plan[m].kcal:0),0);
+  const Lx=L();
+  const total=['breakfast','lunch','dinner'].reduce((s,m)=>s+(state.plan[m]?state.plan[m].kcal:0),0);
   const qk=document.getElementById('qorsheKcal');
   const kf=document.getElementById('kalFill');
   const kl=document.getElementById('kalLeft');
   if(qk) qk.textContent=`${total} / 1500 kcal`;
   if(kf) kf.style.width=Math.min(100,total/1500*100)+'%';
-  if(kl) kl.textContent=T.kcal_left(1500-total);
+  if(kl) kl.textContent=Lx.kcal_left(1500-total);
 }
 
 function planSelect(meal){
   state.planTarget=meal;
-  const icons={quraac:'☀️',qado:'🌤️',casho:'🌙'};
+  const icons={breakfast:'☀️',lunch:'🌤️',dinner:'🌙'};
   const ft=document.getElementById('foodModalTitle');
-  if(ft) ft.textContent=`${icons[meal]} ${meal.charAt(0).toUpperCase()+meal.slice(1)} Door`;
-  const all=[...FOODS.quraac,...FOODS.qado,...FOODS.casho].filter((f,i,a)=>a.findIndex(x=>x.name===f.name)===i);
+  if(ft) ft.textContent=`${icons[meal]} Pick ${meal}`;
+  window._planFoods=[...FOODS.breakfast,...FOODS.lunch,...FOODS.dinner]
+    .filter((f,i,a)=>a.findIndex(x=>x.name===f.name)===i);
   const fsl=document.getElementById('foodSelectList');
-  if(fsl) fsl.innerHTML=all.map(f=>`
-    <div onclick="selectPlanFood(${JSON.stringify(f.name)},${JSON.stringify(f.icon)},${f.kcal})"
-      style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1.5px solid var(--border);cursor:pointer"
-      onmouseover="this.style.borderColor='var(--pink)'" onmouseout="this.style.borderColor='var(--border)'">
+  if(fsl) fsl.innerHTML=window._planFoods.map((f,idx)=>`
+    <div class="food-select-item" onclick="selectPlanFood(${idx})">
       <span style="font-size:26px">${f.icon}</span>
-      <div style="flex:1"><div style="font-size:14px;font-weight:600">${f.name}</div><div style="font-size:12px;color:var(--muted)">${f.desc.substring(0,48)}…</div></div>
-      <span style="font-size:14px;font-weight:700;color:var(--orange)">🔥${f.kcal}</span>
+      <div style="flex:1"><div style="font-size:14px;font-weight:700">${f.name}</div><div style="font-size:11px;color:var(--muted)">${f.protein}g protein · ${f.carbs}g carbs · ${f.fat}g fat</div></div>
+      <span style="font-size:14px;font-weight:800;color:var(--orange)">🔥${f.kcal}</span>
     </div>`).join('');
   document.getElementById('foodModal').classList.add('open');
+  if(typeof gtag!=='undefined') gtag('event','meal_planner_open',{meal});
 }
 
-function selectPlanFood(name,icon,kcal){
-  state.plan[state.planTarget]={name,icon,kcal};
+function selectPlanFood(idx){
+  const f=window._planFoods[idx];
+  if(!f) return;
+  state.plan[state.planTarget]={name:f.name,icon:f.icon,kcal:f.kcal};
   localStorage.setItem('hf_plan',JSON.stringify(state.plan));
-  closeFoodModal(); renderPlan(); showToast(`✅ ${icon} ${name} la doortay!`);
+  closeFoodModal();renderPlan();
+  showToast(`✅ ${f.icon} ${f.name} selected!`);
+  if(typeof gtag!=='undefined') gtag('event','meal_selected',{meal:state.planTarget,food:f.name});
 }
 
 function closeFoodModal(){document.getElementById('foodModal').classList.remove('open');}
+function closeWeightModal2(){document.getElementById('weightModal').classList.remove('open');document.getElementById('weightInput').value='';}
 function closeModal(e){if(e.target===e.currentTarget){closeWeightModal();closeFoodModal();}}
 
-// ─── TOAST ────────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════════════════════════════
 function showToast(msg){
   const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2600);
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════
+// LANGUAGE
+// ══════════════════════════════════════════════════════════════════
+const STATIC_IDS={
+  'txt-hi':'hi','txt-h1':'h1','txt-small':'small','txt-tip-label':'tip_lbl',
+  'txt-quick-nav':'quick_nav','mn-w':'mn_w','mn-ws':'mn_ws','mn-n':'mn_n','mn-ns':'mn_ns',
+  'mn-p':'mn_p','mn-ps':'mn_ps','mn-s':'mn_s','mn-ss':'mn_ss',
+  'h-streak-lbl':'streak_lbl','h-done-lbl':'done_lbl','h-water-lbl':'water_lbl_h',
+  'lbl-programs':'lbl_programs','lbl-exercises':'lbl_exercises',
+  'ex-title':'ex_title','ex-sub':'ex_sub',
+  'prog-sub':'prog_sub','prog-title':'prog_title','prog-tip':'prog_tip',
+  'streak-lbl':'streak_lbl2','total-done-lbl':'total_done_lbl','weight-count-lbl':'weight_count_lbl',
+  'chart-lbl':'chart_lbl','w-history-label':'w_history','w-add-btn':'w_add',
+  'w-modal-title':'w_modal_title','w-cancel':'w_cancel','w-save':'w_save',
+  'f-sub':'f_sub','f-title':'f_title','f-kcal-label':'f_kcal_lbl',
+  'q-sub':'q_sub','q-title':'q_title','lbl-week':'lbl_week',
+  'lbl-today-plan':'lbl_today','lbl-meals':'lbl_meals',
+  'q-kcal-label':'q_kcal_lbl','q-goal-label':'q_goal',
+  'water-label':'water_label',
+  't1-title':'t1_title','t1-body':'t1_body','t2-title':'t2_title','t2-body':'t2_body',
+  'pq-label':'pq','pqd-label':'pqd','pc-label':'pc',
+  'pq-btn':'pick','pqd-btn':'pick','pc-btn':'pick','food-close-btn':'close',
+  'pwa-title':'pwa_title','pwa-sub':'pwa_sub','btn-pwa-install':'pwa_install','btn-pwa-dismiss':'pwa_later',
+  'btn-upd-refresh':'upd_btn',
+};
+const HTML_IDS={'txt-reminder':'reminder','ex-tip':'ex_tip_html','f-tip':'f_tip','upd-sub':'upd_sub'};
+// ex_tip_html isn't in T — handled inline
+function applyLang(l){
+  const Lx=T[l];
+  // Static text
+  for(const [id,key] of Object.entries(STATIC_IDS)){
+    const el=document.getElementById(id);
+    if(el&&Lx[key]!==undefined) el.textContent=Lx[key];
+  }
+  // HTML content
+  for(const [id,key] of Object.entries(HTML_IDS)){
+    const el=document.getElementById(id);
+    if(!el) continue;
+    if(key==='ex_tip_html'){
+      el.innerHTML=l==='en'?'💡 <strong>Tip:</strong> Start with just 10 minutes a day. Gradually increase over time!':'💡 <strong>Talo:</strong> Bilowga waxaad ku bilaabi kartaa 10 daqiiqo maalin kasta. Si tartiib ah kor u qaad!';
+    } else if(Lx[key]!==undefined) el.innerHTML=Lx[key];
+  }
+  // Nav
+  const navEls=document.querySelectorAll('.nav-item span');
+  Lx.nav.forEach((txt,i)=>{if(navEls[i]) navEls[i].textContent=txt;});
+  // Meal tabs
+  document.querySelectorAll('.meal-tab').forEach((tab,i)=>{if(Lx.mt[i]) tab.textContent=Lx.mt[i];});
+  // Heer pills
+  document.querySelectorAll('#heerPills .pill').forEach((p,i)=>{if(Lx.hp[i]) p.textContent=Lx.hp[i];});
+  // Nooc pills
+  document.querySelectorAll('#noocPills .pill').forEach((p,i)=>{if(Lx.np[i]) p.textContent=Lx.np[i];});
+  // Lang toggle
+  document.getElementById('langToggle').textContent=Lx.toggle;
+  // weightInput placeholder
+  const wi=document.getElementById('weightInput');
+  if(wi) wi.placeholder=Lx.w_placeholder;
+  // Daily tip
+  const tips=l==='en'?TIPS_EN:TIPS_SO;
+  document.getElementById('dailyTip').textContent=tips[new Date().getDate()%tips.length];
+  // Re-render dynamic content
+  updateProgress();renderWater();updateKcal();renderPlan();
+  if(document.getElementById('page-workouts').classList.contains('active')) renderExercises();
+  if(document.getElementById('page-progress').classList.contains('active')) renderWeights();
+  if(document.getElementById('page-nutrition').classList.contains('active')) renderFood();
+  if(document.getElementById('page-schedule').classList.contains('active')){renderWeekGrid();renderTodaySchedule();}
+  if(typeof gtag!=='undefined') gtag('event','language_change',{language:l});
+}
+
+function toggleLang(){
+  _lang=_lang==='en'?'so':'en';
+  localStorage.setItem('hf_lang',_lang);
+  applyLang(_lang);
+  showToast(_lang==='en'?'🇬🇧 Switched to English':'🇸🇴 Soomaali la doortay');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════════
 function init(){
-  document.getElementById('dailyTip').textContent=TIPS[new Date().getDate()%TIPS.length];
+  // Daily water reset
   const today=new Date().toDateString();
   if(localStorage.getItem('hf_waterDate')!==today){
-    state.water=0;
-    localStorage.setItem('hf_water','0');
-    localStorage.setItem('hf_waterDate',today);
+    state.water=0;localStorage.setItem('hf_water','0');localStorage.setItem('hf_waterDate',today);
+    state.doneEx.clear();localStorage.setItem('hf_doneEx','[]');
+    // Update streak
+    const lastActive=localStorage.getItem('hf_lastActive');
+    const yesterday=new Date(Date.now()-86400000).toDateString();
+    if(lastActive===yesterday) state.streak++;
+    else if(lastActive!==today) state.streak=1;
+    localStorage.setItem('hf_streak',state.streak);
+    localStorage.setItem('hf_lastActive',today);
   }
-  updateProgress();
-  renderFood(); // ← FIX: render food on load so it's ready when tab opens
+  renderFood();
+  applyLang(_lang);
 }
 init();
 
-// ─── PWA REFS (must be before applyLang call) ─────────────────────
-const _updBanner  = document.getElementById('update-banner');
-const _btnRefresh = document.getElementById('btn-upd-refresh');
-const _btnUpdDism = document.getElementById('btn-upd-dismiss');
-let _newWorker = null;
+// ══════════════════════════════════════════════════════════════════
+// PWA REFS — declared after init so applyLang has run
+// ══════════════════════════════════════════════════════════════════
+const _updBanner=document.getElementById('update-banner');
+const _btnRefresh=document.getElementById('btn-upd-refresh');
+const _btnUpdDism=document.getElementById('btn-upd-dismiss');
+let _newWorker=null;
 
-// Apply saved language (all functions & refs defined above this line)
-applyLang(_lang);
-
-// ─── SERVICE WORKER & AUTO-UPDATE ─────────────────────────────────
+// ══════════════════════════════════════════════════════════════════
+// SERVICE WORKER & AUTO-UPDATE
+// ══════════════════════════════════════════════════════════════════
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
     navigator.serviceWorker.register('/sw.js').then(reg=>{
-      setInterval(()=>reg.update(), 60000);
+      setInterval(()=>reg.update(),60000);
       reg.addEventListener('updatefound',()=>{
         _newWorker=reg.installing;
         _newWorker.addEventListener('statechange',()=>{
-          if(_newWorker.state==='installed'&&navigator.serviceWorker.controller){
+          if(_newWorker.state==='installed'&&navigator.serviceWorker.controller)
             _updBanner.classList.add('show');
-          }
         });
       });
     }).catch(()=>{});
-
     navigator.serviceWorker.addEventListener('message',e=>{
       if(e.data?.type==='SW_UPDATED') _updBanner.classList.add('show');
     });
-
     let refreshing=false;
     navigator.serviceWorker.addEventListener('controllerchange',()=>{
       if(!refreshing){refreshing=true;window.location.reload();}
     });
   });
 }
-
 _btnRefresh.addEventListener('click',()=>{
   _updBanner.classList.remove('show');
   if(_newWorker) _newWorker.postMessage({type:'SKIP_WAITING'});
@@ -1179,50 +1424,36 @@ _btnRefresh.addEventListener('click',()=>{
 });
 _btnUpdDism.addEventListener('click',()=>_updBanner.classList.remove('show'));
 
-// ─── PWA INSTALL ──────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════
+// PWA INSTALL
+// ══════════════════════════════════════════════════════════════════
 let _deferredPrompt;
-const _pwaBanner = document.getElementById('pwa-banner');
-const _btnInst   = document.getElementById('btn-pwa-install');
-const _btnDism   = document.getElementById('btn-pwa-dismiss');
-
+const _pwaBanner=document.getElementById('pwa-banner');
+const _btnInst=document.getElementById('btn-pwa-install');
+const _btnDism=document.getElementById('btn-pwa-dismiss');
 window.addEventListener('beforeinstallprompt',e=>{
-  e.preventDefault();
-  _deferredPrompt=e;
-  if(!localStorage.getItem('hf_pwaDismissed')){
-    setTimeout(()=>_pwaBanner.classList.add('show'),3500);
-  }
+  e.preventDefault();_deferredPrompt=e;
+  if(!localStorage.getItem('hf_pwaDismissed')) setTimeout(()=>_pwaBanner.classList.add('show'),4000);
 });
-
 _btnInst.addEventListener('click',async()=>{
   if(!_deferredPrompt) return;
   _deferredPrompt.prompt();
   const {outcome}=await _deferredPrompt.userChoice;
-  _deferredPrompt=null;
-  _pwaBanner.classList.remove('show');
-  if(outcome==='accepted') showToast('🎉 HooyoFit la rakibay!');
+  _deferredPrompt=null;_pwaBanner.classList.remove('show');
+  if(outcome==='accepted'){showToast('🎉 HooyoFit installed!');if(typeof gtag!=='undefined') gtag('event','pwa_install');}
 });
-
-_btnDism.addEventListener('click',()=>{
-  _pwaBanner.classList.remove('show');
-  localStorage.setItem('hf_pwaDismissed','1');
-});
-
+_btnDism.addEventListener('click',()=>{_pwaBanner.classList.remove('show');localStorage.setItem('hf_pwaDismissed','1');});
 window.addEventListener('appinstalled',()=>_pwaBanner.classList.remove('show'));
 
-// ─── iOS INSTALL HINT ─────────────────────────────────────────────
-const _isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
-const _isStandalone = window.navigator.standalone===true;
-const _iosHint = document.getElementById('ios-hint');
-const _iosClose = document.getElementById('ios-close');
-
+// iOS
+const _isIos=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const _isStandalone=window.navigator.standalone===true;
+const _iosHint=document.getElementById('ios-hint');
+const _iosClose=document.getElementById('ios-close');
 if(_isIos&&!_isStandalone&&!localStorage.getItem('hf_iosDismissed')){
-  _iosHint.style.display='block';
-  setTimeout(()=>_iosHint.classList.add('show'),3500);
+  _iosHint.style.display='block';setTimeout(()=>_iosHint.classList.add('show'),4000);
 }
-_iosClose.addEventListener('click',()=>{
-  _iosHint.classList.remove('show');
-  localStorage.setItem('hf_iosDismissed','1');
-});
+_iosClose.addEventListener('click',()=>{_iosHint.classList.remove('show');localStorage.setItem('hf_iosDismissed','1');});
 </script>
 </body>
 </html>
