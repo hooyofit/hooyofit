@@ -540,14 +540,48 @@ Protein-rich Somali meal for muscle recovery.
 </div>
 
 <div class="nav">
-<div>🏠 Home</div>
-<div>💪 Workouts</div>
-<div>📅 Schedule</div>
-<div>🥗 Nutrition</div>
-<div>📈 Progress</div>
+<div onclick="showPage('home')">🏠 Home</div>
+<div onclick="showPage('workouts')">💪 Workouts</div>
+<div onclick="showPage('schedule')">📅 Schedule</div>
+<div onclick="showPage('nutrition')">🥗 Nutrition</div>
+<div onclick="showPage('progress')">📈 Progress</div>
 </div>
 
 <script>
+function showPage(page){
+alert(page.charAt(0).toUpperCase() + page.slice(1) + ' page opened');
+}
+
+const menuCards = document.querySelectorAll('.menu-card');
+
+menuCards[0].onclick = () => {
+trackWorkout('Beginner Program');
+alert('Opening Workouts');
+};
+
+menuCards[1].onclick = () => {
+alert('Opening Nutrition');
+};
+
+menuCards[2].onclick = () => {
+alert('Opening Progress Tracker');
+};
+
+menuCards[3].onclick = () => {
+alert('Opening Planner');
+};
+
+const exercises = document.querySelectorAll('.exercise');
+
+exercises.forEach(ex => {
+ex.addEventListener('click', () => {
+ex.style.color = '#22c55e';
+ex.style.fontWeight = '700';
+alert('Exercise completed: ' + ex.innerText);
+});
+});
+
+
 let waterCount = Number(localStorage.getItem('water') || 0);
 
 function renderWater(){
