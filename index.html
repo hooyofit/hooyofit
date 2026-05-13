@@ -41,9 +41,30 @@ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 body{
 background:var(--bg);
 color:var(--text);
-max-width:480px;
-margin:auto;
+width:100%;
+max-width:100%;
+margin:0;
 padding-bottom:100px;
+overflow-x:hidden;
+}
+
+.app{
+width:100%;
+max-width:100%;
+min-height:100vh;
+}
+
+.page{
+width:100%;
+min-height:100vh;
+padding-bottom:120px;
+}
+
+@media(min-width:768px){
+body{
+max-width:720px;
+margin:auto;
+}
 }
 
 header{
@@ -309,6 +330,7 @@ cursor:pointer;
 }
 
 .nav{
+min-height:70px;
 position:fixed;
 bottom:0;
 left:50%;
@@ -330,7 +352,9 @@ color:var(--muted);
 </style>
 </head>
 <body>
+<div class="app">
 
+<div id="homePage">
 <header>
 <h1>HooyoFit</h1>
 <p class="subtitle">Empowering Mothers, Healthy Families</p>
@@ -640,28 +664,37 @@ Protein-rich Somali meal for muscle recovery.
 </div>
 
 <script>
+const pages = {
+home: document.getElementById('homePage'),
+workouts: document.getElementById('workoutsPage'),
+schedule: document.getElementById('schedulePage'),
+nutrition: document.getElementById('nutritionPage'),
+progress: document.getElementById('progressPage')
+};
+
 function showPage(page){
-alert(page.charAt(0).toUpperCase() + page.slice(1) + ' page opened');
+Object.values(pages).forEach(p => {
+if(p) p.style.display = 'none';
+});
+
+if(pages[page]){
+pages[page].style.display = 'block';
+}
+
+const navItems = document.querySelectorAll('.nav div');
+navItems.forEach(item => item.style.color = '#9ca3af');
+
+if(event && event.target){
+event.target.style.color = '#f87171';
+}
 }
 
 const menuCards = document.querySelectorAll('.menu-card');
 
-menuCards[0].onclick = () => {
-trackWorkout('Beginner Program');
-alert('Opening Workouts');
-};
-
-menuCards[1].onclick = () => {
-alert('Opening Nutrition');
-};
-
-menuCards[2].onclick = () => {
-alert('Opening Progress Tracker');
-};
-
-menuCards[3].onclick = () => {
-alert('Opening Planner');
-};
+menuCards[0].onclick = () => showPage('workouts');
+menuCards[1].onclick = () => showPage('nutrition');
+menuCards[2].onclick = () => showPage('progress');
+menuCards[3].onclick = () => showPage('schedule');
 
 const exercises = document.querySelectorAll('.exercise');
 
@@ -669,10 +702,9 @@ exercises.forEach(ex => {
 ex.addEventListener('click', () => {
 ex.style.color = '#22c55e';
 ex.style.fontWeight = '700';
-alert('Exercise completed: ' + ex.innerText);
+ex.innerHTML += ' ✅';
 });
 });
-
 
 let waterCount = Number(localStorage.getItem('water') || 0);
 
@@ -684,6 +716,11 @@ for(let i=0;i<8;i++){
 const drop = document.createElement('div');
 drop.className = i < waterCount ? 'drop active' : 'drop';
 drop.innerHTML = '💧';
+drop.onclick = () => {
+waterCount = i + 1;
+localStorage.setItem('water', waterCount);
+renderWater();
+};
 container.appendChild(drop);
 }
 }
@@ -718,7 +755,66 @@ navigator.serviceWorker.register('sw.js');
 }
 
 renderWater();
+showPage('home');
+}
+}
+
+function saveWeight(weight){
+const weights = JSON.parse(localStorage.getItem('weights') || '[]');
+
+weights.push({
+value: weight,
+date: new Date().toISOString()
+});
+
+localStorage.setItem('weights', JSON.stringify(weights));
+}
+
+function trackWorkout(name){
+gtag('event','workout_started',{
+workout_name:name
+});
+}
+
+if('serviceWorker' in navigator){
+navigator.serviceWorker.register('sw.js');
+}
+
+renderWater();
 </script>
 
+</div>
+
+<div id="workoutsPage" style="display:none;padding:20px;">
+<h2 style="margin-bottom:16px;">Workout Videos 💪</h2>
+<p style="color:#6b7280;margin-bottom:18px;">Tap any animated exercise to open the YouTube tutorial.</p>
+</div>
+
+<div id="schedulePage" style="display:none;padding:20px;">
+<h2 style="margin-bottom:16px;">Weekly Schedule 📅</h2>
+<div class="card">
+Monday — Full Body<br><br>
+Tuesday — Fat Burn<br><br>
+Wednesday — Core<br><br>
+Thursday — Walking<br><br>
+Friday — Recovery
+</div>
+</div>
+
+<div id="nutritionPage" style="display:none;padding:20px;">
+<h2 style="margin-bottom:16px;">Nutrition Plans 🥗</h2>
+<div class="card">
+Balanced Somali meals with calories, protein, carbs, fat, and fiber.
+</div>
+</div>
+
+<div id="progressPage" style="display:none;padding:20px;">
+<h2 style="margin-bottom:16px;">Progress Tracking 📈</h2>
+<div class="card">
+Weight logs, water tracking, and workout completion history.
+</div>
+</div>
+
+</div>
 </body>
 </html>
