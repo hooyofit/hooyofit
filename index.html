@@ -1461,5 +1461,21 @@ _iosClose.addEventListener('click',()=>{
   localStorage.setItem('hf_iosDismissed','1');
 });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script>
+
+const supabaseUrl = 'https://qmiutlpdhmuqfymruxal.supabase.co';
+
+const supabaseKey = 'sb_publishable_MqQ9YRxbxltWr8hoVcrcgQ_yC7UxeEX';
+
+const supabase = window.supabase.createClient(
+  supabaseUrl,
+  supabaseKey
+);
+
+alert('Supabase connected successfully!');
+
+</script>
 </body>
 </html>
