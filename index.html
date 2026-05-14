@@ -1461,6 +1461,8 @@ _iosClose.addEventListener('click',()=>{
   localStorage.setItem('hf_iosDismissed','1');
 });
 </script>
+<div id="connectionStatus"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
 <script>
@@ -1474,7 +1476,10 @@ const supabase = window.supabase.createClient(
   supabaseKey
 );
 
-alert('Supabase connected successfully!');
+document.getElementById('connectionStatus').innerHTML =
+'✅ Supabase Connected';
+
+</script>
 
 </script>
 </body>
