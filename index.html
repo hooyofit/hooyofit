@@ -1460,26 +1460,51 @@ _iosClose.addEventListener('click',()=>{
   _iosHint.classList.remove('show');
   localStorage.setItem('hf_iosDismissed','1');
 });
-</script>
-<div id="connectionStatus"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Supabase Connect</title>
+</head>
+<body>
 
-const supabaseUrl = 'https://qmiutlpdhmuqfymruxal.supabase.co';
+    <div id="connectionStatus">Connecting to Supabase...</div>
 
-const supabaseKey = 'sb_publishable_MqQ9YRxbxltWr8hoVcrcgQ_yC7UxeEX';
+    <!-- 1. Load the Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-const supabase = window.supabase.createClient(
-  supabaseUrl,
-  supabaseKey
-);
+    <script>
+        // 2. Your Project Configuration
+        const supabaseUrl = 'https://qmiutlpdhmuqfymruxal.supabase.co';
+        const supabaseKey = 'PASTE_YOUR_ANON_PUBLIC_KEY_HERE'; // Replace this!
 
-document.getElementById('connectionStatus').innerHTML =
-'✅ Supabase Connected';
+        // 3. Initialize the Client
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-</script>
+        // 4. Verification Function (The "Health Check")
+        async function checkConnection() {
+            try {
+                // We try to fetch the current session. 
+                // This doesn't require a login, but confirms the API key is valid.
+                const { data, error } = await supabase.auth.getSession();
+
+                if (error) throw error;
+
+                document.getElementById('connectionStatus').innerHTML = '✅ Supabase Connected successfully!';
+                console.log("Connection successful:", data);
+            } catch (err) {
+                document.getElementById('connectionStatus').innerHTML = '❌ Connection Failed. Check console.';
+                console.error("Supabase Error:", err.message);
+            }
+        }
+
+        checkConnection();
+    </script>
+</body>
+</html>
+
 
 </script>
 </body>
