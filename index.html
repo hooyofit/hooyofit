@@ -2442,7 +2442,7 @@ async function subscribeUser(){
   // Stripe webhook should update the profiles.subscription_status column server-side on successful payment.
   state.sub='paid';
   localStorage.setItem('hf_sub','paid');
-  await supabase.from('profiles').update({subscription_status:'paid'}).eq('id',currentUser.id);
+  await supabaseClient.from('profiles').update({subscription_status:'paid'}).eq('id',currentUser.id);
   if(currentProfile) currentProfile.subscription_status='paid';
   updateProfileButtonUI();
   closeUpgradeModal();
@@ -2791,10 +2791,10 @@ _iosClose.addEventListener('click',()=>{
 </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script>
-let supabase = null;
+let supabaseClient = null;
 try{
   if(window.supabase){
-    supabase = window.supabase.createClient(
+    supabaseClient = window.supabase.createClient(
       'https://qmiutlpdhmuqfymruxal.supabase.co',
       'sb_publishable_MqQ9YRxbxltWr8hoVcrcgQ_yC7UxeEX'
     );
@@ -2821,14 +2821,14 @@ function setAuthMode(mode){
   document.getElementById('authError').style.display='none';
 }
 function openProfileOrAuth(){
-  if(!supabase){ showToast('⚠️ Connection issue — please refresh the page'); return; }
+  if(!supabaseClient){ showToast('⚠️ Connection issue — please refresh the page'); return; }
   if(currentUser){ openProfileModal(); }
   else { document.getElementById('authModal').classList.add('open'); }
 }
 function closeAuthModal(){ document.getElementById('authModal').classList.remove('open'); }
 
 async function submitAuth(){
-  if(!supabase){ document.getElementById('authError').textContent='Connection issue — please refresh the page.'; document.getElementById('authError').style.display='block'; return; }
+  if(!supabaseClient){ document.getElementById('authError').textContent='Connection issue — please refresh the page.'; document.getElementById('authError').style.display='block'; return; }
   const email=document.getElementById('authEmail').value.trim();
   const password=document.getElementById('authPassword').value;
   const name=document.getElementById('authName').value.trim();
@@ -2838,10 +2838,10 @@ async function submitAuth(){
 
   try{
     if(authMode==='signup'){
-      const {data,error}=await supabase.auth.signUp({email,password,options:{data:{name:name||email.split('@')[0]}}});
+      const {data,error}=await supabaseClient.auth.signUp({email,password,options:{data:{name:name||email.split('@')[0]}}});
       if(error) throw error;
     } else {
-      const {data,error}=await supabase.auth.signInWithPassword({email,password});
+      const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
       if(error) throw error;
     }
     closeAuthModal();
@@ -2855,7 +2855,7 @@ async function submitAuth(){
 }
 
 async function handleSignOut(){
-  await supabase.auth.signOut();
+  await supabaseClient.auth.signOut();
   closeProfileModal();
   showToast('Logged out');
 }
@@ -2889,7 +2889,7 @@ function updateProfileButtonUI(){
 }
 
 async function loadProfile(userId){
-  const {data,error}=await supabase.from('profiles').select('*').eq('id',userId).single();
+  const {data,error}=await supabaseClient.from('profiles').select('*').eq('id',userId).single();
   if(!error && data){
     currentProfile=data;
     state.sub=data.subscription_status||'free';
@@ -2899,7 +2899,7 @@ async function loadProfile(userId){
   }
 }
 
-supabase.auth.onAuthStateChange((event,session)=>{
+supabaseClient.auth.onAuthStateChange((event,session)=>{
   currentUser=session?session.user:null;
   if(currentUser){
     loadProfile(currentUser.id);
@@ -2908,7 +2908,7 @@ supabase.auth.onAuthStateChange((event,session)=>{
     updateProfileButtonUI();
   }
 });
-supabase.auth.getSession().then(({data:{session}})=>{
+supabaseClient.auth.getSession().then(({data:{session}})=>{
   currentUser=session?session.user:null;
   if(currentUser) loadProfile(currentUser.id);
 });
