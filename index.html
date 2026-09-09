@@ -170,6 +170,17 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .auth-error{color:#dc2626;font-size:12px;margin:-4px 0 10px;display:none}
 .profile-avatar-big{width:72px;height:72px;border-radius:50%;background:var(--grad);color:#fff;font-size:28px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
 .profile-row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid #f9f0ee}
+.dm-switch{width:44px;height:26px;border-radius:14px;background:#e5e7eb;position:relative;transition:background .2s;flex-shrink:0}
+.dm-switch.on{background:var(--pink)}
+.dm-knob{width:20px;height:20px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.dm-switch.on .dm-knob{left:21px}
+body.dark{--bg:#15151a;--white:#1e1e26;--text:#f0f0f2;--muted:#9096a3;--border:#2c2c36;--card:#1e1e26}
+body.dark .app{background:var(--bg)}
+body.dark .card,body.dark .card-sm,body.dark .plan-card,body.dark .food-card,body.dark .sv-n-card,body.dark .sv-rec-card,body.dark .sv-res-card,body.dark .paywall-card,body.dark .sv-modal,body.dark .search-bar,body.dark .meal-tab,body.dark .sv-sym-btn,body.dark .auth-input{background:var(--white);color:var(--text);border-color:var(--border)}
+body.dark .profile-btn,body.dark .lang-btn{background:var(--white);border-color:var(--border);color:var(--text)}
+body.dark .bottom-nav{background:var(--white);border-color:var(--border)}
+body.dark .nav-item{color:var(--muted)}
+body.dark .toast{background:var(--white);color:var(--text)}
 .profile-row:last-child{border-bottom:none}
 .lock-badge{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;font-size:10px;font-weight:800;padding:4px 9px;border-radius:20px;z-index:2}
 .paywall-card{background:#fff;border-radius:18px;margin:20px 16px;padding:32px 20px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.05)}
@@ -768,6 +779,32 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
       <input class="auth-input" id="authPassword" type="password" placeholder="Password"/>
       <div class="auth-error" id="authError"></div>
       <button class="btn-save" style="width:100%;padding:13px;font-size:14px" id="authSubmitBtn" onclick="submitAuth()">Log In</button>
+      <div style="text-align:center;margin-top:12px" id="forgotPwRow"><span style="font-size:12px;color:var(--pink);cursor:pointer;font-weight:600" onclick="openForgotPassword()">Forgot password?</span></div>
+    </div>
+  </div>
+
+  <!-- FORGOT PASSWORD MODAL -->
+  <div class="sv-modal-overlay" id="forgotPwModal" onclick="if(event.target===this)closeForgotPassword()">
+    <div class="sv-modal">
+      <button class="sv-modal-close" onclick="closeForgotPassword()">✕</button>
+      <div style="font-size:18px;font-weight:900;margin-bottom:8px">Reset your password</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Enter your email and we'll send you a link to set a new password.</div>
+      <input class="auth-input" id="forgotPwEmail" type="email" placeholder="Email"/>
+      <div class="auth-error" id="forgotPwError"></div>
+      <div style="font-size:12px;color:#16a34a;display:none;margin:-4px 0 10px" id="forgotPwSuccess">✅ Check your email for a reset link.</div>
+      <button class="btn-save" style="width:100%;padding:13px;font-size:14px" onclick="submitForgotPassword()">Send Reset Link</button>
+    </div>
+  </div>
+
+  <!-- CHANGE PASSWORD MODAL -->
+  <div class="sv-modal-overlay" id="changePwModal" onclick="if(event.target===this)closeChangePassword()">
+    <div class="sv-modal">
+      <button class="sv-modal-close" onclick="closeChangePassword()">✕</button>
+      <div style="font-size:18px;font-weight:900;margin-bottom:14px">Change Password</div>
+      <input class="auth-input" id="newPwInput" type="password" placeholder="New password"/>
+      <input class="auth-input" id="newPwConfirm" type="password" placeholder="Confirm new password"/>
+      <div class="auth-error" id="changePwError"></div>
+      <button class="btn-save" style="width:100%;padding:13px;font-size:14px" onclick="submitChangePassword()">Update Password</button>
     </div>
   </div>
 
@@ -776,11 +813,17 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
     <div class="sv-modal">
       <button class="sv-modal-close" onclick="closeProfileModal()">✕</button>
       <div class="profile-avatar-big" id="profileAvatar">?</div>
-      <div style="text-align:center;font-size:18px;font-weight:800" id="profileName">—</div>
+      <input class="auth-input" id="profileNameInput" type="text" style="text-align:center;font-size:16px;font-weight:700;margin-bottom:4px" placeholder="Your name"/>
       <div style="text-align:center;font-size:13px;color:var(--muted);margin-bottom:16px" id="profileEmail">—</div>
       <div class="card" style="margin:0 0 16px;padding:0;overflow:hidden">
         <div class="profile-row"><span style="font-size:18px">💳</span><div><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">Plan</div><div style="font-size:14px;font-weight:700" id="profilePlan">Free</div></div></div>
+        <div class="profile-row" style="justify-content:space-between;cursor:pointer" onclick="toggleDarkMode()">
+          <div style="display:flex;align-items:center;gap:10px"><span style="font-size:18px">🌙</span><div style="font-size:14px;font-weight:700">Dark Mode</div></div>
+          <div class="dm-switch" id="darkModeSwitch"><div class="dm-knob"></div></div>
+        </div>
       </div>
+      <button class="btn-save" style="width:100%;padding:13px;font-size:14px;margin-bottom:10px" onclick="saveProfileName()">Save Changes</button>
+      <button class="btn-cancel" style="width:100%;padding:13px;font-size:14px;margin-bottom:10px" onclick="closeProfileModal();openChangePassword()">Change Password</button>
       <button class="btn-save" style="width:100%;padding:13px;font-size:14px;margin-bottom:10px" onclick="closeProfileModal();openUpgradeModal()" id="profileUpgradeBtn">Upgrade to Premium</button>
       <button class="btn-cancel" style="width:100%;padding:13px;font-size:14px" onclick="handleSignOut()">Log Out</button>
     </div>
@@ -2870,12 +2913,80 @@ function renderProfileModal(){
   if(!currentProfile) return;
   const initial=(currentProfile.name||currentProfile.email||'?').charAt(0).toUpperCase();
   document.getElementById('profileAvatar').textContent=initial;
-  document.getElementById('profileName').textContent=currentProfile.name||'—';
+  document.getElementById('profileNameInput').value=currentProfile.name||'';
   document.getElementById('profileEmail').textContent=currentProfile.email||'';
   const isPaid=currentProfile.subscription_status==='paid';
   document.getElementById('profilePlan').textContent=isPaid?'Premium ($11/mo)':'Free';
   document.getElementById('profileUpgradeBtn').style.display=isPaid?'none':'block';
+  document.getElementById('darkModeSwitch').classList.toggle('on', localStorage.getItem('hf_dark')==='1');
 }
+
+// ── FORGOT PASSWORD ──
+function openForgotPassword(){
+  closeAuthModal();
+  document.getElementById('forgotPwEmail').value=document.getElementById('authEmail').value||'';
+  document.getElementById('forgotPwError').style.display='none';
+  document.getElementById('forgotPwSuccess').style.display='none';
+  document.getElementById('forgotPwModal').classList.add('open');
+}
+function closeForgotPassword(){ document.getElementById('forgotPwModal').classList.remove('open'); }
+async function submitForgotPassword(){
+  if(!supabaseClient){ showToast('⚠️ Connection issue — please refresh the page'); return; }
+  const email=document.getElementById('forgotPwEmail').value.trim();
+  const errEl=document.getElementById('forgotPwError');
+  errEl.style.display='none';
+  if(!email){ errEl.textContent='Please enter your email.'; errEl.style.display='block'; return; }
+  const {error}=await supabaseClient.auth.resetPasswordForEmail(email,{redirectTo:window.location.origin});
+  if(error){ errEl.textContent=error.message; errEl.style.display='block'; return; }
+  document.getElementById('forgotPwSuccess').style.display='block';
+}
+
+// ── CHANGE PASSWORD (while logged in) ──
+function openChangePassword(){
+  document.getElementById('newPwInput').value='';
+  document.getElementById('newPwConfirm').value='';
+  document.getElementById('changePwError').style.display='none';
+  document.getElementById('changePwModal').classList.add('open');
+}
+function closeChangePassword(){ document.getElementById('changePwModal').classList.remove('open'); }
+async function submitChangePassword(){
+  if(!supabaseClient){ showToast('⚠️ Connection issue — please refresh the page'); return; }
+  const pw=document.getElementById('newPwInput').value;
+  const pw2=document.getElementById('newPwConfirm').value;
+  const errEl=document.getElementById('changePwError');
+  errEl.style.display='none';
+  if(!pw||pw.length<6){ errEl.textContent='Password must be at least 6 characters.'; errEl.style.display='block'; return; }
+  if(pw!==pw2){ errEl.textContent='Passwords do not match.'; errEl.style.display='block'; return; }
+  const {error}=await supabaseClient.auth.updateUser({password:pw});
+  if(error){ errEl.textContent=error.message; errEl.style.display='block'; return; }
+  closeChangePassword();
+  showToast('✅ Password updated');
+}
+
+// ── EDIT NAME ──
+async function saveProfileName(){
+  if(!supabaseClient||!currentUser) return;
+  const name=document.getElementById('profileNameInput').value.trim();
+  if(!name) return;
+  await supabaseClient.from('profiles').update({name}).eq('id',currentUser.id);
+  await supabaseClient.auth.updateUser({data:{name}});
+  if(currentProfile) currentProfile.name=name;
+  updateProfileButtonUI();
+  renderProfileModal();
+  showToast('✅ Profile updated');
+}
+
+// ── DARK MODE ──
+function applyDarkMode(on){
+  document.body.classList.toggle('dark', on);
+  document.getElementById('darkModeSwitch')?.classList.toggle('on', on);
+}
+function toggleDarkMode(){
+  const on = localStorage.getItem('hf_dark')!=='1';
+  localStorage.setItem('hf_dark', on?'1':'0');
+  applyDarkMode(on);
+}
+applyDarkMode(localStorage.getItem('hf_dark')==='1');
 
 function updateProfileButtonUI(){
   const btn=document.getElementById('profileBtn');
