@@ -2626,13 +2626,16 @@ function renderScheduleDetail(){
       <div><div style="font-size:14px;font-weight:800">${daySchedule.work}</div><div style="font-size:11px;color:var(--muted)">${plan.title}</div></div>
     </div>
     ${exList.map(e=>`
-      <div class="schedule-ex-item">
+      <div class="schedule-ex-item" style="cursor:pointer" onclick="window.open('https://www.youtube.com/watch?v=${e.ytId}','_blank')">
         <div class="schedule-ex-icon" style="background:linear-gradient(135deg,#fde8e8,#fef3e8)">${e.name.charAt(0)}</div>
         <div>
           <div class="schedule-ex-name">${e.name}</div>
           <div class="schedule-ex-sets">${e.sets}</div>
         </div>
-        <div class="schedule-ex-kcal">🔥${e.kcal} kcal</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="schedule-ex-kcal">🔥${e.kcal} kcal</div>
+          <div style="font-size:11px;color:var(--pink);font-weight:700">▶</div>
+        </div>
       </div>`).join('')}
   </div>`;
 }
