@@ -612,6 +612,7 @@ body.dark .toast{background:var(--white);color:var(--text)}
           <span style="font-size:12px;color:#9a3412" id="n-kcal-label">Meal Total:</span>
           <span style="font-size:16px;font-weight:800;color:var(--orange)">🔥 <span id="totalKcal">0</span> kcal avg</span>
         </div>
+        <div id="foodOrderFilterChip" style="display:none;margin:0 16px 10px"></div>
         <div id="foodList"></div>
       </div>
 
@@ -2295,14 +2296,28 @@ function renderHowToEat(){
   const body=document.getElementById('hteBody');
   if(!body) return;
   body.innerHTML=l.howToEatSteps.map((s,i)=>`
-    <div style="display:flex;gap:10px;margin-bottom:10px">
+    <div style="display:flex;gap:10px;margin-bottom:10px;cursor:pointer" onclick="event.stopPropagation();filterFoodsByOrder(${i+1})">
       <div style="width:6px;border-radius:3px;background:${stepColors[i]};flex-shrink:0"></div>
       <div>
-        <div style="font-size:13px;font-weight:800;color:${stepColors[i]}">${s.label}</div>
+        <div style="font-size:13px;font-weight:800;color:${stepColors[i]}">${s.label} ›</div>
         <div style="font-size:12px;color:var(--muted);line-height:1.5">${s.desc}</div>
       </div>
     </div>`).join('')
     + `<div style="font-size:11px;color:#9a3412;background:#fff7ed;padding:8px 10px;border-radius:9px;line-height:1.5;margin-top:2px">💡 ${l.howToEatWhy}</div>`;
+}
+
+let foodOrderFilter=null;
+function filterFoodsByOrder(orderNum){
+  foodOrderFilter=orderNum;
+  // Collapse the how-to-eat card so the filtered list is immediately visible
+  const hteBody=document.getElementById('hteBody');
+  if(hteBody && hteBody.style.display!=='none') toggleHowToEat();
+  renderFood();
+  document.getElementById('foodList').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function clearFoodOrderFilter(){
+  foodOrderFilter=null;
+  renderFood();
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -2508,7 +2523,27 @@ function orderTag(order){
 }
 
 function renderFood(){
-  const foods=FOODS[state.currentMeal].slice().sort((a,b)=>(a.order||3)-(b.order||3));
+  const l=L();
+  const chipEl=document.getElementById('foodOrderFilterChip');
+  const kcalRow=document.getElementById('n-kcal-label')?.closest('.card-sm');
+  let foods;
+  if(foodOrderFilter){
+    foods=[...FOODS.breakfast,...FOODS.lunch,...FOODS.dinner]
+      .filter((f,i,a)=>a.findIndex(x=>x.name===f.name)===i)
+      .filter(f=>(f.order||3)===foodOrderFilter)
+      .sort((a,b)=>a.name.localeCompare(b.name));
+    const c=ORDER_COLORS[foodOrderFilter]||ORDER_COLORS[3];
+    chipEl.style.display='block';
+    chipEl.innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between;background:${c.bg};border-radius:10px;padding:8px 12px">
+      <span style="font-size:12px;font-weight:700;color:${c.fg}">${l.orderShort[foodOrderFilter-1]} · ${l.orderLabels[foodOrderFilter-1]} — showing all meals</span>
+      <span style="font-size:12px;font-weight:700;color:${c.fg};cursor:pointer" onclick="clearFoodOrderFilter()">✕ Clear</span>
+    </div>`;
+    if(kcalRow) kcalRow.style.display='none';
+  } else {
+    foods=FOODS[state.currentMeal].slice().sort((a,b)=>(a.order||3)-(b.order||3));
+    chipEl.style.display='none';
+    if(kcalRow) kcalRow.style.display='flex';
+  }
   const avg=Math.round(foods.reduce((s,f)=>s+f.kcal,0)/foods.length);
   const kcalEl=document.getElementById('totalKcal');
   if(kcalEl) kcalEl.textContent=avg;
@@ -2538,6 +2573,7 @@ function renderFood(){
 
 function switchMeal(meal,el){
   state.currentMeal=meal;
+  foodOrderFilter=null;
   document.querySelectorAll('.meal-tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
   renderFood();
