@@ -26,6 +26,10 @@
 html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
 .app{display:flex;flex-direction:column;height:100%;max-width:480px;margin:0 auto;position:relative;background:var(--bg);box-shadow:0 0 40px rgba(0,0,0,.08)}
 .scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:0 0 80px;position:relative}
+#pullRefreshIndicator{position:absolute;top:-50px;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:center;transition:transform .2s;z-index:5;pointer-events:none}
+.pr-spinner{width:22px;height:22px;border-radius:50%;border:2.5px solid #f0e8e4;border-top-color:var(--pink);transition:transform .1s;opacity:0}
+.pr-spinner.spin{animation:pr-rotate .6s linear infinite;opacity:1}
+@keyframes pr-rotate{to{transform:rotate(360deg)}}
 .scroll::-webkit-scrollbar{display:none}
 
 /* ── NAV ── */
@@ -444,6 +448,7 @@ body.dark .toast{background:var(--white);color:var(--text)}
 <body>
 <div class="app">
   <div class="scroll" id="mainScroll">
+    <div id="pullRefreshIndicator"><div class="pr-spinner"></div></div>
 
     <!-- ══ HOME ══ -->
     <div class="page active" id="page-home">
@@ -2762,8 +2767,55 @@ function init(){
   renderFood();
   updateRing();
   applyLang();
+  setupPullToRefresh();
 }
 init();
+
+// ══════════════════════════════════════════════════════════════════
+// PULL TO REFRESH (custom, since #mainScroll is its own scroll
+// container and Chrome's native pull-to-refresh only watches the
+// real document scroll, not nested elements)
+// ══════════════════════════════════════════════════════════════════
+function setupPullToRefresh(){
+  const scrollEl=document.getElementById('mainScroll');
+  const indicator=document.getElementById('pullRefreshIndicator');
+  const spinner=indicator.querySelector('.pr-spinner');
+  const THRESHOLD=70;
+  let startY=0, pulling=false, triggered=false;
+
+  scrollEl.addEventListener('touchstart',(e)=>{
+    if(scrollEl.scrollTop<=0){
+      startY=e.touches[0].clientY;
+      pulling=true;
+      triggered=false;
+    }
+  },{passive:true});
+
+  scrollEl.addEventListener('touchmove',(e)=>{
+    if(!pulling) return;
+    const delta=e.touches[0].clientY-startY;
+    if(delta>0 && scrollEl.scrollTop<=0){
+      const pull=Math.min(delta*0.5,100);
+      indicator.style.transform=`translateY(${pull+50}px)`;
+      spinner.style.opacity=Math.min(pull/THRESHOLD,1);
+      spinner.style.transform=`rotate(${pull*3}deg)`;
+      if(pull>=THRESHOLD) triggered=true;
+    }
+  },{passive:true});
+
+  scrollEl.addEventListener('touchend',()=>{
+    if(!pulling) return;
+    pulling=false;
+    if(triggered){
+      spinner.classList.add('spin');
+      indicator.style.transform='translateY(50px)';
+      setTimeout(()=>{ location.reload(); },300);
+    } else {
+      indicator.style.transform='translateY(0)';
+      spinner.style.opacity=0;
+    }
+  },{passive:true});
+}
 
 // ══════════════════════════════════════════════════════════════════
 // PWA & SERVICE WORKER
@@ -3017,6 +3069,10 @@ supabaseClient.auth.onAuthStateChange((event,session)=>{
   } else {
     currentProfile=null;
     updateProfileButtonUI();
+  }
+  if(event==='PASSWORD_RECOVERY'){
+    openChangePassword();
+    showToast('Set your new password below');
   }
 });
 supabaseClient.auth.getSession().then(({data:{session}})=>{
