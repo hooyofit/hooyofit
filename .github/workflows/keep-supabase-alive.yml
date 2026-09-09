@@ -10,4 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping Supabase project
-        run: curl -s -o /dev/null -w "%{http_code}" "https://qmiutlpdhmuqfymruxal.supabase.co/rest/v1/profiles?select=id&limit=1" -H "apikey: sb_publishable_MqQ9YRxbxltWr8hoVcrcgQ_yC7UxeEX"
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" "https://qmiutlpdhmuqfymruxal.supabase.co/rest/v1/profiles?select=id&limit=1" -H "apikey: sb_publishable_MqQ9YRxbxltWr8hoVcrcgQ_yC7UxeEX"
