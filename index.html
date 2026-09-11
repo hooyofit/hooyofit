@@ -2126,6 +2126,7 @@ function selectPlan(id){
   if(id==='weightloss' && state.sub!=='paid'){ openUpgradeModal(); return; }
   state.activePlan=id;
   localStorage.setItem('hf_activePlan',id);
+  syncAppDataToCloud();
   showToast('✅ Plan selected! Check your Schedule tab.');
   goPage('schedule');
 }
@@ -2181,6 +2182,7 @@ function toggleEx(id){
     showToast(L().toastDone);
   }
   localStorage.setItem('hf_doneEx',JSON.stringify([...state.doneEx]));
+  syncAppDataToCloud();
   renderExercises();
 }
 
@@ -2268,6 +2270,7 @@ function saveWeight(){
   const now=new Date();
   state.weights.push({kg:v,date:now.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})});
   localStorage.setItem('hf_weights',JSON.stringify(state.weights));
+  syncAppDataToCloud();
   closeWeightModal(); renderProgress(); showToast(L().toastWeight);
 }
 
@@ -2656,7 +2659,7 @@ function renderWater(){
   if(wm) wm.textContent=l.waterLeft(8-state.water);
   if(ws) ws.textContent=state.water+'💧';
 }
-function setWater(n){state.water=n;localStorage.setItem('hf_water',n);renderWater();}
+function setWater(n){state.water=n;localStorage.setItem('hf_water',n);syncAppDataToCloud();renderWater();}
 function changeWater(d){setWater(Math.max(0,Math.min(8,state.water+d)));}
 
 function renderPlan(){
@@ -2711,6 +2714,7 @@ function selectPlanFood(idx){
   if(!f) return;
   state.plan[state.planTarget]={name:f.name,icon:f.icon,kcal:f.kcal,order:f.order||3};
   localStorage.setItem('hf_plan',JSON.stringify(state.plan));
+  syncAppDataToCloud();
   closeFoodModal();
   renderPlan();
   showToast(L().toastMeal(f.name));
@@ -3096,9 +3100,56 @@ async function loadProfile(userId){
     currentProfile=data;
     state.sub=data.subscription_status||'free';
     localStorage.setItem('hf_sub',state.sub);
+    if(data.app_data && Object.keys(data.app_data).length) applyCloudAppData(data.app_data);
     updateProfileButtonUI();
     renderWorkouts();
   }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// PROGRESS SYNC (weight, streak, workouts done, water, meal plan)
+// ══════════════════════════════════════════════════════════════════
+function gatherAppData(){
+  return {
+    doneEx:[...state.doneEx],
+    weights:state.weights,
+    water:state.water,
+    waterDate:localStorage.getItem('hf_waterDate'),
+    plan:state.plan,
+    activePlan:state.activePlan,
+    streak:state.streak,
+    lastWorkout:localStorage.getItem('hf_lastWorkout')
+  };
+}
+
+let _syncTimer=null;
+function syncAppDataToCloud(){
+  if(!supabaseClient||!currentUser) return; // not logged in — stays local-only, same as before
+  clearTimeout(_syncTimer);
+  _syncTimer=setTimeout(async()=>{
+    await supabaseClient.from('profiles').update({app_data:gatherAppData()}).eq('id',currentUser.id);
+  },1200);
+}
+
+function applyCloudAppData(d){
+  // Cloud data is the source of truth once logged in — this device's local
+  // progress (if any) is overwritten so all devices show the same numbers.
+  if(d.doneEx){ state.doneEx=new Set(d.doneEx); localStorage.setItem('hf_doneEx',JSON.stringify(d.doneEx)); }
+  if(d.weights){ state.weights=d.weights; localStorage.setItem('hf_weights',JSON.stringify(d.weights)); }
+  if(typeof d.water==='number'){ state.water=d.water; localStorage.setItem('hf_water',String(d.water)); }
+  if(d.waterDate){ localStorage.setItem('hf_waterDate',d.waterDate); }
+  if(d.plan){ state.plan=d.plan; localStorage.setItem('hf_plan',JSON.stringify(d.plan)); }
+  if(d.activePlan){ state.activePlan=d.activePlan; localStorage.setItem('hf_activePlan',d.activePlan); }
+  if(typeof d.streak==='number'){ state.streak=d.streak; localStorage.setItem('hf_streak',String(d.streak)); }
+  if(d.lastWorkout){ localStorage.setItem('hf_lastWorkout',d.lastWorkout); }
+  // Re-render everything that shows this data
+  updateRing();
+  renderWater();
+  renderPlan();
+  const streakEl=document.getElementById('streakNum');
+  if(streakEl) streakEl.textContent=state.streak;
+  if(document.getElementById('page-progress')?.classList.contains('active')) renderProgress();
+  if(document.getElementById('page-workouts')?.classList.contains('active')) renderExercises();
 }
 
 supabaseClient.auth.onAuthStateChange((event,session)=>{
