@@ -2375,13 +2375,14 @@ function renderSVNutrients(){
   const grid=document.getElementById('sv-n-grid');
   if(!grid) return;
   grid.innerHTML=filtered.map(n=>`
-    <div class="sv-n-card" onclick="openSVNutrientDetail('${n.id}')">
+    <div class="sv-n-card" onclick="_svDetailOrigin=null;openSVNutrientDetail('${n.id}')">
       <span class="sv-n-emoji">${n.emoji}</span>
       <div class="sv-n-type">${n.type}</div>
       <div class="sv-n-name">${n.name[svLang]}</div>
       <div class="sv-n-tag">${n.tagline[svLang]}</div>
     </div>`).join('') || '<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:24px">No nutrients found</div>';
 }
+let _svDetailOrigin=null; // tracks whether nutrient detail was opened from Nafaqada's own list or from a Calaamadaha symptom result
 function openSVNutrientDetail(id){
   const n=SV_NUTRIENTS.find(x=>x.id===id);
   if(!n) return;
@@ -2400,6 +2401,11 @@ function openSVNutrientDetail(id){
   document.getElementById('mainScroll').scrollTop=0;
 }
 function closeSVNDetail(){
+  if(_svDetailOrigin==='calaamado'){
+    _svDetailOrigin=null;
+    switchCuntadaTab('calaamado',document.getElementById('cst2'));
+    return;
+  }
   document.getElementById('sv-n-list-view').style.display='block';
   document.getElementById('sv-n-detail-view').style.display='none';
 }
@@ -2437,7 +2443,7 @@ function checkSVSymptoms(){
   res.innerHTML=`<div class="sv-res-card"><div class="sv-res-title">Nutrients to focus on</div>${sorted.map(([nid])=>{
     const n=SV_NUTRIENTS.find(x=>x.id===nid);
     if(!n) return '';
-    return `<div class="sv-res-row" onclick="switchCuntadaTab('nafaqa',document.getElementById('cst1'));openSVNutrientDetail('${nid}')"><span style="font-size:24px">${n.emoji}</span><div><div style="font-size:13px;font-weight:700">${n.name[svLang]}</div><div style="font-size:11px;color:var(--muted)">${n.tagline[svLang]}</div></div><span style="margin-left:auto;color:var(--muted)">→</span></div>`;
+    return `<div class="sv-res-row" onclick="_svDetailOrigin='calaamado';switchCuntadaTab('nafaqa',document.getElementById('cst1'));openSVNutrientDetail('${nid}')"><span style="font-size:24px">${n.emoji}</span><div><div style="font-size:13px;font-weight:700">${n.name[svLang]}</div><div style="font-size:11px;color:var(--muted)">${n.tagline[svLang]}</div></div><span style="margin-left:auto;color:var(--muted)">→</span></div>`;
   }).join('')}</div>`;
 }
 
