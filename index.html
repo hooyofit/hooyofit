@@ -411,6 +411,42 @@ body.dark .toast{background:var(--white);color:var(--text)}
 .bu-star{position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:14px;animation:star-show 2.4s infinite}
 @keyframes star-show{0%,80%{opacity:0}88%,95%{opacity:1;transform:translateX(-50%) translateY(-6px)}100%{opacity:0}}
 
+/* ── POSTPARTUM-SAFE EXERCISES ── */
+.anim-pelvictilt{width:170px;height:75px;position:relative;margin:auto}
+.pt-head{position:absolute;width:19px;height:19px;background:#f5c5a0;border-radius:50%;top:23px;left:24px}
+.pt-torso{position:absolute;width:50px;height:15px;background:var(--grad);border-radius:8px;top:28px;left:42px}
+.pt-thigh{position:absolute;width:36px;height:12px;background:#e74c3c;border-radius:6px;top:33px;left:92px;transform:rotate(-45deg);transform-origin:left;animation:pt-thigh-move 2s ease-in-out infinite}
+.pt-shin{position:absolute;width:32px;height:11px;background:#c0392b;border-radius:6px;top:14px;left:115px;transform:rotate(50deg);transform-origin:left;animation:pt-shin-move 2s ease-in-out infinite}
+.pt-hip{position:absolute;width:14px;height:8px;background:#a855f7;border-radius:4px;top:30px;left:88px;animation:pt-hip-move 2s ease-in-out infinite}
+.pt-floor{position:absolute;bottom:8px;left:0;right:0;height:2px;background:rgba(255,255,255,.12);border-radius:2px}
+@keyframes pt-thigh-move{0%,100%{transform:rotate(-45deg)}50%{transform:rotate(-55deg)}}
+@keyframes pt-shin-move{0%,100%{transform:rotate(50deg)}50%{transform:rotate(60deg)}}
+@keyframes pt-hip-move{0%,100%{top:30px}50%{top:26px}}
+
+.anim-breathing{width:150px;height:90px;position:relative;margin:auto}
+.br-head{position:absolute;width:19px;height:19px;background:#f5c5a0;border-radius:50%;top:20px;left:20px}
+.br-torso{position:absolute;width:36px;height:22px;background:var(--grad);border-radius:10px;top:24px;left:38px}
+.br-belly{position:absolute;width:34px;height:20px;background:linear-gradient(135deg,#14b8a6,#3b82f6);border-radius:50%;top:30px;left:66px;animation:br-belly-move 3s ease-in-out infinite}
+.br-legs{position:absolute;width:44px;height:12px;background:#c0392b;border-radius:6px;top:38px;left:96px}
+@keyframes br-belly-move{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+
+.anim-birddog{width:180px;height:80px;position:relative;margin:auto}
+.bd-head{position:absolute;width:18px;height:18px;background:#f5c5a0;border-radius:50%;top:20px;left:20px}
+.bd-torso{position:absolute;width:70px;height:15px;background:var(--grad);border-radius:8px;top:26px;left:36px}
+.bd-arm-down{position:absolute;width:22px;height:7px;background:#c0392b;border-radius:4px;top:38px;left:38px;transform:rotate(70deg);transform-origin:top}
+.bd-leg-down{position:absolute;width:24px;height:8px;background:#a93226;border-radius:4px;top:38px;left:96px;transform:rotate(-70deg);transform-origin:top}
+.bd-arm-ext{position:absolute;width:32px;height:6px;background:#dc2626;border-radius:4px;top:20px;left:6px;transform-origin:right;animation:bd-arm-move 2.4s ease-in-out infinite}
+.bd-leg-ext{position:absolute;width:36px;height:7px;background:#ef4444;border-radius:4px;top:22px;left:104px;transform-origin:left;animation:bd-leg-move 2.4s ease-in-out infinite}
+@keyframes bd-arm-move{0%,40%,100%{transform:rotate(0);opacity:1}20%{transform:rotate(-15deg);opacity:1}45%,95%{opacity:0}}
+@keyframes bd-leg-move{0%,40%,100%{transform:rotate(0);opacity:1}20%{transform:rotate(15deg);opacity:1}45%,95%{opacity:0}}
+
+.anim-kegel{width:140px;height:90px;position:relative;margin:auto}
+.kg-head{position:absolute;width:19px;height:19px;background:#f5c5a0;border-radius:50%;top:14px;left:60px}
+.kg-torso{position:absolute;width:20px;height:34px;background:var(--grad);border-radius:10px;top:32px;left:60px}
+.kg-legs{position:absolute;width:46px;height:14px;background:#c0392b;border-radius:7px;top:62px;left:47px}
+.kg-pulse{position:absolute;width:20px;height:20px;border-radius:50%;background:rgba(168,85,247,.5);top:58px;left:60px;animation:kg-pulse-move 2.4s ease-in-out infinite}
+@keyframes kg-pulse-move{0%,100%{transform:scale(1.3);opacity:.3}50%{transform:scale(.6);opacity:.9}}
+
 /* ── TOAST ── */
 .toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(30px);background:#1a1a2e;color:#fff;padding:9px 18px;border-radius:11px;font-size:12px;font-weight:600;z-index:400;opacity:0;transition:all .3s;white-space:nowrap;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -422,6 +458,11 @@ body.dark .toast{background:var(--white);color:var(--text)}
 #update-banner .upd-text small{display:block;font-size:11px;opacity:.7;font-weight:400}
 .btn-upd-refresh{background:#f87171;color:#fff;border:none;border-radius:8px;padding:6px 13px;font-size:12px;font-weight:700;cursor:pointer}
 .btn-upd-dismiss{background:none;border:none;color:rgba(255,255,255,.5);font-size:18px;cursor:pointer;padding:0 2px;flex-shrink:0}
+
+/* ── SUNNAH BANNER ── */
+#sunnah-banner{position:fixed;top:0;left:50%;transform:translateX(-50%) translateY(-100%);width:100%;max-width:480px;z-index:1000;background:linear-gradient(135deg,#0f3d2e,#1a5c42);color:#fff;padding:14px 16px;display:flex;align-items:flex-start;gap:10px;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:transform .45s cubic-bezier(.4,0,.2,1);max-height:80vh;overflow-y:auto}
+#sunnah-banner.show{transform:translateX(-50%) translateY(0)}
+#sunnah-banner .sunnah-text{flex:1;min-width:0}
 
 /* ── PWA BANNER ── */
 #pwa-banner{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:480px;z-index:999;background:#fff;border-top:2px solid var(--pink);border-radius:20px 20px 0 0;box-shadow:0 -4px 24px rgba(248,113,113,.2);padding:14px 18px 22px;display:flex;align-items:center;gap:12px;transition:transform .4s cubic-bezier(.4,0,.2,1)}
@@ -465,6 +506,7 @@ body.dark .toast{background:var(--white);color:var(--text)}
           </div>
         </div>
       </div>
+      <div class="reminder-card" id="txt-reminder"><strong>Remember:</strong> Even 15 minutes of exercise daily improves your health and mental wellbeing!</div>
       <div class="tip-card">
         <div style="font-size:20px;flex-shrink:0">⭐</div>
         <div>
@@ -477,6 +519,19 @@ body.dark .toast{background:var(--white);color:var(--text)}
         <div>
           <div style="font-size:10px;font-weight:800;letter-spacing:1.5px;opacity:.8;margin-bottom:3px" id="txt-fiber-label">SIDA LOO CUNO</div>
           <div style="font-size:13px;font-weight:600;line-height:1.5" id="fiberTip"></div>
+        </div>
+      </div>
+      <div class="tip-card" style="background:linear-gradient(135deg,#0ea5e9,#2563eb);flex-direction:column;align-items:flex-start;gap:8px">
+        <div style="display:flex;gap:12px;width:100%">
+          <div style="font-size:20px;flex-shrink:0">☀️</div>
+          <div>
+            <div style="font-size:10px;font-weight:800;letter-spacing:1.5px;opacity:.8;margin-bottom:3px">MOST PEOPLE ARE LOW ON THIS</div>
+            <div style="font-size:13px;font-weight:600;line-height:1.5">Vitamin D & Calcium deficiency is extremely common — free to check, no subscription needed.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;padding-left:32px">
+          <span style="background:rgba(255,255,255,.2);color:#fff;border-radius:10px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer" onclick="openFreeNutrientPreview('vitamin-d')">☀️ Vitamin D</span>
+          <span style="background:rgba(255,255,255,.2);color:#fff;border-radius:10px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer" onclick="openFreeNutrientPreview('calcium')">🦴 Calcium</span>
         </div>
       </div>
       <div class="streak-card">
@@ -521,7 +576,6 @@ body.dark .toast{background:var(--white);color:var(--text)}
           <div class="menu-card-arrow">›</div>
         </div>
       </div>
-      <div class="reminder-card" id="txt-reminder"><strong>Remember:</strong> Even 15 minutes of exercise daily improves your health and mental wellbeing!</div>
     </div>
 
     <!-- ══ WORKOUTS ══ -->
@@ -530,6 +584,7 @@ body.dark .toast{background:var(--white);color:var(--text)}
         <div style="width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,#fde8e8,#fef3e8);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">💪</div>
         <div><div style="font-size:20px;font-weight:900" id="w-title">Workouts</div><div style="font-size:12px;color:var(--muted)" id="w-sub">Choose your plan</div></div>
       </div>
+      <div id="fitnessQuizSummary" style="margin:0 16px 14px"></div>
       <div class="pills" id="workoutPills">
         <div class="pill active" onclick="filterWorkout('all',this)" id="wp0">All Plans</div>
         <div class="pill" onclick="filterWorkout('beginner',this)" id="wp1">🌱 Beginner</div>
@@ -582,6 +637,7 @@ body.dark .toast{background:var(--white);color:var(--text)}
         <div class="pill" onclick="switchCuntadaTab('nafaqa',this)" id="cst1">🌿 Nafaqada</div>
         <div class="pill" onclick="switchCuntadaTab('calaamado',this)" id="cst2">🩺 Calaamadaha</div>
         <div class="pill" onclick="switchCuntadaTab('cunto',this)" id="cst3">👨‍🍳 Cunto Karinta</div>
+        <div class="pill" onclick="switchCuntadaTab('foods',this)" id="cst4">🥗 Cuntooyinka</div>
       </div>
 
       <!-- SUB-TAB 1: MACROOYINKA (existing food DB) -->
@@ -619,6 +675,13 @@ body.dark .toast{background:var(--white);color:var(--text)}
       <!-- SUB-TAB 2: NAFAQADA (Sahan Vita nutrients) -->
       <div class="cuntada-sub" id="sub-nafaqa" style="display:none">
         <div id="sv-n-list-view">
+          <div class="card-sm" style="background:#eff6ff;border:1px solid #bfdbfe;margin:0 16px 12px">
+            <div style="font-size:11px;font-weight:800;color:#2563eb;text-transform:uppercase;margin-bottom:6px">⚠️ Most Commonly Deficient</div>
+            <div style="display:flex;gap:8px">
+              <span class="sv-def-tag" style="background:#fff;border:1.5px solid #bfdbfe;color:#2563eb;cursor:pointer" onclick="_svDetailOrigin=null;openSVNutrientDetail('vitamin-d')">☀️ Vitamin D</span>
+              <span class="sv-def-tag" style="background:#fff;border:1.5px solid #bfdbfe;color:#2563eb;cursor:pointer" onclick="_svDetailOrigin=null;openSVNutrientDetail('calcium')">🦴 Calcium</span>
+            </div>
+          </div>
           <input class="search-bar" id="sv-n-search" type="search" placeholder="Search nutrients…" oninput="renderSVNutrients()">
           <div class="pills">
             <div class="pill active" onclick="setSVFilter('all',this)">All</div>
@@ -639,8 +702,8 @@ body.dark .toast{background:var(--white);color:var(--text)}
           <div class="card-sm" style="background:#fff7ed;border:1px solid #fed7aa">
             <p style="font-size:13px;color:#92400e;line-height:1.5">Tap a symptom to instantly see which nutrients you may need.</p>
           </div>
-          <div class="sv-sym-grid" id="sv-sym-grid"></div>
           <div id="sv-sym-results"></div>
+          <div class="sv-sym-grid" id="sv-sym-grid"></div>
         </div>
       </div>
 
@@ -648,6 +711,19 @@ body.dark .toast{background:var(--white);color:var(--text)}
       <div class="cuntada-sub" id="sub-cunto" style="display:none">
         <div class="pills" id="sv-rec-filter-row"></div>
         <div id="sv-rec-list"></div>
+      </div>
+
+      <!-- SUB-TAB 5: CUNTOOYINKA (Food Browser — SV_FOODS_DB) -->
+      <div class="cuntada-sub" id="sub-foods" style="display:none">
+        <div id="sv-f-list-view">
+          <input class="search-bar" id="sv-f-search" type="search" placeholder="Search foods…" oninput="renderSVFoodBrowser()">
+          <div class="pills" id="sv-f-cat-row"></div>
+          <div class="sv-n-grid" id="sv-f-grid"></div>
+        </div>
+        <div id="sv-f-detail-view" style="display:none">
+          <button class="back-btn" onclick="closeSVFoodDetail()">← Back</button>
+          <div id="sv-f-detail-content"></div>
+        </div>
       </div>
     </div>
 
@@ -742,6 +818,46 @@ body.dark .toast{background:var(--white);color:var(--text)}
       <h3 id="foodModalTitle">Pick a Meal</h3>
       <div id="foodSelectList" style="margin-bottom:12px"></div>
       <button class="btn-cancel" id="food-close-btn" style="width:100%;padding:11px" onclick="closeFoodModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- FITNESS QUIZ MODAL -->
+  <div class="sv-modal-overlay" id="fitnessQuizModal" onclick="if(event.target===this)closeFitnessQuiz()">
+    <div class="sv-modal">
+      <button class="sv-modal-close" onclick="closeFitnessQuiz()">✕</button>
+      <div style="font-size:18px;font-weight:900;margin-bottom:4px">Find Your Fit</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:16px">4 quick questions — we'll recommend a plan and adjust it to you.</div>
+
+      <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Fitness level</div>
+      <div class="pills" id="fq-level" style="margin-bottom:16px">
+        <div class="pill" data-val="beginner" onclick="fqSelect('level','beginner',this)">🌱 Just starting</div>
+        <div class="pill" data-val="intermediate" onclick="fqSelect('level','intermediate',this)">⚡ Some experience</div>
+        <div class="pill" data-val="advanced" onclick="fqSelect('level','advanced',this)">🔥 Very active</div>
+      </div>
+
+      <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Main goal</div>
+      <div class="pills" id="fq-goal" style="margin-bottom:16px">
+        <div class="pill" data-val="general" onclick="fqSelect('goal','general',this)">💪 General fitness</div>
+        <div class="pill" data-val="loss" onclick="fqSelect('goal','loss',this)">🔥 Weight loss</div>
+        <div class="pill" data-val="postpartum" onclick="fqSelect('goal','postpartum',this)">👶 Postpartum recovery</div>
+      </div>
+
+      <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Time available per day</div>
+      <div class="pills" id="fq-time" style="margin-bottom:16px">
+        <div class="pill" data-val="short" onclick="fqSelect('time','short',this)">⏱ ~10 min</div>
+        <div class="pill" data-val="medium" onclick="fqSelect('time','medium',this)">⏱ 20–30 min</div>
+        <div class="pill" data-val="long" onclick="fqSelect('time','long',this)">⏱ 30+ min</div>
+      </div>
+
+      <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Anything we should know?</div>
+      <div class="pills" id="fq-note" style="margin-bottom:20px">
+        <div class="pill" data-val="none" onclick="fqSelect('note','none',this)">✅ Nothing, I'm good</div>
+        <div class="pill" data-val="joints" onclick="fqSelect('note','joints',this)">🦴 Go easy on joints</div>
+        <div class="pill" data-val="newmom" onclick="fqSelect('note','newmom',this)">🤱 Recently gave birth</div>
+      </div>
+
+      <div class="auth-error" id="fq-error"></div>
+      <button class="btn-save" style="width:100%;padding:13px;font-size:14px" onclick="submitFitnessQuiz()">Get My Plan</button>
     </div>
   </div>
 
@@ -844,6 +960,18 @@ body.dark .toast{background:var(--white);color:var(--text)}
   <div class="upd-text"><span id="upd-title">Update available!</span><small id="upd-sub">Refresh to get the latest version</small></div>
   <button class="btn-upd-refresh" id="btn-upd-refresh">Refresh</button>
   <button class="btn-upd-dismiss" id="btn-upd-dismiss">✕</button>
+</div>
+
+<!-- SUNNAH BANNER -->
+<div id="sunnah-banner">
+  <div style="font-size:20px;flex-shrink:0">🌙</div>
+  <div class="sunnah-text">
+    <div style="font-size:10px;font-weight:800;letter-spacing:1px;opacity:.75;margin-bottom:3px">HADITH OF THE DAY</div>
+    <div id="sunnah-ar" dir="rtl" style="font-size:15px;font-weight:700;line-height:1.7;margin-bottom:6px"></div>
+    <div id="sunnah-en" style="font-size:12px;line-height:1.5;opacity:.95;margin-bottom:2px"></div>
+    <div id="sunnah-source" style="font-size:10px;opacity:.65;font-style:italic"></div>
+  </div>
+  <button class="btn-upd-dismiss" id="btn-sunnah-dismiss" style="align-self:flex-start">✕</button>
 </div>
 
 <!-- PWA BANNER -->
@@ -1030,6 +1158,18 @@ const EXERCISES = [
   {id:12,name:'Burpees',heer:'hard',nooc:['cardio'],sets:'3 sets × 8 reps',kcal:100,
    desc:'Squat, kick legs back, do push-up, jump up. The ultimate full-body exercise.',
    tags:['Full Body','Cardio'],time:'3:00',animKey:'burpee',ytId:'xRdGC6cFY0s'},
+  {id:13,name:'Pelvic Tilts',heer:'easy',nooc:['core','postpartum'],sets:'3 sets × 10 reps',kcal:10,
+   desc:'Lie on back, knees bent. Gently flatten your lower back into the floor by tightening your deep abs, then release. A safe way to reconnect with your core after birth — avoids the strain of crunches.',
+   tags:['Core','Postpartum-Safe'],time:'3:00',animKey:'pelvictilt',ytId:null,guideUrl:'https://hackensackmeridianhealth.org/en/healthu/2023/03/24/what-are-the-best-movements-to-practice-in-postpartum'},
+  {id:14,name:'Diaphragmatic Breathing',heer:'easy',nooc:['core','postpartum'],sets:'3 sets × 10 breaths',kcal:5,
+   desc:'Sit or lie comfortably. Breathe deeply into your belly, then exhale while gently drawing your belly button toward your spine. Rebuilds deep core connection before any harder core work.',
+   tags:['Core','Postpartum-Safe'],time:'3:00',animKey:'breathing',ytId:null,guideUrl:'https://www.hingehealth.com/resources/articles/diaphragmatic-breathing'},
+  {id:15,name:'Modified Bird-Dog',heer:'easy',nooc:['core','back','postpartum'],sets:'3 sets × 8 each side',kcal:15,
+   desc:'On hands and knees, slowly extend one arm and the opposite leg. Keep hips level and move slowly. A gentle, diastasis-safe alternative to Superman and planks.',
+   tags:['Core','Back','Postpartum-Safe'],time:'4:00',animKey:'birddog',ytId:null,guideUrl:'https://hingehealth.com/resources/articles/bird-dog'},
+  {id:16,name:'Kegel Exercises',heer:'easy',nooc:['postpartum'],sets:'3 sets × 10 reps',kcal:5,
+   desc:'Gently squeeze your pelvic floor muscles (as if stopping the flow of urine) for 5 seconds, then release. Rebuilds pelvic floor strength after childbirth.',
+   tags:['Pelvic Floor','Postpartum-Safe'],time:'2:00',animKey:'kegel',ytId:null,guideUrl:'https://hackensackmeridianhealth.org/en/healthu/2023/03/24/what-are-the-best-movements-to-practice-in-postpartum'},
 ];
 
 const PLANS = [
@@ -1047,7 +1187,8 @@ const PLANS = [
    title:'Postpartum Recovery',sub:'Gentle recovery for new mamas',
    duration:'6 weeks',level:'Easy',kcal:'100-150',equipment:'None',
    schedule:['Gentle Core','Walking','Rest','Stretching','Gentle Core','Walking','Rest'],
-   exercises:[1,3,8,9,7]},
+   exercises:[13,14,15,16,8],
+   safetyNote:'These exercises are gentler on your core and pelvic floor than standard ab work. Please get clearance from your doctor or midwife before starting any postpartum exercise routine, especially if you had a C-section or notice any doming/bulging along your midline.'},
   {id:'quick',cat:'quick',icon:'⚡',grad:'linear-gradient(135deg,#14b8a6,#3b82f6)',
    title:'Quick 10-Min Workout',sub:'No time? No excuse!',
    duration:'Daily',level:'Medium',kcal:'80-120',equipment:'None',
@@ -1073,6 +1214,18 @@ const FOODS = {
      goals:['general'],warning:'Choose whole wheat for better nutrition.',
      desc:'Somali bread with tea. Add less sugar to the tea.',
      portion:'2 slices bread + 1 cup tea'},
+    {icon:'🥣',name:'Digirjileec + Caano Fadhi + Timir',kcal:340,protein:13,carbs:52,fat:8,fiber:7,order:1,
+     goals:['heart','loss','general'],warning:null,
+     desc:'Oats soaked in yogurt with chopped dates. A slow-release, iron-rich start to the day.',
+     portion:'½ cup oats + 1 cup yogurt + 3 dates'},
+    {icon:'🫘',name:'Digir Cad + Toon',kcal:300,protein:12,carbs:40,fat:10,fiber:9,order:1,
+     goals:['heart','loss','general'],warning:null,
+     desc:'Mashed chickpeas with garlic and olive oil. A fiber-rich, filling vegetarian start.',
+     portion:'1 cup chickpeas + 1 tbsp olive oil'},
+    {icon:'🍳',name:'Ukun + Sabaaniq',kcal:220,protein:18,carbs:5,fat:14,fiber:3,order:2,
+     goals:['muscle','loss'],warning:null,
+     desc:'Eggs scrambled with fresh spinach. High protein with a boost of iron.',
+     portion:'2 eggs + 1 cup spinach'},
   ],
   lunch:[
     {icon:'🍚',name:'Bariis + Hilib Digaag',kcal:450,protein:32,carbs:52,fat:10,fiber:3,order:2,
@@ -1091,6 +1244,18 @@ const FOODS = {
      goals:['loss','heart','post'],warning:null,
      desc:'Lentil soup with bread. Heart-healthy and filling.',
      portion:'2 cups soup + 1 slice bread'},
+    {icon:'🥙',name:'Qolof-badeed + Digir Cad + Brokoli',kcal:390,protein:29,carbs:32,fat:11,fiber:9,order:1,
+     goals:['heart','loss','muscle'],warning:null,
+     desc:'Tuna and chickpea salad with steamed broccoli. High protein, high fiber, and rich in iodine and selenium.',
+     portion:'1 can tuna + ½ cup chickpeas + 1 cup broccoli'},
+    {icon:'🍚',name:'Bariis + Brokoli + Simsim',kcal:350,protein:11,carbs:55,fat:9,fiber:8,order:1,
+     goals:['heart','loss','general'],warning:null,
+     desc:'Rice with steamed broccoli, finished with a sprinkle of sesame seeds for calcium and magnesium.',
+     portion:'1 cup rice + 1 cup broccoli + 1 tbsp sesame seeds'},
+    {icon:'🍖',name:'Hilib Ari + Khudaar',kcal:420,protein:34,carbs:20,fat:16,fiber:5,order:2,
+     goals:['muscle','general'],warning:'Trim visible fat for a leaner meal.',
+     desc:'Grilled goat meat with mixed vegetables. A traditional, protein-dense lunch.',
+     portion:'150g goat meat + 1 cup vegetables'},
   ],
   dinner:[
     {icon:'🍵',name:'Suqaar + Bariis Yar',kcal:380,protein:26,carbs:38,fat:12,fiber:4,order:2,
@@ -1109,6 +1274,18 @@ const FOODS = {
      goals:['general'],warning:'Choose whole wheat bread.',
      desc:'Bread with avocado spread. Simple and nutritious.',
      portion:'2 slices bread + ½ avocado'},
+    {icon:'🍤',name:'Karkabo Toon leh + Xabxab',kcal:310,protein:24,carbs:22,fat:9,fiber:2,order:2,
+     goals:['heart','loss'],warning:null,
+     desc:'Garlic shrimp with a side of fresh watermelon. Light, high in iodine, and refreshing at night.',
+     portion:'150g shrimp + 1 cup watermelon'},
+    {icon:'🥣',name:'Caano Fadhi + Simsim + Cambo',kcal:270,protein:9,carbs:38,fat:8,fiber:4,order:3,
+     goals:['general','post'],warning:null,
+     desc:'Yogurt topped with sesame seeds and mango. A light, calcium-rich way to end the day.',
+     portion:'1 cup yogurt + 1 tbsp sesame + ½ mango'},
+    {icon:'🍗',name:'Digaag Xawaash + Khudaar',kcal:360,protein:30,carbs:18,fat:14,fiber:4,order:2,
+     goals:['muscle','general'],warning:'Keep portions moderate at dinner.',
+     desc:'Xawaash-spiced roasted chicken with a side of vegetables.',
+     portion:'150g chicken + 1 cup vegetables'},
   ]
 };
 
@@ -1119,7 +1296,34 @@ const TIPS = [
   'Eat slowly — your brain takes 20 minutes to feel full.',
   'Exercise 3-4 times a week to strengthen your heart.',
   'Avoid heavy meals at night. Your stomach needs rest too.',
-  'Breakfast is the most important meal — don\'t skip it!',
+  'Eating at regular times matters more than any single meal — including breakfast.',
+];
+
+const SUNNAH_TIPS = [
+  {
+    ar:'الْكَافِرُ يَأْكُلُ فِي سَبْعَةِ أَمْعَاءٍ وَالْمُؤْمِنُ يَأْكُلُ فِي مِعًى وَاحِدٍ',
+    en:'"The believer eats with one intestine, while the unbeliever eats with seven." — a reminder to eat with moderation, not until overly full.',
+    so:'"Mu\'minku wuxuu ku cunaa hal calool, gaaladuna waxay ku cunaan toddoba calool." — xasuusin ah in la cuno si dhexdhexaad ah.',
+    source:'Sahih al-Bukhari 5393/5397 & Sahih Muslim 2060'
+  },
+  {
+    ar:'سَمِّ اللَّهَ، وَكُلْ بِيَمِينِكَ، وَكُلْ مِمَّا يَلِيكَ',
+    en:'"Say Bismillah, eat with your right hand, and eat from what is nearest to you."',
+    so:'"Dheh Bismillah, gacanta midig ku cun, oo ka cun waxa kuu dhow."',
+    source:'Sahih al-Bukhari & Sahih Muslim'
+  },
+  {
+    ar:'أَلَا إِنَّ الْقُوَّةَ الرَّمْيُ',
+    en:'"Indeed, strength is archery." — said three times for emphasis, on the importance of physical training.',
+    so:'"Xoogga waxaa ka mid ah fallaadh-tuurista." — saddex jeer la yidhi si loo xoojiyo.',
+    source:'Sahih Muslim 1917'
+  },
+  {
+    ar:'ارْمُوا وَأَنَا مَعَكُمْ كُلِّكُمْ',
+    en:'When some men stopped practicing archery in his presence, the Prophet ﷺ told them: "Throw, and I am with all of you."',
+    so:'Markuu niman ka gam\'ay fallaadh-tuurista hortiisa, Nabigu ﷺ wuxuu ku yidhi: "Tuura, anigu waan idinla jiraa dhammaantiin."',
+    source:'Sahih al-Bukhari 2899/3507'
+  },
 ];
 
 // ══ SAHAN VITA MERGED DATA ══
@@ -1329,7 +1533,7 @@ const SV_NUTRIENTS = [
       {name:{en:"UV Mushrooms",so:"Suunka UV"},amount:"450 IU/100g",emoji:"🍄"},
       {name:{en:"Beef Liver",so:"Beer lo'aad"},amount:"50 IU/100g",emoji:"🫀"},
     ],
-    absorption:{en:"Always take with fat — D is fat-soluble. Sunlight (15–30 min on skin daily) is the primary source — but Stockholm winters give almost zero UVB. Dark-skinned people need 3–5x more sun time for the same production.",so:"Had iyo jeer cun dufan — D waa dufanka ku milma. Qorraxdu (15–30 daqiiqo maqaarka maalintiiba) waa isha ugu weyn."},
+    absorption:{en:"Always take with fat — D is fat-soluble. Sunlight (15–30 min on skin daily) is the primary source — but winters at high latitudes (northern Europe, Canada, much of the US) give almost zero usable UVB, even on a sunny day, so food sources and a supplement matter more then. Dark-skinned people need 3–5x more sun time for the same production.",so:"Had iyo jeer cun dufan — D waa dufanka ku milma. Qorraxdu (15–30 daqiiqo maqaarka maalintiiba) waa isha ugu weyn."},
     daily:{en:"600–4000 IU/day (adults; many experts recommend higher)",so:"600–4000 IU/maalintii (waaweyn; khubaro badan ayaa sare ka talinaya)"}
   },
   {
@@ -1722,6 +1926,15 @@ const SV_FOODS_DB = [
   {name:{en:"Mango",so:"Cambo"},emoji:"🥭",category:{en:"Fruits",so:"Khudaar"},nutrients:["vitamin-c","vitamin-a","vitamin-b9","potassium"],benefit:{en:"Tropical Vitamin A and C bomb — great for immune health and skin.",so:"Qarxiye Fiitamiin A iyo C oo tropical ah."}},
   {name:{en:"Beef",so:"Hilib lo'aad"},emoji:"🥩",category:{en:"Meat",so:"Hilib"},nutrients:["vitamin-b12","iron","zinc","potassium","omega3"],benefit:{en:"Highly bioavailable B12, iron, and zinc — all in forms your body absorbs best.",so:"B12, bir, iyo sink oo aad si wanaagsan u nuquli karto."}},
   {name:{en:"Dates",so:"Timir"},emoji:"🌴",category:{en:"Fruits",so:"Khudaar"},nutrients:["iron","potassium","magnesium","vitamin-b9","calcium"],benefit:{en:"Natural energy + iron + potassium. A traditional Somali superfood.",so:"Tamar dabiici ah + bir + botasiyam."}},
+  {name:{en:"Sesame Seeds",so:"Simsim"},emoji:"⚪",category:{en:"Nuts & Seeds",so:"Cunooyin & abuur"},nutrients:["calcium","magnesium","iron","zinc","copper","manganese"],benefit:{en:"One of the richest plant sources of calcium that exists — a small handful rivals a glass of milk.",so:"Mid ka mid ah ilaha kalsiyamka ugu badan ee dhirta."}},
+  {name:{en:"Chickpeas",so:"Digir Cad"},emoji:"🫛",category:{en:"Legumes",so:"Digirta"},nutrients:["iron","magnesium","zinc","manganese","vitamin-b9"],benefit:{en:"A filling, affordable plant protein rich in iron, folate, and manganese for bone health.",so:"Borotiin dhireed oo dhergiya oo bir iyo folate ka buuxa."}},
+  {name:{en:"Plain Yogurt",so:"Caano Fadhi"},emoji:"🥣",category:{en:"Dairy",so:"Caano"},nutrients:["calcium","phosphorus","zinc","vitamin-b12"],benefit:{en:"Easier to digest than milk for many people, with just as much calcium and added gut-friendly probiotics.",so:"Way ka fudud tahay caanaha dheefshiidka, kalsiyam la mid ah ayeyna leedahay."}},
+  {name:{en:"Oats",so:"Digirjileec"},emoji:"🌾",category:{en:"Grains",so:"Hadhuudh"},nutrients:["iron","magnesium","potassium","vitamin-b1","phosphorus"],benefit:{en:"A slow-release breakfast grain with more iron than most people expect — pair with citrus to absorb it better.",so:"Hadhuudh subax ah oo bir ka badan intii la filayo."}},
+  {name:{en:"Tuna",so:"Qolof-badeed"},emoji:"🐟",category:{en:"Fish",so:"Kalluun"},nutrients:["selenium","vitamin-b12","zinc","vitamin-b6","iodine"],benefit:{en:"Lean, affordable, and one of the best food sources of selenium and iodine for thyroid health.",so:"Isha ugu fiican ee seeleniyam iyo iodine caafimaadka thyroid-ka."}},
+  {name:{en:"Shrimp",so:"Karkabo"},emoji:"🦐",category:{en:"Seafood",so:"Cunto-badeed"},nutrients:["iodine","selenium","zinc","vitamin-b12"],benefit:{en:"Very low in fat but rich in iodine and selenium — two minerals the modern diet often falls short on.",so:"Dufan yar leh laakiin iodine iyo seeleniyam ka buuxda."}},
+  {name:{en:"Broccoli",so:"Brokoli"},emoji:"🥦",category:{en:"Vegetables",so:"Khudaar"},nutrients:["vitamin-c","vitamin-k","calcium","potassium","vitamin-b9"],benefit:{en:"More Vitamin C per bite than an orange, plus calcium and Vitamin K for strong bones.",so:"Fiitamiin C ka badan liinta macaan, iyo kalsiyam lafaha u adkeeya."}},
+  {name:{en:"Garlic",so:"Toon"},emoji:"🧄",category:{en:"Other",so:"Kale"},nutrients:["manganese","selenium","vitamin-b6","vitamin-c","sulfur"],benefit:{en:"Small but mighty — crushed garlic releases sulfur compounds with real immune and heart benefits.",so:"Yar laakiin xoog badan — toonka la tuujiyay wuxuu sii daayaa walxo sulfur ah oo faa'iido leh."}},
+  {name:{en:"Watermelon",so:"Xabxab"},emoji:"🍉",category:{en:"Fruits",so:"Khudaar"},nutrients:["potassium","vitamin-a","vitamin-c"],benefit:{en:"Over 90% water — a refreshing way to rehydrate and top up potassium in hot weather.",so:"In ka badan 90% biyo — hab qaboojiya oo botasiyam ah kuleylka daran."}},
 ];
 
 const SV_DAILY_TIPS = [
@@ -1770,10 +1983,10 @@ const SV_RECIPES = [
       {name:{en:'Red lentils',so:'Digir casaan'},amount:'200g'},
       {name:{en:'Onion',so:'Basal'},amount:'1 large'},
       {name:{en:'Garlic cloves',so:'Toon'},amount:'4 cloves'},
-      {name:{en:'Tomatoes',so:'Tamaato'},amount:'3 medium'},
+      {name:{en:'Tomatoes',so:'Yaanyo/Tamaandho'},amount:'3 medium'},
       {name:{en:'Olive oil',so:'Saliidda saytuun'},amount:'2 tbsp'},
       {name:{en:'Cumin',so:'Kamuun'},amount:'1 tsp'},
-      {name:{en:'Turmeric',so:'Huruud'},amount:'1 tsp'},
+      {name:{en:'Turmeric',so:'Haruud'},amount:'1 tsp'},
       {name:{en:'Spinach (fresh)',so:'Sabaaniq'},amount:'100g'},
       {name:{en:'Lemon juice',so:'Liin macaan'},amount:'½ lemon'},
     ],
@@ -1786,7 +1999,7 @@ const SV_RECIPES = [
         'Stir in fresh spinach and lemon juice. Cook 2 more minutes. Serve hot.'],
       so:['Kariyaha ku shiil hilibka saliidda saytuun ku dhuftay muddo 5 daqiiqo. Dhig meel.',
         'Kariyaha ku shiil basal iyo toon ilaa casaan noqdaan — qiyaastii 4 daqiiqo.',
-        'Ku dar tamaato, kamuun, iyo huruud. Karso 3 daqiiqo ilaa udgoon noqoto.',
+        'Ku dar tamaato/yaanyo, kamuun, iyo haruud. Karso 3 daqiiqo ilaa udgoon noqoto.',
         'Hilibka ku celi kariyaha. Ku dar digirta iyo 800ml biyo. Bisad u keeno.',
         "Kulaylka hoos u dhig oo biyo la'aanta kaadi 25 daqiiqo ilaa digirtu jilicsto.",
         'Ku dar sabaaniq iyo liin macaan. 2 daqiiqo karisoo. Kulul u gadi.']
@@ -1804,11 +2017,11 @@ const SV_RECIPES = [
       {name:{en:'Chicken (halal)',so:'Digaag (xalaal)'},amount:'500g'},
       {name:{en:'Onion',so:'Basal'},amount:'2 medium'},
       {name:{en:'Garlic',so:'Toon'},amount:'5 cloves'},
-      {name:{en:'Fresh ginger',so:'Injir'},amount:'1 inch piece'},
-      {name:{en:'Tomatoes',so:'Tamaato'},amount:'2 large'},
-      {name:{en:'Cardamom pods',so:'Xawaash heyl'},amount:'4 pods'},
-      {name:{en:'Cinnamon stick',so:'Qorfe'},amount:'1 stick'},
-      {name:{en:'Cumin seeds',so:'Kamuun miraha'},amount:'1 tsp'},
+      {name:{en:'Fresh ginger',so:'Sanjabiil'},amount:'1 inch piece'},
+      {name:{en:'Tomatoes',so:'Yaanyo/Tamaandho'},amount:'2 large'},
+      {name:{en:'Cardamom pods',so:'Heel'},amount:'4 pods'},
+      {name:{en:'Cinnamon stick',so:'Qarfo'},amount:'1 stick'},
+      {name:{en:'Cumin seeds',so:'Xawaash Dhuudhuub'},amount:'1 tsp'},
       {name:{en:'Olive oil',so:'Saliidda saytuun'},amount:'3 tbsp'},
     ],
     steps:{
@@ -1821,7 +2034,7 @@ const SV_RECIPES = [
         'Add drained rice. Pour 3.5 cups of hot water. Season with salt.',
         'Cover tightly and cook on low heat for 18 minutes. Rest 5 minutes before fluffing.'],
       so:['Bariiska dhaq oo biyo qaboow ku dhex dami 20 daqiiqo.',
-        'Basal, toon, iyo injirta xoogaa u shiid.',
+        'Basal, toon, iyo sanjabiilka xoogaa u shiid.',
         'Kariyaha waaweyn ku kululee saliidda. Ku dar xawaashka dhamaan.',
         'Ku dar kulaylka basalka la shiidey oo ku shiil ilaa dahab casaan.',
         'Ku dar digaagga oo dhammaan dhinacyada ku shiil 5 daqiiqo.',
@@ -1829,7 +2042,7 @@ const SV_RECIPES = [
         'Bariiska la shaandhayay ku dar. 3.5 koob biyo kulul seli.',
         'Si adag u dabool oo kulaylka hoostiisa 18 daqiiqo karisoo.']
     },
-    tip:{en:"Garlic and ginger together create allicin and gingerol — two of nature's most powerful immune compounds.",so:'Toon iyo injir waa laba xawaash ee ugu xoogga badan ee dabiiciga ah ee difaaca xoojiya.'},
+    tip:{en:"Garlic and ginger together create allicin and gingerol — two of nature's most powerful immune compounds.",so:'Toon iyo sanjabiil waa laba xawaash ee ugu xoogga badan ee dabiiciga ah ee difaaca xoojiya.'},
     halal:true
   },
   {
@@ -1841,10 +2054,10 @@ const SV_RECIPES = [
       {name:{en:'Whole chicken (halal)',so:'Digaag dhan (xalaal)'},amount:'1 whole'},
       {name:{en:'Onion',so:'Basal'},amount:'1 large'},
       {name:{en:'Garlic',so:'Toon'},amount:'6 cloves'},
-      {name:{en:'Fresh ginger',so:'Injir'},amount:'2 inch piece'},
+      {name:{en:'Fresh ginger',so:'Sanjabiil'},amount:'2 inch piece'},
       {name:{en:'Carrots',so:'Daawo'},amount:'2 large'},
       {name:{en:'Celery stalks',so:'Karafas'},amount:'3 stalks'},
-      {name:{en:'Turmeric',so:'Huruud'},amount:'1 tsp'},
+      {name:{en:'Turmeric',so:'Haruud'},amount:'1 tsp'},
       {name:{en:'Water',so:'Biyo'},amount:'2 litres'},
     ],
     steps:{
@@ -1856,7 +2069,7 @@ const SV_RECIPES = [
         'Strain the broth through a sieve. Return clear broth to the pot.',
         'Add shredded chicken back. Season with salt. Simmer 5 more minutes.'],
       so:['Digaagga dhan kariyaha waaweyn ku dhig. 2 litre biyo qaboow ku dabool.',
-        'Ku dar basal (laba la gooyay), toon, injir, huruud.',
+        'Ku dar basal (laba la gooyay), toon, sanjabiil, haruud.',
         'Bisad u keeno, dhoobo kasta oo korka u soo baxda ka qaad.',
         "Kulaylka hoos u dhig. Daawo iyo karafas ku dar. Biyo la'aanta 45 daqiiqo kaadi.",
         'Digaagga saar. Hilibka taar u jajab oo lafaha iyo maqaarka tuur.',
@@ -1973,7 +2186,7 @@ const SV_RECIPES = [
       {name:{en:'Banana',so:'Moos'},amount:'1 ripe'},
       {name:{en:'Full-fat milk or oat milk',so:"Caano buuxa ama caano lo'aad"},amount:'250ml'},
       {name:{en:'Raw cacao powder',so:'Dhuuqa kakaw'},amount:'1 tbsp'},
-      {name:{en:'Cinnamon',so:'Qorfe'},amount:'½ tsp'},
+      {name:{en:'Cinnamon',so:'Qarfo'},amount:'½ tsp'},
     ],
     steps:{
       en:['Soak dates in warm water for 5 minutes to soften (skip if already soft).',
@@ -1997,10 +2210,10 @@ const SV_RECIPES = [
     nutrients:['zinc','selenium','vitamin-b6','vitamin-b12','phosphorus','vitamin-d'],
     ingredients:[
       {name:{en:'Chicken thighs (halal)',so:'Dafeerka digaagga (xalaal)'},amount:'8 pieces'},
-      {name:{en:'Xawaash spice mix',so:'Xawaash'},amount:'2 tbsp'},
-      {name:{en:'Turmeric',so:'Huruud'},amount:'1 tsp'},
-      {name:{en:'Garlic paste',so:'Toon la shiidey'},amount:'1 tbsp'},
-      {name:{en:'Ginger paste',so:'Injir la shiidey'},amount:'1 tbsp'},
+      {name:{en:'Xawaash spice mix',so:'Xawaash Isku Dar'},amount:'2 tbsp'},
+      {name:{en:'Turmeric',so:'Haruud'},amount:'1 tsp'},
+      {name:{en:'Garlic paste',so:'Toon Shiidan'},amount:'1 tbsp'},
+      {name:{en:'Ginger paste',so:'Sanjabiil Shiidan'},amount:'1 tbsp'},
       {name:{en:'Olive oil',so:'Saliidda saytuun'},amount:'3 tbsp'},
       {name:{en:'Lemon',so:'Liin macaan'},amount:'1 whole'},
     ],
@@ -2012,13 +2225,13 @@ const SV_RECIPES = [
         'Roast for 35-40 minutes until deep golden and juices run clear.',
         'Squeeze fresh lemon over the chicken as it comes out of the oven.'],
       so:['Dafeerka digaagga faro si qoto dheer ugu jab.',
-        'Xawaash, huruud, toon, injir, saliid, iyo cusbo wada walaaq.',
+        'Xawaash, haruud, toon, sanjabiil, saliid, iyo cusbo wada walaaq.',
         'Marinada dhammaan dafeerka ku rub. Ugu yaraan 30 daqiiqo mari.',
         'Feranka 200°C u kululee.',
         'Feran 35-40 daqiiqo ilaa casaan casaan noqdo.',
         'Liin macaan cusub dafeerka ka shub.']
     },
-    tip:{en:'Xawaash contains curcumin, cinnamon, and black pepper — three of the most studied anti-inflammatory compounds in food science.',so:'Xawaashku waxaa ku jira curcumin, qorfe, iyo filfil madow.'},
+    tip:{en:'Xawaash contains curcumin, cinnamon, and black pepper — three of the most studied anti-inflammatory compounds in food science.',so:'Xawaashku waxaa ku jira curcumin, qarfo, iyo filfil madow.'},
     halal:true
   },
 ];
@@ -2046,11 +2259,21 @@ const state = {
   selectedDay: new Date().getDay()===0?6:new Date().getDay()-1,
   streak: parseInt(localStorage.getItem('hf_streak')||'0'),
   sub: localStorage.getItem('hf_sub')||'free',
+  intensity: localStorage.getItem('hf_intensity')||'standard',
+  fitnessDone: localStorage.getItem('hf_fitnessDone')==='1',
 };
 
 // ══════════════════════════════════════════════════════════════════
 // ANIMATION BUILDER
 // ══════════════════════════════════════════════════════════════════
+function ytLink(e){
+  if(e.guideUrl) return e.guideUrl;
+  if(e.ytId) return `https://www.youtube.com/watch?v=${e.ytId}`;
+  const q=e.ytQuery||(e.name+' exercise tutorial');
+  return `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`;
+}
+function linkLabel(e){ return e.guideUrl ? '📖 Expert Guide' : '▶ YouTube'; }
+function watchHint(e){ return e.guideUrl ? 'Read the expert guide' : 'Watch on YouTube'; }
 function buildAnim(key){
   const m={
     plank:`<div class="anim-plank"><div class="plank-body"></div><div class="plank-head"></div><div class="plank-arm1"></div><div class="plank-arm2"></div><div class="plank-leg"></div><div class="plank-toes"></div><div class="plank-sweat"></div></div>`,
@@ -2065,6 +2288,10 @@ function buildAnim(key){
     lunge:`<div class="anim-lunge"><div class="lu-head"></div><div class="lu-body"></div><div class="lu-arm1"></div><div class="lu-arm2"></div><div class="lu-fleg"></div><div class="lu-bleg"></div></div>`,
     mc:`<div class="anim-mc"><div class="mc-body"></div><div class="mc-head"></div><div class="mc-arm1"></div><div class="mc-arm2"></div><div class="mc-leg1"></div><div class="mc-leg2"></div></div>`,
     burpee:`<div class="anim-burpee"><div class="bu-star">🌟</div><div class="bu-head"></div><div class="bu-body"></div><div class="bu-arms"></div><div class="bu-leg1"></div><div class="bu-leg2"></div></div>`,
+    pelvictilt:`<div class="anim-pelvictilt"><div class="pt-head"></div><div class="pt-torso"></div><div class="pt-hip"></div><div class="pt-thigh"></div><div class="pt-shin"></div><div class="pt-floor"></div></div>`,
+    breathing:`<div class="anim-breathing"><div class="br-head"></div><div class="br-torso"></div><div class="br-belly"></div><div class="br-legs"></div></div>`,
+    birddog:`<div class="anim-birddog"><div class="bd-torso"></div><div class="bd-head"></div><div class="bd-arm-down"></div><div class="bd-leg-down"></div><div class="bd-arm-ext"></div><div class="bd-leg-ext"></div></div>`,
+    kegel:`<div class="anim-kegel"><div class="kg-pulse"></div><div class="kg-head"></div><div class="kg-torso"></div><div class="kg-legs"></div></div>`,
   };
   return m[key]||'';
 }
@@ -2087,7 +2314,100 @@ function goPage(p){
 // ══════════════════════════════════════════════════════════════════
 // WORKOUT PLANS
 // ══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
+// FITNESS QUIZ — recommends a plan and sets an intensity tier
+// ══════════════════════════════════════════════════════════════════
+let fqAnswers={level:null,goal:null,time:null,note:null};
+function fqSelect(key,val,el){
+  fqAnswers[key]=val;
+  el.parentElement.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+}
+function openFitnessQuiz(){
+  fqAnswers={level:null,goal:null,time:null,note:null};
+  document.querySelectorAll('#fitnessQuizModal .pill').forEach(p=>p.classList.remove('active'));
+  document.getElementById('fq-error').style.display='none';
+  document.getElementById('fitnessQuizModal').classList.add('open');
+}
+function closeFitnessQuiz(){ document.getElementById('fitnessQuizModal').classList.remove('open'); }
+
+function submitFitnessQuiz(){
+  const {level,goal,time,note}=fqAnswers;
+  const errEl=document.getElementById('fq-error');
+  if(!level||!goal||!time||!note){
+    errEl.textContent='Please answer all 4 questions.';
+    errEl.style.display='block';
+    return;
+  }
+  errEl.style.display='none';
+
+  // Recommend the best-fit existing plan
+  let planId;
+  if(note==='newmom'||goal==='postpartum') planId='postpartum';
+  else if(time==='short') planId='quick';
+  else if(goal==='loss') planId='weightloss';
+  else planId='beginner';
+
+  // Weight Loss is a paid plan — fall back to Beginner for free users so the
+  // recommendation itself never silently requires a purchase
+  if(planId==='weightloss' && state.sub!=='paid') planId='beginner';
+
+  // Intensity tier — joint-care note always overrides toward lighter
+  let intensity = level==='beginner' ? 'light' : level==='advanced' ? 'intense' : 'standard';
+  if(note==='joints'||note==='newmom') intensity='light';
+
+  state.activePlan=planId;
+  state.intensity=intensity;
+  state.fitnessDone=true;
+  localStorage.setItem('hf_activePlan',planId);
+  localStorage.setItem('hf_intensity',intensity);
+  localStorage.setItem('hf_fitnessDone','1');
+  syncAppDataToCloud();
+
+  closeFitnessQuiz();
+  renderFitnessSummary();
+  renderWorkouts();
+  const plan=PLANS.find(p=>p.id===planId);
+  showToast('✅ Matched you with '+(plan?plan.title:'a plan'));
+}
+
+function renderFitnessSummary(){
+  const el=document.getElementById('fitnessQuizSummary');
+  if(!el) return;
+  if(!state.fitnessDone){
+    el.innerHTML=`<div class="card" style="cursor:pointer;background:linear-gradient(135deg,#fef3e8,#fde8e8)" onclick="openFitnessQuiz()">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:26px">🎯</span>
+        <div><div style="font-size:14px;font-weight:800">Find Your Fit</div><div style="font-size:12px;color:var(--muted)">Take a 30-second quiz for a plan matched to you</div></div>
+        <span style="margin-left:auto;color:var(--muted)">→</span>
+      </div>
+    </div>`;
+    return;
+  }
+  const plan=PLANS.find(p=>p.id===state.activePlan);
+  const tierLabel={light:'🌱 Lighter pace',standard:'⚡ Standard pace',intense:'🔥 Challenge mode'}[state.intensity]||'';
+  el.innerHTML=`<div class="card" style="background:#f0fdf4;border:1.5px solid #bbf7d0">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#16a34a;text-transform:uppercase">Your Match</div>
+        <div style="font-size:14px;font-weight:800">${plan?plan.title:'—'} · ${tierLabel}</div>
+      </div>
+      <span style="font-size:12px;font-weight:700;color:var(--pink);cursor:pointer" onclick="openFitnessQuiz()">Retake</span>
+    </div>
+  </div>`;
+}
+
+function intensityTip(){
+  const tips={
+    light:'💡 Take it at your own pace — fewer reps or a short rest is completely fine.',
+    standard:'💡 Aim for the full sets shown — steady and consistent.',
+    intense:'💡 Feeling strong? Add one extra set or shorten your rest between sets.'
+  };
+  return tips[state.intensity]||tips.standard;
+}
+
 function renderWorkouts(){
+  renderFitnessSummary();
   const l=L();
   const filtered = state.workoutFilter==='all'? PLANS : PLANS.filter(p=>p.cat===state.workoutFilter);
   const planHTML = filtered.map(p=>{
@@ -2150,21 +2470,22 @@ function renderExercises(){
     +filtered.map(e=>{
       const done=state.doneEx.has(e.id);
       return `<div class="ex-card">
-        <div class="ex-anim-area" onclick="window.open('https://www.youtube.com/watch?v=${e.ytId}','_blank')">
+        <div class="ex-anim-area" onclick="window.open('${ytLink(e)}','_blank')">
           <div class="w-bg"></div>${buildAnim(e.animKey)}
           <div class="ex-level-badge badge-${e.heer}">${e.heer}</div>
-          <div class="ex-anim-label">🎬 Tap to watch</div>
-          <div class="yt-overlay"><div class="yt-play-btn">▶</div><div class="yt-hint">Watch on YouTube</div></div>
+          <div class="ex-anim-label">${e.guideUrl?'📖 Tap for guide':'🎬 Tap to watch'}</div>
+          <div class="yt-overlay"><div class="yt-play-btn">${e.guideUrl?'📖':'▶'}</div><div class="yt-hint">${watchHint(e)}</div></div>
         </div>
         <div class="ex-body">
           <div class="ex-name">${e.name}</div>
           <div class="ex-sets">${e.sets} · 🔥${e.kcal} kcal</div>
           <div class="ex-desc">${e.desc}</div>
+          <div style="font-size:11px;color:var(--blue);margin:2px 0 4px">${intensityTip()}</div>
           <div class="ex-tags">${e.tags.map(t=>`<span class="ex-tag">${t}</span>`).join('')}</div>
           <div class="ex-footer">
             <div class="ex-meta">⏱ ${e.time}</div>
             <div class="ex-actions">
-              <a class="btn-yt" href="https://www.youtube.com/watch?v=${e.ytId}" target="_blank" rel="noopener">▶ YouTube</a>
+              <a class="btn-yt" href="${ytLink(e)}" target="_blank" rel="noopener">${linkLabel(e)}</a>
               <button class="btn-start${done?' done':''}" onclick="toggleEx(${e.id})">${done?'✅':l.exStart}</button>
             </div>
           </div>
@@ -2284,6 +2605,21 @@ function goalTags(goals){
 }
 
 let _hteOpen=false;
+function openFreeNutrientPreview(id){
+  // Deliberately bypasses the Nafaqada paywall gate for this one nutrient —
+  // a free taste of the content to demonstrate value before asking to subscribe.
+  goPage('nutrition');
+  document.querySelectorAll('#cuntadaSubTabs .pill').forEach(p=>p.classList.remove('active'));
+  document.getElementById('cst1').classList.add('active');
+  document.querySelectorAll('.cuntada-sub').forEach(s=>s.style.display='none');
+  const subEl=document.getElementById('sub-nafaqa');
+  subEl.style.display='block';
+  if(subEl.innerHTML.includes('paywall-card') && _subOriginalHTML['nafaqa']){
+    subEl.innerHTML=_subOriginalHTML['nafaqa'];
+  }
+  _svDetailOrigin='freepreview';
+  openSVNutrientDetail(id);
+}
 function toggleHowToEat(){
   _hteOpen=!_hteOpen;
   const body=document.getElementById('hteBody');
@@ -2336,7 +2672,7 @@ function switchCuntadaTab(tab,el){
   subEl.style.display='block';
   if(!_subOriginalHTML[tab]) _subOriginalHTML[tab]=subEl.innerHTML;
   svLang = (_lang==='so') ? 'so' : 'en';
-  const premiumTabs={nafaqa:1,calaamado:1,cunto:1};
+  const premiumTabs={nafaqa:1,calaamado:1,cunto:1,foods:1};
   if(premiumTabs[tab] && state.sub!=='paid'){
     subEl.innerHTML=`
       <div class="paywall-card">
@@ -2351,6 +2687,7 @@ function switchCuntadaTab(tab,el){
   if(tab==='nafaqa') renderSVNutrients();
   if(tab==='calaamado') renderSVSymptoms();
   if(tab==='cunto') renderSVRecipes();
+  if(tab==='foods') renderSVFoodBrowser();
 }
 
 // ── NAFAQADA (Nutrients) ──
@@ -2372,6 +2709,16 @@ function renderSVNutrients(){
     const matchQ=!ql||n.name[svLang].toLowerCase().includes(ql)||n.tagline[svLang].toLowerCase().includes(ql);
     return matchType&&matchQ;
   });
+  if(svNFilter==='all' && !ql){
+    const pinned=['vitamin-d','calcium'];
+    filtered.sort((a,b)=>{
+      const ai=pinned.indexOf(a.id), bi=pinned.indexOf(b.id);
+      if(ai===-1&&bi===-1) return 0;
+      if(ai===-1) return 1;
+      if(bi===-1) return -1;
+      return ai-bi;
+    });
+  }
   const grid=document.getElementById('sv-n-grid');
   if(!grid) return;
   grid.innerHTML=filtered.map(n=>`
@@ -2404,6 +2751,16 @@ function closeSVNDetail(){
   if(_svDetailOrigin==='calaamado'){
     _svDetailOrigin=null;
     switchCuntadaTab('calaamado',document.getElementById('cst2'));
+    return;
+  }
+  if(_svDetailOrigin==='foods'){
+    _svDetailOrigin=null;
+    switchCuntadaTab('foods',document.getElementById('cst4'));
+    return;
+  }
+  if(_svDetailOrigin==='freepreview'){
+    _svDetailOrigin=null;
+    goPage('home');
     return;
   }
   document.getElementById('sv-n-list-view').style.display='block';
@@ -2445,6 +2802,58 @@ function checkSVSymptoms(){
     if(!n) return '';
     return `<div class="sv-res-row" onclick="_svDetailOrigin='calaamado';switchCuntadaTab('nafaqa',document.getElementById('cst1'));openSVNutrientDetail('${nid}')"><span style="font-size:24px">${n.emoji}</span><div><div style="font-size:13px;font-weight:700">${n.name[svLang]}</div><div style="font-size:11px;color:var(--muted)">${n.tagline[svLang]}</div></div><span style="margin-left:auto;color:var(--muted)">→</span></div>`;
   }).join('')}</div>`;
+}
+
+// ── CUNTOOYINKA (Food Browser — SV_FOODS_DB) ──
+let svFCat='all';
+function renderSVFoodBrowser(){
+  svLang = (_lang==='so') ? 'so' : 'en';
+  document.getElementById('sv-f-list-view').style.display='block';
+  document.getElementById('sv-f-detail-view').style.display='none';
+  const cats=['all',...new Set(SV_FOODS_DB.map(f=>f.category.en))];
+  const catRow=document.getElementById('sv-f-cat-row');
+  if(catRow) catRow.innerHTML=cats.map(c=>`<div class="pill${svFCat===c?' active':''}" onclick="setSVFoodCat('${c}',this)">${c==='all'?'All':(SV_FOODS_DB.find(f=>f.category.en===c)?.category[svLang]||c)}</div>`).join('');
+  const q=(document.getElementById('sv-f-search')||{}).value||'';
+  const ql=q.toLowerCase();
+  const filtered=SV_FOODS_DB.filter(f=>{
+    const matchCat=svFCat==='all'||f.category.en===svFCat;
+    const matchQ=!ql||f.name[svLang].toLowerCase().includes(ql)||f.benefit[svLang].toLowerCase().includes(ql);
+    return matchCat&&matchQ;
+  });
+  const grid=document.getElementById('sv-f-grid');
+  if(!grid) return;
+  grid.innerHTML=filtered.map((f,idx)=>`
+    <div class="sv-n-card" onclick="openSVFoodDetail(${SV_FOODS_DB.indexOf(f)})">
+      <span class="sv-n-emoji">${f.emoji}</span>
+      <div class="sv-n-type">${f.category[svLang]}</div>
+      <div class="sv-n-name">${f.name[svLang]}</div>
+      <div class="sv-n-tag">${f.benefit[svLang]}</div>
+    </div>`).join('') || '<div style="grid-column:1/-1;text-align:center;color:var(--muted);padding:24px">No foods found</div>';
+}
+function setSVFoodCat(cat,el){
+  svFCat=cat;
+  el.parentElement.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  renderSVFoodBrowser();
+}
+function openSVFoodDetail(idx){
+  const f=SV_FOODS_DB[idx];
+  if(!f) return;
+  svLang = (_lang==='so') ? 'so' : 'en';
+  document.getElementById('sv-f-list-view').style.display='none';
+  document.getElementById('sv-f-detail-view').style.display='block';
+  let html=`<div class="sv-d-hero"><span class="sv-d-emoji">${f.emoji}</span><div class="sv-d-name">${f.name[svLang]}</div><div class="sv-d-tag">${f.category[svLang]}</div></div>`;
+  html+=`<div class="card" style="margin:0 16px 12px"><div class="section-label" style="padding:0;margin:0 0 6px">🌟 Why it's good for you</div><p style="font-size:13px;line-height:1.6;color:#374151">${f.benefit[svLang]}</p></div>`;
+  html+=`<div class="card" style="margin:0 16px 12px"><div class="section-label" style="padding:0;margin:0 0 8px">🔬 Key Nutrients</div><div class="sv-def-list">${f.nutrients.map(nid=>{
+    const n=SV_NUTRIENTS.find(x=>x.id===nid);
+    return n?`<span class="sv-def-tag" style="background:#f0fdf4;color:#16a34a;cursor:pointer" onclick="_svDetailOrigin='foods';switchCuntadaTab('nafaqa',document.getElementById('cst1'));openSVNutrientDetail('${nid}')">${n.emoji} ${n.name[svLang]}</span>`:'';
+  }).join('')}</div></div>`;
+  document.getElementById('sv-f-detail-content').innerHTML=html;
+  document.getElementById('mainScroll').scrollTop=0;
+}
+function closeSVFoodDetail(){
+  document.getElementById('sv-f-list-view').style.display='block';
+  document.getElementById('sv-f-detail-view').style.display='none';
 }
 
 // ── CUNTO KARINTA (Recipes) ──
@@ -2634,8 +3043,10 @@ function renderScheduleDetail(){
       <div style="font-size:22px">${daySchedule.icon}</div>
       <div><div style="font-size:14px;font-weight:800">${daySchedule.work}</div><div style="font-size:11px;color:var(--muted)">${plan.title}</div></div>
     </div>
+    <div style="font-size:11px;color:var(--blue);padding:0 16px 10px">${intensityTip()}</div>
+    ${plan.safetyNote?`<div style="font-size:11px;color:#9a3412;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;margin:0 16px 12px;padding:10px 12px;line-height:1.5">⚠️ ${plan.safetyNote}</div>`:''}
     ${exList.map(e=>`
-      <div class="schedule-ex-item" style="cursor:pointer" onclick="window.open('https://www.youtube.com/watch?v=${e.ytId}','_blank')">
+      <div class="schedule-ex-item" style="cursor:pointer" onclick="window.open('${ytLink(e)}','_blank')">
         <div class="schedule-ex-icon" style="background:linear-gradient(135deg,#fde8e8,#fef3e8)">${e.name.charAt(0)}</div>
         <div>
           <div class="schedule-ex-name">${e.name}</div>
@@ -2747,6 +3158,7 @@ function applyLang(){
   set('langToggle',l.toggle);
   set('txt-hi',l.hi); set('txt-h1',l.h1); set('txt-small',l.small);
   set('txt-tip-label',l.tipLabel);
+  if(document.getElementById('sunnah-banner')?.classList.contains('show')) renderSunnahBanner();
   set('txt-fiber-label',l.howToEatTitle.toUpperCase());
   set('fiberTip',l.fiberTip);
   set('mc1t',l.mc1t); set('mc1s',l.mc1s); set('mc2t',l.mc2t); set('mc2s',l.mc2s);
@@ -2873,6 +3285,27 @@ const _updBanner=document.getElementById('update-banner');
 const _btnRefresh=document.getElementById('btn-upd-refresh');
 const _btnUpdDism=document.getElementById('btn-upd-dismiss');
 let _newWorker=null;
+
+// ══ SUNNAH BANNER — once per day, rotates through 4 verified hadith ══
+let _sunnahIndex=0;
+function renderSunnahBanner(){
+  const t=SUNNAH_TIPS[_sunnahIndex];
+  if(!t) return;
+  document.getElementById('sunnah-ar').textContent=t.ar;
+  document.getElementById('sunnah-en').textContent=(_lang==='so')?t.so:t.en;
+  document.getElementById('sunnah-source').textContent=t.source;
+}
+(function initSunnahBanner(){
+  const today=new Date().toDateString();
+  if(localStorage.getItem('hf_sunnahShownDate')===today) return; // already dismissed today
+  _sunnahIndex=new Date().getDate()%SUNNAH_TIPS.length;
+  renderSunnahBanner();
+  setTimeout(()=>document.getElementById('sunnah-banner').classList.add('show'),600);
+})();
+document.getElementById('btn-sunnah-dismiss').addEventListener('click',()=>{
+  document.getElementById('sunnah-banner').classList.remove('show');
+  localStorage.setItem('hf_sunnahShownDate',new Date().toDateString());
+});
 
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
@@ -3124,7 +3557,9 @@ function gatherAppData(){
     plan:state.plan,
     activePlan:state.activePlan,
     streak:state.streak,
-    lastWorkout:localStorage.getItem('hf_lastWorkout')
+    lastWorkout:localStorage.getItem('hf_lastWorkout'),
+    intensity:state.intensity,
+    fitnessDone:state.fitnessDone
   };
 }
 
@@ -3148,10 +3583,13 @@ function applyCloudAppData(d){
   if(d.activePlan){ state.activePlan=d.activePlan; localStorage.setItem('hf_activePlan',d.activePlan); }
   if(typeof d.streak==='number'){ state.streak=d.streak; localStorage.setItem('hf_streak',String(d.streak)); }
   if(d.lastWorkout){ localStorage.setItem('hf_lastWorkout',d.lastWorkout); }
+  if(d.intensity){ state.intensity=d.intensity; localStorage.setItem('hf_intensity',d.intensity); }
+  if(typeof d.fitnessDone==='boolean'){ state.fitnessDone=d.fitnessDone; localStorage.setItem('hf_fitnessDone',d.fitnessDone?'1':'0'); }
   // Re-render everything that shows this data
   updateRing();
   renderWater();
   renderPlan();
+  renderFitnessSummary();
   const streakEl=document.getElementById('streakNum');
   if(streakEl) streakEl.textContent=state.streak;
   if(document.getElementById('page-progress')?.classList.contains('active')) renderProgress();
