@@ -48,6 +48,9 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .hero{padding:20px 20px 16px;background:linear-gradient(160deg,#fde8e8,#fef3e8 50%,#f0f4ff);position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(248,113,113,.15),transparent 70%);pointer-events:none}
 .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.top-bar{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#fff;border-bottom:1px solid var(--border);flex-shrink:0;z-index:50}
+.hamburger-btn{background:none;border:none;font-size:20px;cursor:pointer;color:var(--text);padding:2px 4px;flex-shrink:0}
+body.dark .top-bar{background:var(--white);border-color:var(--border)}
 .hero-text p{font-size:14px;color:var(--muted)}
 .hero-text h1{font-size:26px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
 .hero-text small{font-size:12px;color:var(--muted);display:block;margin-top:2px}
@@ -488,6 +491,14 @@ body.dark .toast{background:var(--white);color:var(--text)}
 </head>
 <body>
 <div class="app">
+  <div class="top-bar">
+    <button class="hamburger-btn" onclick="openMenu()">☰</button>
+    <div style="font-size:15px;font-weight:800;flex:1;text-align:center">HooyoFit</div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="lang-btn" id="langToggle" onclick="toggleLang()" style="padding:5px 10px;font-size:11px">🇸🇴 Somali</button>
+      <button class="profile-btn" id="profileBtn" onclick="openProfileOrAuth()" style="width:28px;height:28px;font-size:12px">👤</button>
+    </div>
+  </div>
   <div class="scroll" id="mainScroll">
     <div id="pullRefreshIndicator"><div class="pr-spinner"></div></div>
 
@@ -499,10 +510,6 @@ body.dark .toast{background:var(--white);color:var(--text)}
             <p id="txt-hi">Welcome 👋</p>
             <h1 id="txt-h1">HooyoFit</h1>
             <small id="txt-small">Easy workouts. Healthy food. Better life.</small>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center;flex-shrink:0">
-            <button class="lang-btn" id="langToggle" onclick="toggleLang()">🇸🇴 Somali</button>
-            <button class="profile-btn" id="profileBtn" onclick="openProfileOrAuth()">👤</button>
           </div>
         </div>
       </div>
@@ -818,6 +825,27 @@ body.dark .toast{background:var(--white);color:var(--text)}
       <h3 id="foodModalTitle">Pick a Meal</h3>
       <div id="foodSelectList" style="margin-bottom:12px"></div>
       <button class="btn-cancel" id="food-close-btn" style="width:100%;padding:11px" onclick="closeFoodModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- HAMBURGER MENU MODAL -->
+  <div class="sv-modal-overlay" id="menuModal" onclick="if(event.target===this)closeMenu()">
+    <div class="sv-modal">
+      <button class="sv-modal-close" onclick="closeMenu()">✕</button>
+      <div style="font-size:18px;font-weight:900;margin-bottom:16px">Menu</div>
+      <div class="card" style="margin:0 0 16px;padding:0;overflow:hidden">
+        <div class="profile-row" style="cursor:pointer" onclick="showInfo('howitworks')"><span style="font-size:18px">❓</span><div style="font-size:14px;font-weight:700">How It Works</div><span style="margin-left:auto;color:var(--muted)">›</span></div>
+        <div class="profile-row" style="cursor:pointer" onclick="showInfo('help')"><span style="font-size:18px">💬</span><div style="font-size:14px;font-weight:700">Help &amp; Support</div><span style="margin-left:auto;color:var(--muted)">›</span></div>
+        <div class="profile-row" style="cursor:pointer" onclick="showInfo('about')"><span style="font-size:18px">ℹ️</span><div style="font-size:14px;font-weight:700">About HooyoFit</div><span style="margin-left:auto;color:var(--muted)">›</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO CONTENT MODAL (shared by How It Works / Help / About) -->
+  <div class="sv-modal-overlay" id="infoModal" onclick="if(event.target===this)closeInfo()">
+    <div class="sv-modal">
+      <button class="sv-modal-close" onclick="closeInfo()">✕</button>
+      <div id="infoContent"></div>
     </div>
   </div>
 
@@ -3396,6 +3424,65 @@ function setAuthMode(mode){
   document.getElementById('authName').style.display=mode==='signup'?'block':'none';
   document.getElementById('authSubmitBtn').textContent=mode==='signup'?'Sign Up':'Log In';
   document.getElementById('authError').style.display='none';
+}
+function openMenu(){ document.getElementById('menuModal').classList.add('open'); }
+function closeMenu(){ document.getElementById('menuModal').classList.remove('open'); }
+function closeInfo(){ document.getElementById('infoModal').classList.remove('open'); }
+function showInfo(section){
+  closeMenu();
+  const isSo=_lang==='so';
+  const pages={
+    howitworks:{
+      en:`<div style="font-size:18px;font-weight:900;margin-bottom:14px">How HooyoFit Works</div>
+      <div style="font-size:13px;line-height:1.7;color:#374151">
+      <p style="margin-bottom:12px"><strong>💪 Workouts</strong> — Answer 4 quick questions to get matched with a plan (Beginner, Weight Loss, Postpartum, Quick 10-min). Every exercise has a built-in animation showing exactly how to do it.</p>
+      <p style="margin-bottom:12px"><strong>📈 Progress</strong> — Log your weight and track your daily streak. Synced to your account if you're logged in.</p>
+      <p style="margin-bottom:12px"><strong>🍽️ Nutrition</strong> — Macros (pick meals), Sida Loo Cuno (the right order to eat), Nafaqada (30+ nutrients), Calaamadaha (symptom checker), Cunto Karinta (recipes), and Cuntooyinka (browse foods).</p>
+      <p style="margin-bottom:12px"><strong>📅 Schedule</strong> — Your weekly plan, meal planner, and water tracker.</p>
+      <p><strong>💳 Premium ($11/month)</strong> — Unlocks Nafaqada, Calaamadaha, Cunto Karinta, and the Weight Loss plan. Everything else is free.</p>
+      </div>`,
+      so:`<div style="font-size:18px;font-weight:900;margin-bottom:14px">Sida HooyoFit u Shaqeeyo</div>
+      <div style="font-size:13px;line-height:1.7;color:#374151">
+      <p style="margin-bottom:12px"><strong>💪 Jimicsi</strong> — Ka jawaab 4 su'aalood si loo helo qorshaha kugu habboon. Jimicsi kastaba wuxuu leeyahay sawir-dhaqdhaqaaq.</p>
+      <p style="margin-bottom:12px"><strong>📈 Horumarka</strong> — Diyaari miisaankaaga oo eeg streak-kaaga maalinlaha ah.</p>
+      <p style="margin-bottom:12px"><strong>🍽️ Nafaqada</strong> — Macrooyinka, Sida Loo Cuno, Nafaqada, Calaamadaha, Cunto Karinta, iyo Cuntooyinka.</p>
+      <p style="margin-bottom:12px"><strong>📅 Jadwalka</strong> — Qorshaha usbuuca, meal planner, iyo biyo-tracker.</p>
+      <p><strong>💳 Premium ($11/bishii)</strong> — Wuxuu furayaa Nafaqada, Calaamadaha, Cunto Karinta, iyo Weight Loss plan-ka.</p>
+      </div>`
+    },
+    help:{
+      en:`<div style="font-size:18px;font-weight:900;margin-bottom:14px">Help &amp; Support</div>
+      <div style="font-size:13px;line-height:1.7;color:#374151">
+      <p style="margin-bottom:12px">Have a question, found a bug, or need help with your account or subscription?</p>
+      <p style="margin-bottom:12px">📧 Email us: <strong>hooyofit@somalibd.com</strong></p>
+      <p style="margin-bottom:12px">🔑 Forgot your password? Use the "Forgot password?" link on the login screen.</p>
+      <p>HooyoFit is still actively being built — thank you for your patience as we keep improving it.</p>
+      </div>`,
+      so:`<div style="font-size:18px;font-weight:900;margin-bottom:14px">Caawimaad &amp; Taageero</div>
+      <div style="font-size:13px;line-height:1.7;color:#374151">
+      <p style="margin-bottom:12px">Su'aal ma qabtaa, cillad ma aragtay, mise caawimaad ma u baahan tahay account-kaaga ama subscription-kaaga?</p>
+      <p style="margin-bottom:12px">📧 Email: <strong>hooyofit@somalibd.com</strong></p>
+      <p style="margin-bottom:12px">🔑 Ma illowday password-kaaga? Isticmaal link-ga "Forgot password?" ee login screen-ka.</p>
+      <p>HooyoFit wali waa la dhisayaa — waad ku mahadsan tahay dulqaadkaaga.</p>
+      </div>`
+    },
+    about:{
+      en:`<div style="font-size:18px;font-weight:900;margin-bottom:14px">About HooyoFit</div>
+      <div style="font-size:13px;line-height:1.7;color:#374151">
+      <p style="margin-bottom:12px">HooyoFit is a Somali-language health, fitness, and nutrition app built for mothers and families — combining safe workout plans, a full Somali food database, and evidence-based nutrition education, all in one place.</p>
+      <p style="margin-bottom:12px">We believe good health guidance should be accessible in your own language, culturally relevant, and genuinely accurate — not just translated generic advice.</p>
+      <p>hooyofit.somalibd.com</p>
+      </div>`,
+      so:`<div style="font-size:18px;font-weight:900;margin-bottom:14px">Ku Saabsan HooyoFit</div>
+      <div style="font-size:13px;line-height:1.7;color:#374151">
+      <p style="margin-bottom:12px">HooyoFit waa app caafimaad, jimicsi, iyo nafaqo oo Af-Soomaali ah, loogu talagalay hooyooyinka iyo qoysaska — isku darsan qorshayaal jimicsi ammaan ah, cunto database dhammaystiran, iyo waxbarasho nafaqo oo sax ah.</p>
+      <p style="margin-bottom:12px">Waxaan aaminsanahay in tilmaanta caafimaadka wanaagsan ay tahay in lagu helo luqaddaada, oo ay la jaanqaadi tahay dhaqankaaga, oo ay sax tahay — ma aha oo kaliya talooyin guud oo la turjumay.</p>
+      <p>hooyofit.somalibd.com</p>
+      </div>`
+    }
+  };
+  document.getElementById('infoContent').innerHTML=pages[section][isSo?'so':'en'];
+  document.getElementById('infoModal').classList.add('open');
 }
 function openProfileOrAuth(){
   if(!supabaseClient){ showToast('⚠️ Connection issue — please refresh the page'); return; }
