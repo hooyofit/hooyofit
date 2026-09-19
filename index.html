@@ -121,7 +121,49 @@ body.dark .top-bar{background:var(--white);border-color:var(--border)}
 .ex-tag{font-size:10px;background:#f3f4f6;color:#6b7280;padding:2px 7px;border-radius:5px}
 .ex-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .ex-meta{font-size:11px;color:var(--muted)}
-.ex-actions{display:flex;gap:7px}
+.ex-actions{display:flex;gap:7px;flex-wrap:wrap}
+.goal-chip{font-size:11px;font-weight:700;padding:4px 10px;border-radius:7px;cursor:pointer;user-select:none;-webkit-user-select:none;transition:transform .1s,background .15s,color .15s}
+.goal-chip:active{transform:scale(.95)}
+.gc-loss{background:#fef2f2;color:#dc2626}.gc-loss.goal-on{background:#dc2626;color:#fff}
+.gc-muscle{background:#eff6ff;color:#2563eb}.gc-muscle.goal-on{background:#2563eb;color:#fff}
+.gc-heart{background:#fff1f2;color:#e11d48}.gc-heart.goal-on{background:#e11d48;color:#fff}
+.gc-post{background:#f0fdf4;color:#16a34a}.gc-post.goal-on{background:#16a34a;color:#fff}
+.steps-card{background:#fff;border-radius:18px;margin:0 16px 12px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.steps-hero{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.steps-ring{width:110px;height:110px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.steps-ring-inner{width:84px;height:84px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.steps-big{font-size:18px;font-weight:900;color:var(--text);line-height:1.1}
+.steps-goal-txt{font-size:10px;color:var(--muted)}
+.steps-side{flex:1;min-width:0}
+.steps-btn-row{display:flex;gap:8px;margin-bottom:10px}
+.step-btn{flex:1;border:none;border-radius:10px;padding:10px 0;font-size:13px;font-weight:800;background:#fef2f2;color:#dc2626;cursor:pointer}
+.step-btn:active{transform:scale(.96)}
+.step-btn-primary{background:var(--grad);color:#fff}
+.steps-input-row{display:flex;gap:8px;margin-bottom:12px}
+.steps-input{flex:1;border:1.5px solid var(--border);border-radius:10px;padding:9px 12px;font-size:14px;font-weight:700;background:#fff;outline:none}
+.steps-goal-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.steps-goal-chip{font-size:11px;font-weight:700;padding:4px 10px;border-radius:7px;background:#f3f4f6;color:#6b7280;cursor:pointer}
+.steps-goal-chip.goal-on{background:var(--orange);color:#fff}
+.settings-card{background:var(--card);border-radius:18px;margin:0 16px 14px;padding:14px 16px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.setting-row{display:flex;align-items:center;gap:12px}
+.set-title{font-size:14px;font-weight:800;color:var(--text)}
+.set-sub{font-size:11px;color:var(--muted)}
+.setting-divider{height:1px;background:var(--border);margin:12px 0}
+.switch{width:46px;height:26px;border-radius:13px;background:#e5e7eb;position:relative;cursor:pointer;flex-shrink:0;transition:background .2s}
+.switch .switch-knob{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.switch.on{background:#22c55e}
+.switch.on .switch-knob{transform:translateX(20px)}
+.rem-time{border:1.5px solid var(--border);border-radius:8px;padding:5px 6px;font-size:12px;font-weight:700;background:var(--card);color:var(--text);outline:none;flex-shrink:0}
+.ramadan-banner{margin:0 16px 12px;background:linear-gradient(135deg,#14532d,#166534);color:#fff;border-radius:14px;padding:12px 14px;font-size:12px;font-weight:600;line-height:1.5}
+.ramadan-nutri-card{margin:0 16px 12px}
+.pp-phase{border:1.5px solid var(--border);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.pp-phase.active{border-color:var(--orange);background:#fff7f0}
+body.dark .pp-phase.active{background:#2a211a}
+.pp-date-input{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;font-size:14px;background:var(--card);color:var(--text);outline:none;box-sizing:border-box}
+.pp-change-btn{border:none;background:var(--border);border-radius:8px;padding:6px 10px;font-size:11px;font-weight:700;color:var(--text);cursor:pointer;flex-shrink:0}
+.share-btn{display:block;width:calc(100% - 32px);margin:4px 16px 16px;border:none;border-radius:14px;padding:14px 0;font-size:15px;font-weight:800;background:var(--grad);color:#fff;cursor:pointer}
+.share-btn:active{transform:scale(.98)}
+.btn-guide{background:#fff;color:#374151;border:1.5px solid #e5e7eb;border-radius:9px;padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:4px}
 .btn-yt{background:#ff0000;color:#fff;border:none;border-radius:9px;padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:4px}
 .btn-start{background:var(--grad);color:#fff;border:none;border-radius:9px;padding:7px 13px;font-size:12px;font-weight:700;cursor:pointer}
 .btn-start.done{background:linear-gradient(135deg,#22c55e,#16a34a)}
@@ -541,6 +583,26 @@ body.dark .toast{background:var(--white);color:var(--text)}
           <span style="background:rgba(255,255,255,.2);color:#fff;border-radius:10px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer" onclick="openFreeNutrientPreview('calcium')">🦴 Calcium</span>
         </div>
       </div>
+      <div class="settings-card">
+        <div class="setting-row">
+          <div style="font-size:20px;flex-shrink:0">🌙</div>
+          <div style="flex:1;min-width:0">
+            <div class="set-title" id="rm-title">Ramadan Mode</div>
+            <div class="set-sub" id="rm-sub">Adjusts meals & workouts for fasting days</div>
+          </div>
+          <div class="switch" id="rm-switch" onclick="toggleRamadan()"><div class="switch-knob"></div></div>
+        </div>
+        <div class="setting-divider"></div>
+        <div class="setting-row">
+          <div style="font-size:20px;flex-shrink:0">⏰</div>
+          <div style="flex:1;min-width:0">
+            <div class="set-title" id="rem-title">Daily Reminder</div>
+            <div class="set-sub" id="rem-sub">A nudge to keep your streak</div>
+          </div>
+          <input type="time" id="rem-time" class="rem-time" value="17:00" onchange="setReminderTime(this.value)"/>
+          <div class="switch" id="rem-switch" onclick="toggleReminder()"><div class="switch-knob"></div></div>
+        </div>
+      </div>
       <div class="streak-card">
         <div>
           <div style="font-size:12px;opacity:.7;margin-bottom:2px" id="streak-label">🔥 Day Streak</div>
@@ -592,6 +654,7 @@ body.dark .toast{background:var(--white);color:var(--text)}
         <div><div style="font-size:20px;font-weight:900" id="w-title">Workouts</div><div style="font-size:12px;color:var(--muted)" id="w-sub">Choose your plan</div></div>
       </div>
       <div id="fitnessQuizSummary" style="margin:0 16px 14px"></div>
+      <div class="ramadan-banner" id="ramadanWorkoutBanner" style="display:none"></div>
       <div class="pills" id="workoutPills">
         <div class="pill active" onclick="filterWorkout('all',this)" id="wp0">All Plans</div>
         <div class="pill" onclick="filterWorkout('beginner',this)" id="wp1">🌱 Beginner</div>
@@ -629,6 +692,11 @@ body.dark .toast{background:var(--white);color:var(--text)}
       <div class="chart-area" id="weightChart"><div style="width:100%;text-align:center;color:var(--muted);font-size:13px;padding:20px" id="chart-empty">No data yet. Add your weight to start!</div></div>
       <div class="section-label" id="p-history-label">Weight Log</div>
       <div id="weightContent"></div>
+      <div class="section-label" id="p-steps-label">Steps Tracker</div>
+      <div class="steps-card" id="stepsSection"></div>
+      <div class="section-label" id="pp-label">Postpartum Recovery</div>
+      <div class="steps-card" id="ppSection"></div>
+      <button class="share-btn" id="share-progress-btn" onclick="shareProgress()">📤 Share Progress</button>
     </div>
 
     <!-- ══ NUTRITION ══ -->
@@ -650,12 +718,13 @@ body.dark .toast{background:var(--white);color:var(--text)}
       <!-- SUB-TAB 1: MACROOYINKA (existing food DB) -->
       <div class="cuntada-sub active" id="sub-macro">
         <div style="padding:0 20px;display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px">
-          <span style="font-size:11px;font-weight:700;padding:3px 9px;border-radius:7px;background:#fef2f2;color:#dc2626">🔥 Weight Loss</span>
-          <span style="font-size:11px;font-weight:700;padding:3px 9px;border-radius:7px;background:#eff6ff;color:#2563eb">💪 Muscle Gain</span>
-          <span style="font-size:11px;font-weight:700;padding:3px 9px;border-radius:7px;background:#fff1f2;color:#e11d48">❤️ Heart Health</span>
-          <span style="font-size:11px;font-weight:700;padding:3px 9px;border-radius:7px;background:#f0fdf4;color:#16a34a">👶 Postpartum</span>
+          <span class="goal-chip gc-loss" id="gc-loss" onclick="setGoalFilter('loss')">🔥 Weight Loss</span>
+          <span class="goal-chip gc-muscle" id="gc-muscle" onclick="setGoalFilter('muscle')">💪 Muscle Gain</span>
+          <span class="goal-chip gc-heart" id="gc-heart" onclick="setGoalFilter('heart')">❤️ Heart Health</span>
+          <span class="goal-chip gc-post" id="gc-post" onclick="setGoalFilter('post')">👶 Postpartum</span>
         </div>
         <div style="height:12px"></div>
+        <div class="ramadan-nutri-card" id="ramadanNutriCard" style="display:none"></div>
         <div class="card" style="margin:0 16px 12px;cursor:pointer" onclick="toggleHowToEat()">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <div>
@@ -812,6 +881,8 @@ body.dark .toast{background:var(--white);color:var(--text)}
     <div class="modal">
       <h3 id="w-modal-title">⚖️ Add Weight</h3>
       <input type="number" id="weightInput" placeholder="Your weight (kg)" step="0.1" min="20" max="300"/>
+      <input type="number" id="waistInput" placeholder="Waist (cm) — optional" step="0.5" min="30" max="200"/>
+      <input type="number" id="hipsInput" placeholder="Hips (cm) — optional" step="0.5" min="30" max="200"/>
       <div class="modal-btns">
         <button class="btn-cancel" id="w-cancel" onclick="closeWeightModal()">Cancel</button>
         <button class="btn-save" id="w-save" onclick="saveWeight()">Save</button>
@@ -1047,11 +1118,36 @@ const T = {
     pTitle:'Progress', pSub:'Your journey',
     pAddBtn:'+ Add',
     statWLabel:'Workouts Done', statSLabel:'Day Streak', statWtLabel:'Current Weight', statWaLabel:'Cups Today',
+    pStepsLabel:'Steps Tracker', stepsTodayLabel:'Steps Today', stepsGoalLabel:'Daily Goal',
+    stepsLeft:(n)=>`Only ${n.toLocaleString()} steps to go!`, stepsGoalReached:'🎉 Goal reached — great job!',
+    stepsWeekLabel:'Last 7 Days', toastSteps:'✅ Steps saved!', stepsSetBtn:'Set',
+    stepsKcal:(n)=>`≈ ${n} kcal burned`,
+    rmTitle:'Ramadan Mode', rmSub:'Adjusts meals & workouts for fasting days',
+    rmNutriTitle:'🌙 Ramadan Guide',
+    rmSuhoorT:'🌙 Suhoor — slow energy', rmSuhoorD:'Oats, beans, eggs — and drink 2-3 cups of water. Skip sugary tea: it makes hunger come faster.',
+    rmIftarT:'🌙 Iftar — break gently', rmIftarD:'Dates and water first, then soup, then your meal. Workouts are best after iftar.',
+    rmWaterD:'💧 Aim for 8 cups of water between iftar and suhoor.',
+    rmWorkout:'🌙 Ramadan: keep workouts light. Walk after iftar — save intense workouts for after iftar or before suhoor.',
+    remTitle:'Daily Reminder', remSub:'A nudge to keep your streak', remOn:'⏰ Reminder on!', remOff:'Reminder off', remNudge:'Time for your workout! 💪',
+    ppTitle:'Postpartum Recovery', ppSub:'Your day-by-day journey', ppDateLabel:'When was your baby born?', ppStartBtn:'Start Tracking',
+    ppDayOf:(n)=>`Day ${n} of recovery`, ppPhaseLabel:'CURRENT PHASE', ppExBtn:'View exercises', ppChangeBtn:'Change',
+    ppClearNote:'Ask your doctor before intense workouts',
+    ppP:[
+      {n:'Healing & Rest',d:'Days 1–13: Rest and bond with your baby. Start diaphragmatic breathing and pelvic tilts. Short, slow walks when you feel ready.'},
+      {n:'Gentle Rebuild',d:'Days 14–27: Add daily Kegel exercises and the bird-dog. Walks can get longer.'},
+      {n:'Core Recovery',d:'Days 28–41: All four core exercises, progressing gently. Listen to your body.'},
+      {n:'Doctor Check + Return',d:'Day 42+: Your 6-week check. With doctor clearance, return to normal workouts gradually.'}
+    ],
+    mwW:'Waist', mwH:'Hips',
+    measureWaistPh:'Waist (cm) — optional', measureHipsPh:'Hips (cm) — optional',
+    shareBtn:'📤 Share Progress', shareTitle:'My HooyoFit Progress', shareStreak:'Day Streak', shareWorkouts:'Workouts Done',
+    shareSteps:'Steps Today', shareWeightChange:'Weight Change', shareFooter:'HooyoFit • Easy workouts. Healthy food. Better life.',
     pChartLabel:'Weight History', pHistoryLabel:'Weight Log',
     chartEmpty:'No data yet. Add your weight to start!',
     nTitle:'Nutrition', nSub:'Healthy Somali meals',
     nKcalLabel:'Meal Total:',
     mt:['☀️ Breakfast','🌤️ Lunch','🌙 Dinner'],
+    mtRam:['🌙 Suhoor','🌤️ Lunch','🌙 Iftar'],
     sTitle:'Schedule', sSub:'Your weekly plan',
     sDetailLabel:"Today's Workout", sPlannerLabel:'Meal Planner',
     sKcalLabel:"🔥 Today's Calories", sGoalLabel:'Goal: 1500 kcal',
@@ -1103,11 +1199,36 @@ const T = {
     pTitle:'Horumarkaaga', pSub:'Safarkaaaga',
     pAddBtn:'+ Kudar',
     statWLabel:'Jimicsi la dhammeeyay', statSLabel:'Maalmaha joogtada', statWtLabel:'Miisaankaaga', statWaLabel:'Koobab Maanta',
+    pStepsLabel:'Tallaabooyinka', stepsTodayLabel:'Tallaabada Maanta', stepsGoalLabel:'Hadha Maalinlaha',
+    stepsLeft:(n)=>`Weli ${n.toLocaleString()} tallaabo ayaa ka hadhay!`, stepsGoalReached:'🎉 Hadha maalinlaha waa la gaadhay!',
+    stepsWeekLabel:'7 Maalmood u Dambeeyay', toastSteps:'✅ Tallaabooyinka la kaydiyay!', stepsSetBtn:'Deji',
+    stepsKcal:(n)=>`≈ ${n} kcal la gubay`,
+    rmTitle:'Maalmaha Ramadaanka', rmSub:'Waxay hagaajisaa cunta & jimicsiga maalmaha soonka',
+    rmNutriTitle:'🌙 Hagaha Ramadaanka',
+    rmSuhoorT:'🌙 Suur — tamarta degdegga', rmSuhoorD:'Digir, ukun, bur gheel — dheji 2-3 koob biyo. Iska ilaali shaah sonkor leh: gaajada ayuu dhaqaaqshaa.',
+    rmIftarT:'🌙 Afuur — si tartiib ah', rmIftarD:'Timir iyo biyo marka hore, kadib maraq, kadibna cuntaada. Jimicsigu wuu fiican yahay kadib aafuurka.',
+    rmWaterD:'💧 U hadh 8 koob biyo u dhexeeya aafuurka iyo suurka.',
+    rmWorkout:'🌙 Ramadaan: jimicsiga ka dhig mid fudud. Socod kadib aafuurka — jimicsi adag ka dhig kadib aafuurka ama ka hor suurka.',
+    remTitle:'Xasuus Maalinle', remSub:'Waano ku waaninayaa inaad sii wadato', remOn:'⏰ Xasuus shidan!', remOff:'Xasuusta waa la damay', remNudge:'Waqtiga jimicsiga! 💪',
+    ppTitle:'Ka Dib Dhalashada', ppSub:'Safarkaaga maalinba maalin', ppDateLabel:'Goormaa ayaa dhashay ilmahaaga?', ppStartBtn:'Bilow Qorista',
+    ppDayOf:(n)=>`Maalinta ${n} ee bogsashada`, ppPhaseLabel:'MARXALADDA HADDA', ppExBtn:'Eeg jimicsiyada', ppChangeBtn:'Beddel',
+    ppClearNote:'Weydii takhtarka ka hor jimicsi adag',
+    ppP:[
+      {n:'Bogsasho & Nasasho',d:'Maalmaha 1–13: Nasasho iyo xiriir ilmahaaga. Bilow neefsashada dhebacaska iyo pelvic tilts. Socod gaaban haddii aad qabto.'},
+      {n:'Dhis Fudud',d:'Maalmaha 14–27: Ku dar Kegels maalin kasta iyo bird-dog. Socodka wuu dheeraan karaa.'},
+      {n:'Bogsashada Xudunta',d:'Maalmaha 28–41: Afarta jimicsi oo dhan, si tartiib ah. Dhegeysto jidhkaaga.'},
+      {n:'Takhtarka + Ku-noqoshada',d:'Maalinta 42+: Baarista 6 toddobaad. Marka takhtarku aakhirka uu ka sheego, si tartiib ah ku noqo jimicsiga caadiga ah.'}
+    ],
+    mwW:'Xudun', mwH:'Dhoobo',
+    measureWaistPh:'Xudunta (cm) — ikhtiyaari', measureHipsPh:'Dhoobada (cm) — ikhtiyaari',
+    shareBtn:'📤 La Wadaag Horumarka', shareTitle:'Horumarka HooyoFit', shareStreak:'Maalmaha Joogtada', shareWorkouts:'Jimicsi la Dhammeeyay',
+    shareSteps:'Tallaabada Maanta', shareWeightChange:'Isbeddelka Miisaanka', shareFooter:'HooyoFit • Jimicsi fudud. Cunto caafimaad leh.',
     pChartLabel:'Taariikhda Miisaanka', pHistoryLabel:'Diiwaanka Miisaanka',
     chartEmpty:'Wax xog ah ma jiraan. Miisaankaaga ku dar!',
     nTitle:'Cuntada', nSub:'Cunto Soomaali caafimaad ah',
     nKcalLabel:'Wadarta Kaloriyada:',
     mt:['☀️ Quraac','🌤️ Qado','🌙 Casho'],
+    mtRam:['🌙 Suur','🌤️ Qado','🌙 Afuur'],
     sTitle:'Jadwalka', sSub:'Qorshaha toddobaadkaaga',
     sDetailLabel:'Jimicsiga Maanta', sPlannerLabel:'Qorshe Cunto',
     sKcalLabel:'🔥 Kaloriyada Maanta', sGoalLabel:'Hadaf: 1500 kcal',
@@ -1188,16 +1309,16 @@ const EXERCISES = [
    tags:['Full Body','Cardio'],time:'3:00',animKey:'burpee',ytId:'xRdGC6cFY0s'},
   {id:13,name:'Pelvic Tilts',heer:'easy',nooc:['core','postpartum'],sets:'3 sets × 10 reps',kcal:10,
    desc:'Lie on back, knees bent. Gently flatten your lower back into the floor by tightening your deep abs, then release. A safe way to reconnect with your core after birth — avoids the strain of crunches.',
-   tags:['Core','Postpartum-Safe'],time:'3:00',animKey:'pelvictilt',ytId:null,guideUrl:'https://hackensackmeridianhealth.org/en/healthu/2023/03/24/what-are-the-best-movements-to-practice-in-postpartum'},
+   tags:['Core','Postpartum-Safe'],time:'3:00',animKey:'pelvictilt',ytId:'7qgTYFZrGBE',guideUrl:'https://hackensackmeridianhealth.org/en/healthu/2023/03/24/what-are-the-best-movements-to-practice-in-postpartum'},
   {id:14,name:'Diaphragmatic Breathing',heer:'easy',nooc:['core','postpartum'],sets:'3 sets × 10 breaths',kcal:5,
    desc:'Sit or lie comfortably. Breathe deeply into your belly, then exhale while gently drawing your belly button toward your spine. Rebuilds deep core connection before any harder core work.',
-   tags:['Core','Postpartum-Safe'],time:'3:00',animKey:'breathing',ytId:null,guideUrl:'https://www.hingehealth.com/resources/articles/diaphragmatic-breathing'},
+   tags:['Core','Postpartum-Safe'],time:'3:00',animKey:'breathing',ytId:'pbaS-KPFfGU',guideUrl:'https://www.hingehealth.com/resources/articles/diaphragmatic-breathing'},
   {id:15,name:'Modified Bird-Dog',heer:'easy',nooc:['core','back','postpartum'],sets:'3 sets × 8 each side',kcal:15,
    desc:'On hands and knees, slowly extend one arm and the opposite leg. Keep hips level and move slowly. A gentle, diastasis-safe alternative to Superman and planks.',
-   tags:['Core','Back','Postpartum-Safe'],time:'4:00',animKey:'birddog',ytId:null,guideUrl:'https://hingehealth.com/resources/articles/bird-dog'},
+   tags:['Core','Back','Postpartum-Safe'],time:'4:00',animKey:'birddog',ytId:'lRJS2SMjAP8',guideUrl:'https://hingehealth.com/resources/articles/bird-dog'},
   {id:16,name:'Kegel Exercises',heer:'easy',nooc:['postpartum'],sets:'3 sets × 10 reps',kcal:5,
    desc:'Gently squeeze your pelvic floor muscles (as if stopping the flow of urine) for 5 seconds, then release. Rebuilds pelvic floor strength after childbirth.',
-   tags:['Pelvic Floor','Postpartum-Safe'],time:'2:00',animKey:'kegel',ytId:null,guideUrl:'https://hackensackmeridianhealth.org/en/healthu/2023/03/24/what-are-the-best-movements-to-practice-in-postpartum'},
+   tags:['Pelvic Floor','Postpartum-Safe'],time:'2:00',animKey:'kegel',ytId:'AfyIQu8nTcI',guideUrl:'https://hackensackmeridianhealth.org/en/healthu/2023/03/24/what-are-the-best-movements-to-practice-in-postpartum'},
 ];
 
 const PLANS = [
@@ -2280,6 +2401,11 @@ const state = {
   doneEx: new Set(JSON.parse(localStorage.getItem('hf_doneEx')||'[]')),
   weights: JSON.parse(localStorage.getItem('hf_weights')||'[]'),
   water: parseInt(localStorage.getItem('hf_water')||'0'),
+  steps: JSON.parse(localStorage.getItem('hf_steps')||'{}'),
+  stepsGoal: parseInt(localStorage.getItem('hf_stepsGoal')||'8000'),
+  ppDate: localStorage.getItem('hf_ppDate')||null,
+  ramadan: localStorage.getItem('hf_ramadan')==='1',
+  reminder: (()=>{try{return JSON.parse(localStorage.getItem('hf_reminder')||'{"on":false,"time":"17:00"}')}catch(e){return {on:false,time:'17:00'}}})(),
   currentMeal:'breakfast',
   plan: JSON.parse(localStorage.getItem('hf_plan')||'{"breakfast":null,"lunch":null,"dinner":null}'),
   planTarget:null,
@@ -2295,13 +2421,13 @@ const state = {
 // ANIMATION BUILDER
 // ══════════════════════════════════════════════════════════════════
 function ytLink(e){
-  if(e.guideUrl) return e.guideUrl;
   if(e.ytId) return `https://www.youtube.com/watch?v=${e.ytId}`;
+  if(e.guideUrl) return e.guideUrl;
   const q=e.ytQuery||(e.name+' exercise tutorial');
   return `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`;
 }
-function linkLabel(e){ return e.guideUrl ? '📖 Expert Guide' : '▶ YouTube'; }
-function watchHint(e){ return e.guideUrl ? 'Read the expert guide' : 'Watch on YouTube'; }
+function linkLabel(e){ return e.ytId ? '▶ YouTube' : '📖 Expert Guide'; }
+function watchHint(e){ return e.ytId ? 'Watch on YouTube' : 'Read the expert guide'; }
 function buildAnim(key){
   const m={
     plank:`<div class="anim-plank"><div class="plank-body"></div><div class="plank-head"></div><div class="plank-arm1"></div><div class="plank-arm2"></div><div class="plank-leg"></div><div class="plank-toes"></div><div class="plank-sweat"></div></div>`,
@@ -2501,8 +2627,8 @@ function renderExercises(){
         <div class="ex-anim-area" onclick="window.open('${ytLink(e)}','_blank')">
           <div class="w-bg"></div>${buildAnim(e.animKey)}
           <div class="ex-level-badge badge-${e.heer}">${e.heer}</div>
-          <div class="ex-anim-label">${e.guideUrl?'📖 Tap for guide':'🎬 Tap to watch'}</div>
-          <div class="yt-overlay"><div class="yt-play-btn">${e.guideUrl?'📖':'▶'}</div><div class="yt-hint">${watchHint(e)}</div></div>
+          <div class="ex-anim-label">${e.ytId?'🎬 Tap to watch':(e.guideUrl?'📖 Tap for guide':'🎬 Tap to watch')}</div>
+          <div class="yt-overlay"><div class="yt-play-btn">${(e.guideUrl&&!e.ytId)?'📖':'▶'}</div><div class="yt-hint">${watchHint(e)}</div></div>
         </div>
         <div class="ex-body">
           <div class="ex-name">${e.name}</div>
@@ -2513,7 +2639,8 @@ function renderExercises(){
           <div class="ex-footer">
             <div class="ex-meta">⏱ ${e.time}</div>
             <div class="ex-actions">
-              <a class="btn-yt" href="${ytLink(e)}" target="_blank" rel="noopener">${linkLabel(e)}</a>
+              <a class="btn-yt" href="${ytLink(e)}" target="_blank" rel="noopener">▶ YouTube</a>
+              ${e.guideUrl?`<a class="btn-guide" href="${e.guideUrl}" target="_blank" rel="noopener">📖 Guide</a>`:''}
               <button class="btn-start${done?' done':''}" onclick="toggleEx(${e.id})">${done?'✅':l.exStart}</button>
             </div>
           </div>
@@ -2573,6 +2700,8 @@ function renderProgress(){
   document.getElementById('statWater').textContent=state.water+'💧';
   renderWeightChart();
   renderWeightList();
+  renderSteps();
+  renderPP();
 }
 
 function renderWeightChart(){
@@ -2607,20 +2736,341 @@ function renderWeightList(){
     const prev=arr[i+1];
     let diff='';
     if(prev){const d=(w.kg-prev.kg).toFixed(1);const cls=d>0?'diff-up':'diff-down';diff=`<span class="weight-diff ${cls}">${d>0?'+':''}${d}kg</span>`;}
-    return `<div class="weight-entry"><div><div class="weight-kg">${w.kg} kg</div><div class="weight-date">${w.date}</div></div>${diff}</div>`;
+    let mLine='';
+    if(w.waist||w.hips){
+      mLine='<div style="font-size:10px;color:var(--muted);margin-top:2px">📏 ';
+      if(w.waist) mLine+=l.mwW+': '+w.waist+'cm';
+      if(w.waist&&w.hips) mLine+=' · ';
+      if(w.hips) mLine+=l.mwH+': '+w.hips+'cm';
+      mLine+='</div>';
+    }
+    return `<div class="weight-entry"><div><div class="weight-kg">${w.kg} kg</div><div class="weight-date">${w.date}</div>${mLine}</div>${diff}</div>`;
   }).join('')}</div>`;
 }
 
 function openWeightModal(){document.getElementById('weightModal').classList.add('open');setTimeout(()=>document.getElementById('weightInput').focus(),300);}
-function closeWeightModal(){document.getElementById('weightModal').classList.remove('open');document.getElementById('weightInput').value='';}
+function closeWeightModal(){
+  document.getElementById('weightModal').classList.remove('open');
+  document.getElementById('weightInput').value='';
+  const wa=document.getElementById('waistInput'); if(wa) wa.value='';
+  const hi=document.getElementById('hipsInput'); if(hi) hi.value='';
+}
 function saveWeight(){
   const v=parseFloat(document.getElementById('weightInput').value);
   if(!v||v<20||v>300){showToast('❌ Enter a valid weight');return;}
   const now=new Date();
-  state.weights.push({kg:v,date:now.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})});
+  const entry={kg:v,date:now.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})};
+  const wa=document.getElementById('waistInput');
+  const hi=document.getElementById('hipsInput');
+  const wv=wa?parseFloat(wa.value):NaN;
+  const hv=hi?parseFloat(hi.value):NaN;
+  if(!isNaN(wv)&&wv>20&&wv<250) entry.waist=wv;
+  if(!isNaN(hv)&&hv>20&&hv<250) entry.hips=hv;
+  state.weights.push(entry);
   localStorage.setItem('hf_weights',JSON.stringify(state.weights));
   syncAppDataToCloud();
   closeWeightModal(); renderProgress(); showToast(L().toastWeight);
+}
+
+// ══════════════════════════════════════════════════════════════════
+// STEPS TRACKER
+// ══════════════════════════════════════════════════════════════════
+function _stepsKey(d){
+  d=d||new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function getStepsToday(){ return state.steps[_stepsKey()]||0; }
+function addSteps(n){
+  const k=_stepsKey();
+  state.steps[k]=Math.max(0,(state.steps[k]||0)+n);
+  localStorage.setItem('hf_steps',JSON.stringify(state.steps));
+  syncAppDataToCloud();
+  renderSteps();
+  if(n>0) showToast(L().toastSteps);
+}
+function setStepsExact(){
+  const inp=document.getElementById('stepsInput');
+  if(!inp) return;
+  const v=parseInt((inp.value||'').replace(/\D/g,''));
+  if(!v||v<0||v>200000){showToast('❌ Enter valid steps');return;}
+  state.steps[_stepsKey()]=v;
+  localStorage.setItem('hf_steps',JSON.stringify(state.steps));
+  syncAppDataToCloud();
+  renderSteps();
+  showToast(L().toastSteps);
+}
+function setStepsGoal(g){
+  state.stepsGoal=g;
+  localStorage.setItem('hf_stepsGoal',String(g));
+  syncAppDataToCloud();
+  renderSteps();
+}
+function renderSteps(){
+  const el=document.getElementById('stepsSection');
+  if(!el) return;
+  const l=L();
+  const today=getStepsToday();
+  const goal=state.stepsGoal;
+  const pct=Math.min(100,Math.round(today/goal*100));
+  const left=Math.max(0,goal-today);
+  const kcal=Math.round(today*0.04);
+  // last 7 days, oldest first, today last
+  const days=[];
+  for(let i=6;i>=0;i--){
+    const d=new Date(); d.setDate(d.getDate()-i);
+    days.push({d:d,val:state.steps[_stepsKey(d)]||0});
+  }
+  const max=Math.max(goal,...days.map(x=>x.val))||1;
+  el.innerHTML=`
+    <div class="steps-hero">
+      <div class="steps-ring" style="background:conic-gradient(var(--orange) ${pct*3.6}deg,#fde8e4 ${pct*3.6}deg)">
+        <div class="steps-ring-inner">
+          <div class="steps-big">${today.toLocaleString()}</div>
+          <div class="steps-goal-txt">/ ${goal.toLocaleString()}</div>
+        </div>
+      </div>
+      <div class="steps-side">
+        <div style="font-size:12px;font-weight:700">${l.stepsTodayLabel}</div>
+        <div style="font-size:11px;color:var(--muted);margin:2px 0 8px">${l.stepsKcal(kcal)}</div>
+        <div style="font-size:11px;font-weight:700;${today>=goal?'color:#16a34a':'color:var(--orange)'}">${today>=goal?l.stepsGoalReached:l.stepsLeft(left)}</div>
+      </div>
+    </div>
+    <div class="steps-btn-row">
+      <button class="step-btn" onclick="addSteps(-500)">−500</button>
+      <button class="step-btn" onclick="addSteps(500)">+500</button>
+      <button class="step-btn" onclick="addSteps(1000)">+1,000</button>
+    </div>
+    <div class="steps-input-row">
+      <input id="stepsInput" type="text" inputmode="numeric" placeholder="${today.toLocaleString()}" class="steps-input">
+      <button class="step-btn step-btn-primary" style="flex:0 0 84px" onclick="setStepsExact()">${l.stepsSetBtn}</button>
+    </div>
+    <div class="steps-goal-row">
+      <span style="font-size:11px;font-weight:700;color:var(--muted)">${l.stepsGoalLabel}:</span>
+      ${[6000,8000,10000].map(g=>`<span class="steps-goal-chip${state.stepsGoal===g?' goal-on':''}" onclick="setStepsGoal(${g})">${g.toLocaleString()}</span>`).join('')}
+    </div>
+    <div class="chart-area" style="margin:12px 0 0;min-height:90px">
+      ${days.map(x=>{
+        const wd=l.weekDays[(x.d.getDay()+6)%7];
+        const h=Math.max(4,Math.round(x.val/max*80));
+        const col=x.val>=goal?'var(--grad)':'#fde8e4';
+        return `<div class="chart-bar-wrap">
+          <div class="chart-bar" style="height:${h}px;background:${col}"></div>
+          <div class="chart-label" style="font-size:9px">${wd}</div>
+        </div>`;
+      }).join('')}
+    </div>
+    <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:6px">${l.stepsWeekLabel}</div>
+  `;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// RAMADAN MODE
+// ══════════════════════════════════════════════════════════════════
+function toggleRamadan(){
+  state.ramadan=!state.ramadan;
+  localStorage.setItem('hf_ramadan',state.ramadan?'1':'0');
+  syncAppDataToCloud();
+  renderRamadanState();
+}
+function renderRamadanState(){
+  const l=L();
+  const sw=document.getElementById('rm-switch');
+  if(sw) sw.classList.toggle('on',state.ramadan);
+  const wb=document.getElementById('ramadanWorkoutBanner');
+  if(wb){ wb.style.display=state.ramadan?'block':'none'; wb.innerHTML=l.rmWorkout; }
+  const nc=document.getElementById('ramadanNutriCard');
+  if(nc){
+    nc.style.display=state.ramadan?'block':'none';
+    if(state.ramadan){
+      nc.innerHTML=`<div class="card-sm" style="background:#f0fdf4;border:1px solid #bbf7d0">
+        <div style="font-size:13px;font-weight:800;color:#15803d;margin-bottom:8px">${l.rmNutriTitle}</div>
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px">${l.rmSuhoorT}</div>
+        <div style="font-size:12px;color:#57534e;line-height:1.5;margin-bottom:10px">${l.rmSuhoorD}</div>
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px">${l.rmIftarT}</div>
+        <div style="font-size:12px;color:#57534e;line-height:1.5;margin-bottom:10px">${l.rmIftarD}</div>
+        <div style="font-size:12px;font-weight:700;color:#2563eb">${l.rmWaterD}</div>
+      </div>`;
+    }
+  }
+  // meal tabs become Suhoor/Iftar during Ramadan
+  const tabs=state.ramadan?l.mtRam:l.mt;
+  tabs.forEach((v,i)=>{const el=document.getElementById('mt'+i);if(el)el.textContent=v;});
+}
+
+// ══════════════════════════════════════════════════════════════════
+// DAILY REMINDER
+// ══════════════════════════════════════════════════════════════════
+function toggleReminder(){
+  state.reminder.on=!state.reminder.on;
+  localStorage.setItem('hf_reminder',JSON.stringify(state.reminder));
+  updateReminderUI();
+  const l=L();
+  if(state.reminder.on){
+    if(typeof Notification!=='undefined'&&Notification.permission==='default'){
+      Notification.requestPermission().catch(()=>{});
+    }
+    showToast(l.remOn);
+  } else {
+    showToast(l.remOff);
+  }
+}
+function setReminderTime(v){
+  if(!v) return;
+  state.reminder.time=v;
+  localStorage.setItem('hf_reminder',JSON.stringify(state.reminder));
+  showToast(L().remOn);
+}
+function updateReminderUI(){
+  const sw=document.getElementById('rem-switch');
+  if(sw) sw.classList.toggle('on',!!(state.reminder&&state.reminder.on));
+  const rt=document.getElementById('rem-time');
+  if(rt&&state.reminder) rt.value=state.reminder.time;
+}
+function checkReminder(){
+  try{
+    if(!state.reminder||!state.reminder.on) return;
+    const now=new Date();
+    const key=now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate();
+    const parts=String(state.reminder.time||'17:00').split(':');
+    if(now.getHours()>+parts[0]||(now.getHours()===+parts[0]&&now.getMinutes()>=+parts[1])){
+      if(localStorage.getItem('hf_reminderDone')!==key){
+        localStorage.setItem('hf_reminderDone',key);
+        const l=L();
+        showToast('⏰ '+l.remNudge);
+        if(typeof Notification!=='undefined'&&Notification.permission==='granted'){
+          new Notification('HooyoFit',{body:l.remNudge});
+        }
+      }
+    }
+  }catch(e){}
+}
+setInterval(checkReminder,30000);
+
+// ══════════════════════════════════════════════════════════════════
+// POSTPARTUM RECOVERY TIMELINE
+// ══════════════════════════════════════════════════════════════════
+function ppDaysSince(){
+  if(!state.ppDate) return null;
+  const d=new Date(state.ppDate+'T00:00:00');
+  if(isNaN(d.getTime())) return null;
+  const now=new Date();
+  const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const start=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+  return Math.max(0,Math.round((today-start)/86400000));
+}
+function ppPhaseIdx(days){ return days<=13?0:(days<=27?1:(days<=41?2:3)); }
+function startPPTracking(){
+  const inp=document.getElementById('ppDateInput');
+  if(!inp||!inp.value){showToast('❌ '+L().ppDateLabel);return;}
+  state.ppDate=inp.value;
+  localStorage.setItem('hf_ppDate',inp.value);
+  syncAppDataToCloud();
+  renderPP();
+}
+function ppChangeDate(){
+  const old=state.ppDate;
+  state.ppDate=null;
+  renderPP();
+  const inp=document.getElementById('ppDateInput');
+  if(inp&&old) inp.value=old;
+}
+function renderPP(){
+  const el=document.getElementById('ppSection');
+  if(!el) return;
+  const l=L();
+  if(!state.ppDate){
+    el.innerHTML=`<div style="text-align:center">
+      <div style="font-size:34px;margin-bottom:6px">👶</div>
+      <div style="font-size:14px;font-weight:800;margin-bottom:4px">${l.ppTitle}</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:12px">${l.ppDateLabel}</div>
+      <input type="date" id="ppDateInput" class="pp-date-input"/>
+      <button class="step-btn step-btn-primary" style="width:100%;margin-top:10px" onclick="startPPTracking()">${l.ppStartBtn}</button>
+    </div>`;
+    return;
+  }
+  const days=ppDaysSince();
+  if(days===null){ state.ppDate=null; renderPP(); return; }
+  const idx=ppPhaseIdx(days);
+  const d=new Date(state.ppDate+'T00:00:00');
+  const dateStr=d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+  let phases='';
+  l.ppP.forEach((p2,i)=>{
+    phases+=`<div class="pp-phase${i===idx?' active':''}">
+      <div style="font-weight:800;font-size:13px;color:var(--text)">${i===idx?'▶ ':''}${p2.n}</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.5;margin-top:3px">${p2.d}</div>
+      ${i===3?`<div style="font-size:12px;font-weight:700;color:#16a34a;margin-top:6px">🩺 ${l.ppClearNote}</div>`:''}
+    </div>`;
+  });
+  el.innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div>
+        <div style="font-size:16px;font-weight:900;color:var(--text)">👶 ${l.ppDayOf(days+1)}</div>
+        <div style="font-size:11px;color:var(--muted)">${l.ppSub} • ${dateStr}</div>
+      </div>
+      <button class="pp-change-btn" onclick="ppChangeDate()">${l.ppChangeBtn}</button>
+    </div>
+    <div style="font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--muted);margin-bottom:8px">${l.ppPhaseLabel}</div>
+    ${phases}
+    <button class="step-btn step-btn-primary" style="width:100%;margin-top:12px" onclick="goPage('workouts');filterWorkout('postpartum',document.getElementById('wp3'))">${l.ppExBtn}</button>`;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// SHARE PROGRESS CARD
+// ══════════════════════════════════════════════════════════════════
+function shareProgress(){
+  const l=L();
+  const c=document.createElement('canvas');
+  c.width=1080; c.height=1350;
+  const x=c.getContext('2d');
+  const g=x.createLinearGradient(0,0,1080,1350);
+  g.addColorStop(0,'#f87171'); g.addColorStop(1,'#fb923c');
+  x.fillStyle=g; x.fillRect(0,0,1080,1350);
+  x.globalAlpha=.15; x.fillStyle='#ffffff';
+  x.beginPath(); x.arc(950,130,190,0,7); x.fill();
+  x.beginPath(); x.arc(90,1240,230,0,7); x.fill();
+  x.globalAlpha=1; x.fillStyle='#ffffff'; x.textAlign='center';
+  x.font='900 96px -apple-system,Roboto,Arial,sans-serif';
+  x.fillText('HooyoFit',540,150);
+  x.font='700 42px -apple-system,Roboto,Arial,sans-serif';
+  x.fillText(l.shareTitle,540,214);
+  x.font='500 30px -apple-system,Roboto,Arial,sans-serif';
+  x.fillText(new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),540,262);
+  let wchg='—';
+  if(state.weights.length>1){
+    const d=+(state.weights[state.weights.length-1].kg-state.weights[0].kg).toFixed(1);
+    wchg=(d>0?'+':'')+d+' kg';
+  }
+  const stats=[
+    {v:state.streak+' 🔥',t:l.shareStreak},
+    {v:String(state.doneEx.size),t:l.shareWorkouts},
+    {v:getStepsToday().toLocaleString(),t:l.shareSteps},
+    {v:wchg,t:l.shareWeightChange}
+  ];
+  const cw=440,ch=300,gap=60,ox=(1080-2*cw-gap)/2,oy=340;
+  stats.forEach((st,i)=>{
+    const cx=ox+(i%2)*(cw+gap), cy=oy+Math.floor(i/2)*(ch+gap);
+    x.globalAlpha=.25; x.fillStyle='#ffffff';
+    if(x.roundRect){x.beginPath();x.roundRect(cx,cy,cw,ch,40);x.fill();}
+    else{x.fillRect(cx,cy,cw,ch);}
+    x.globalAlpha=1; x.fillStyle='#ffffff';
+    x.font='900 80px -apple-system,Roboto,Arial,sans-serif';
+    x.fillText(st.v,cx+cw/2,cy+140);
+    x.font='700 34px -apple-system,Roboto,Arial,sans-serif';
+    x.fillText(st.t,cx+cw/2,cy+218);
+  });
+  x.font='600 30px -apple-system,Roboto,Arial,sans-serif';
+  x.fillText(l.shareFooter,540,1290);
+  const dataUrl=c.toDataURL('image/png');
+  c.toBlob(async blob=>{
+    if(blob){
+      const file=new File([blob],'hooyofit-progress.png',{type:'image/png'});
+      if(navigator.canShare&&navigator.canShare({files:[file]})){
+        try{await navigator.share({files:[file],title:'HooyoFit'});return;}catch(e){}
+      }
+    }
+    const a=document.createElement('a');
+    a.href=dataUrl; a.download='hooyofit-progress.png';
+    document.body.appendChild(a); a.click(); a.remove();
+  },'image/png');
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -2676,6 +3126,7 @@ function renderHowToEat(){
 let foodOrderFilter=null;
 function filterFoodsByOrder(orderNum){
   foodOrderFilter=orderNum;
+  foodGoalFilter=null; updateGoalChips();
   // Collapse the how-to-eat card so the filtered list is immediately visible
   const hteBody=document.getElementById('hteBody');
   if(hteBody && hteBody.style.display!=='none') toggleHowToEat();
@@ -2685,6 +3136,36 @@ function filterFoodsByOrder(orderNum){
 function clearFoodOrderFilter(){
   foodOrderFilter=null;
   renderFood();
+}
+let foodGoalFilter=null;
+const GOAL_STYLES={
+  loss:{bg:'#fef2f2',fg:'#dc2626'},
+  muscle:{bg:'#eff6ff',fg:'#2563eb'},
+  heart:{bg:'#fff1f2',fg:'#e11d48'},
+  post:{bg:'#f0fdf4',fg:'#16a34a'}
+};
+const GOAL_LKEY={loss:'goalLoss',muscle:'goalMuscle',heart:'goalHeart',post:'goalPost'};
+function setGoalFilter(g){
+  foodGoalFilter=(foodGoalFilter===g)?null:g; // tap again to un-clear
+  if(foodGoalFilter){
+    foodOrderFilter=null;
+    const hteBody=document.getElementById('hteBody');
+    if(hteBody && hteBody.style.display!=='none') toggleHowToEat();
+  }
+  updateGoalChips();
+  renderFood();
+  document.getElementById('foodList').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function clearGoalFilter(){
+  foodGoalFilter=null;
+  updateGoalChips();
+  renderFood();
+}
+function updateGoalChips(){
+  ['loss','muscle','heart','post'].forEach(g=>{
+    const el=document.getElementById('gc-'+g);
+    if(el) el.classList.toggle('goal-on',foodGoalFilter===g);
+  });
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -2973,7 +3454,26 @@ function renderFood(){
   const chipEl=document.getElementById('foodOrderFilterChip');
   const kcalRow=document.getElementById('n-kcal-label')?.closest('.card-sm');
   let foods;
-  if(foodOrderFilter){
+  if(foodGoalFilter){
+    const st=GOAL_STYLES[foodGoalFilter];
+    foods=[...FOODS.breakfast,...FOODS.lunch,...FOODS.dinner]
+      .map(f=>Object.assign({},f))
+      .filter((f,i,a)=>a.findIndex(x=>x.name===f.name)===i)
+      .filter(f=>f.goals && f.goals.includes(foodGoalFilter))
+      .sort((a,b)=>(a.order||3)-(b.order||3));
+    // tag each food with ALL meals it appears in, so users know when to eat it
+    const mealMap={};
+    [['breakfast','☀️ Breakfast'],['lunch','🌤️ Lunch'],['dinner','🌙 Dinner']].forEach(pair=>{
+      FOODS[pair[0]].forEach(f=>{ (mealMap[f.name]=mealMap[f.name]||[]).push(pair[1]); });
+    });
+    foods.forEach(f=>{ f._meal=mealMap[f.name]?mealMap[f.name].join(' · '):''; });
+    chipEl.style.display='block';
+    chipEl.innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between;background:${st.bg};border-radius:10px;padding:8px 12px">
+      <span style="font-size:12px;font-weight:700;color:${st.fg}">${l[GOAL_LKEY[foodGoalFilter]]} — good foods, all meals</span>
+      <span style="font-size:12px;font-weight:700;color:${st.fg};cursor:pointer" onclick="clearGoalFilter()">✕ Clear</span>
+    </div>`;
+    if(kcalRow) kcalRow.style.display='none';
+  } else if(foodOrderFilter){
     foods=[...FOODS.breakfast,...FOODS.lunch,...FOODS.dinner]
       .filter((f,i,a)=>a.findIndex(x=>x.name===f.name)===i)
       .filter(f=>(f.order||3)===foodOrderFilter)
@@ -3001,7 +3501,7 @@ function renderFood(){
         <div class="food-icon">${f.icon}</div>
         <div class="food-body">
           <div class="food-name">${f.name}</div>
-          <div class="food-goal-tags">${orderTag(f.order||3)}${goalTags(f.goals)}</div>
+          <div class="food-goal-tags">${f._meal?`<span class="goal-tag gt-general">${f._meal}</span>`:''}${orderTag(f.order||3)}${goalTags(f.goals)}</div>
           <div class="food-desc">${f.desc}</div>
           <div style="font-size:11px;color:var(--blue);margin-top:3px">📏 ${f.portion}</div>
         </div>
@@ -3020,6 +3520,7 @@ function renderFood(){
 function switchMeal(meal,el){
   state.currentMeal=meal;
   foodOrderFilter=null;
+  foodGoalFilter=null; updateGoalChips();
   document.querySelectorAll('.meal-tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
   renderFood();
@@ -3201,6 +3702,13 @@ function applyLang(){
   set('stat-w-label',l.statWLabel); set('stat-s-label',l.statSLabel);
   set('stat-wt-label',l.statWtLabel); set('stat-wa-label',l.statWaLabel);
   set('p-chart-label',l.pChartLabel); set('p-history-label',l.pHistoryLabel);
+  set('p-steps-label',l.pStepsLabel); renderSteps();
+  set('rm-title',l.rmTitle); set('rm-sub',l.rmSub);
+  set('rem-title',l.remTitle); set('rem-sub',l.remSub);
+  set('pp-label',l.ppTitle); set('share-progress-btn',l.shareBtn);
+  const waIn=document.getElementById('waistInput'); if(waIn) waIn.placeholder=l.measureWaistPh;
+  const hiIn=document.getElementById('hipsInput'); if(hiIn) hiIn.placeholder=l.measureHipsPh;
+  renderRamadanState(); updateReminderUI(); renderPP();
   set('chart-empty',l.chartEmpty);
   set('n-title',l.nTitle); set('n-sub',l.nSub); set('n-kcal-label',l.nKcalLabel);
   l.mt.forEach((v,i)=>set('mt'+i,v));
@@ -3646,7 +4154,11 @@ function gatherAppData(){
     streak:state.streak,
     lastWorkout:localStorage.getItem('hf_lastWorkout'),
     intensity:state.intensity,
-    fitnessDone:state.fitnessDone
+    fitnessDone:state.fitnessDone,
+    steps:state.steps,
+    stepsGoal:state.stepsGoal,
+    ppDate:state.ppDate,
+    ramadan:state.ramadan
   };
 }
 
@@ -3672,6 +4184,10 @@ function applyCloudAppData(d){
   if(d.lastWorkout){ localStorage.setItem('hf_lastWorkout',d.lastWorkout); }
   if(d.intensity){ state.intensity=d.intensity; localStorage.setItem('hf_intensity',d.intensity); }
   if(typeof d.fitnessDone==='boolean'){ state.fitnessDone=d.fitnessDone; localStorage.setItem('hf_fitnessDone',d.fitnessDone?'1':'0'); }
+  if(d.steps){ state.steps=d.steps; localStorage.setItem('hf_steps',JSON.stringify(d.steps)); }
+  if(typeof d.stepsGoal==='number'){ state.stepsGoal=d.stepsGoal; localStorage.setItem('hf_stepsGoal',String(d.stepsGoal)); }
+  if(d.ppDate){ state.ppDate=d.ppDate; localStorage.setItem('hf_ppDate',d.ppDate); }
+  if(typeof d.ramadan==='boolean'){ state.ramadan=d.ramadan; localStorage.setItem('hf_ramadan',d.ramadan?'1':'0'); }
   // Re-render everything that shows this data
   updateRing();
   renderWater();
