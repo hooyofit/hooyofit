@@ -12,6 +12,30 @@ webpush.setVapidDetails(
   VAPID_PRIVATE_KEY
 );
 
+const WINDOW_MINUTES = 15; // matches how often the GitHub Action triggers this
+
+// Computes the current local date/time in ANY IANA timezone correctly,
+// including automatic daylight-saving handling — no hardcoded offsets that
+// would silently drift wrong twice a year.
+function getLocalNow(timeZone: string) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: timeZone || "Europe/Stockholm",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date());
+
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? "0";
+  return {
+    dateKey: `${get("year")}-${get("month")}-${get("day")}`,
+    hour: parseInt(get("hour"), 10),
+    minute: parseInt(get("minute"), 10),
+  };
+}
+
 Deno.serve(async (_req) => {
   const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
 
@@ -24,52 +48,48 @@ Deno.serve(async (_req) => {
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
 
-  const nowUtc = new Date();
   let sent = 0;
+  const results: Array<{ id: string; timezone: string; localTime: string; isDue: boolean }> = [];
 
   for (const sub of subs ?? []) {
-    // Convert current UTC time into this user's local time using the offset
-    // captured when they subscribed (getTimezoneOffset semantics: local = UTC - offset)
-    const localMs = nowUtc.getTime() - sub.timezone_offset_minutes * 60000;
-    const local = new Date(localMs);
-    const nowKey = `${local.getUTCFullYear()}-${local.getUTCMonth() + 1}-${local.getUTCDate()}`;
+    const timezone = sub.timezone_name || "Europe/Stockholm";
+    const { dateKey, hour, minute } = getLocalNow(timezone);
+    const nowMinutes = hour * 60 + minute;
 
     const [targetH, targetM] = (sub.reminder_time || "17:00").split(":").map(Number);
-    const nowMinutes = local.getUTCHours() * 60 + local.getUTCMinutes();
     const targetMinutes = targetH * 60 + targetM;
+    const isDue = nowMinutes >= targetMinutes && nowMinutes < targetMinutes + WINDOW_MINUTES;
 
-    const alreadySent = sub.last_sent_date === nowKey;
-    // 15-minute window matches how often this function is triggered (see GitHub Action)
-    const isDue = nowMinutes >= targetMinutes && nowMinutes < targetMinutes + 15;
+    results.push({ id: sub.id, timezone, localTime: `${hour}:${String(minute).padStart(2, "0")}`, isDue });
 
-    if (isDue && !alreadySent) {
-      try {
-        await webpush.sendNotification(
-          {
-            endpoint: sub.endpoint,
-            keys: { p256dh: sub.p256dh, auth: sub.auth_key },
-          },
-          JSON.stringify({
-            title: "HooyoFit",
-            body: "Time for your workout! 💪",
-          })
-        );
-        await supabase
-          .from("push_subscriptions")
-          .update({ last_sent_date: nowKey })
-          .eq("id", sub.id);
-        sent++;
-      } catch (e) {
-        // Dead subscription (browser data cleared, uninstalled, etc.) — clean it up
-        const statusCode = (e as { statusCode?: number }).statusCode;
-        if (statusCode === 410 || statusCode === 404) {
-          await supabase.from("push_subscriptions").delete().eq("id", sub.id);
-        }
+    const alreadySent = sub.last_sent_date === dateKey;
+    if (!isDue || alreadySent) continue;
+
+    try {
+      await webpush.sendNotification(
+        {
+          endpoint: sub.endpoint,
+          keys: { p256dh: sub.p256dh, auth: sub.auth_key },
+        },
+        JSON.stringify({
+          title: "HooyoFit",
+          body: "Time for your workout! 💪",
+        })
+      );
+      await supabase
+        .from("push_subscriptions")
+        .update({ last_sent_date: dateKey })
+        .eq("id", sub.id);
+      sent++;
+    } catch (e) {
+      const statusCode = (e as { statusCode?: number }).statusCode;
+      if (statusCode === 410 || statusCode === 404) {
+        await supabase.from("push_subscriptions").delete().eq("id", sub.id);
       }
     }
   }
 
-  return new Response(JSON.stringify({ checked: subs?.length ?? 0, sent }), {
+  return new Response(JSON.stringify({ checked: subs?.length ?? 0, sent, results }), {
     headers: { "Content-Type": "application/json" },
   });
 });
