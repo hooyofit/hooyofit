@@ -1367,7 +1367,7 @@ const FOODS = {
      goals:['general'],warning:'Choose whole wheat for better nutrition.',
      desc:'Somali bread with tea. Add less sugar to the tea.',
      portion:'2 slices bread + 1 cup tea'},
-    {icon:'🥣',name:'Digirjileec + Caano Fadhi + Timir',kcal:340,protein:13,carbs:52,fat:8,fiber:7,order:1,
+    {icon:'🥣',name:'Boorash + Caano Fadhi + Timir',kcal:340,protein:13,carbs:52,fat:8,fiber:7,order:1,
      goals:['heart','loss','general'],warning:null,
      desc:'Oats soaked in yogurt with chopped dates. A slow-release, iron-rich start to the day.',
      portion:'½ cup oats + 1 cup yogurt + 3 dates'},
@@ -1379,6 +1379,10 @@ const FOODS = {
      goals:['muscle','loss'],warning:null,
      desc:'Eggs scrambled with fresh spinach. High protein with a boost of iron.',
      portion:'2 eggs + 1 cup spinach'},
+    {icon:'🥣',name:'Boorash Masago + Caano',kcal:300,protein:10,carbs:50,fat:6,fiber:6,order:1,
+     goals:['general','heart'],warning:null,
+     desc:'Warm sorghum porridge with milk — one of Somalia\'s oldest breakfast grains, gentle on digestion.',
+     portion:'½ cup sorghum + 1 cup milk'},
   ],
   lunch:[
     {icon:'🍚',name:'Bariis + Hilib Digaag',kcal:450,protein:32,carbs:52,fat:10,fiber:3,order:2,
@@ -1397,7 +1401,7 @@ const FOODS = {
      goals:['loss','heart','post'],warning:null,
      desc:'Lentil soup with bread. Heart-healthy and filling.',
      portion:'2 cups soup + 1 slice bread'},
-    {icon:'🥙',name:'Qolof-badeed + Digir Cad + Brokoli',kcal:390,protein:29,carbs:32,fat:11,fiber:9,order:1,
+    {icon:'🥙',name:'Tabadiin + Digir Cad + Brokoli',kcal:390,protein:29,carbs:32,fat:11,fiber:9,order:1,
      goals:['heart','loss','muscle'],warning:null,
      desc:'Tuna and chickpea salad with steamed broccoli. High protein, high fiber, and rich in iodine and selenium.',
      portion:'1 can tuna + ½ cup chickpeas + 1 cup broccoli'},
@@ -1409,6 +1413,10 @@ const FOODS = {
      goals:['muscle','general'],warning:'Trim visible fat for a leaner meal.',
      desc:'Grilled goat meat with mixed vegetables. A traditional, protein-dense lunch.',
      portion:'150g goat meat + 1 cup vegetables'},
+    {icon:'🥗',name:'Kabaash + Babaay Salad',kcal:220,protein:5,carbs:30,fat:9,fiber:7,order:1,
+     goals:['loss','heart'],warning:null,
+     desc:'Shredded cabbage and papaya salad with lemon. Light, high fiber, and easy to digest.',
+     portion:'1 cup cabbage + 1 cup papaya'},
   ],
   dinner:[
     {icon:'🍵',name:'Suqaar + Bariis Yar',kcal:380,protein:26,carbs:38,fat:12,fiber:4,order:2,
@@ -1439,6 +1447,10 @@ const FOODS = {
      goals:['muscle','general'],warning:'Keep portions moderate at dinner.',
      desc:'Xawaash-spiced roasted chicken with a side of vegetables.',
      portion:'150g chicken + 1 cup vegetables'},
+    {icon:'🍲',name:'Maraq Lows Gaduud',kcal:310,protein:14,carbs:26,fat:16,fiber:5,order:1,
+     goals:['heart','general'],warning:null,
+     desc:'A warming groundnut (peanut) soup, a traditional way to eat this staple crop — filling and fiber-rich.',
+     portion:'2 cups soup'},
   ]
 };
 
@@ -1774,7 +1786,7 @@ const SV_NUTRIENTS = [
     physiology:{en:"Zinc is required for thymic factor (thymulin) that matures T-cells in the thymus. Without zinc, your immune army can't be trained. It's also needed by RNA polymerase for gene transcription and DNA repair. In the prostate gland, zinc concentrations are the highest in the body.",so:"Sink ayaa loo baahan yahay arrimaha thymic (thymulin) ee T-cells thymus ku bilaabanaya."},
     deficiency:{en:["Frequent colds","Hair loss","Loss of taste/smell","Slow healing","Low testosterone","Acne"],so:["Hargab joogto ah","Timaha daadashada","Luminta dhadhan/ur","Daaweyn gaabis","Testosterone hooseeya","Xabadka"]},
     foods:[
-      {name:{en:"Tuna",so:"Qolof-badeed"},amount:"78mg/100g",emoji:"🐟"},
+      {name:{en:"Tuna",so:"Tabadiin"},amount:"78mg/100g",emoji:"🐟"},
       {name:{en:"Beef",so:"Hilib lo'aad"},amount:"8.7mg/100g",emoji:"🥩"},
       {name:{en:"Pumpkin Seeds",so:"Abuuraha gawska"},amount:"7.8mg/100g",emoji:"🎃"},
       {name:{en:"Cashews",so:"Kaasho"},amount:"5.6mg/100g",emoji:"🌰"},
@@ -1905,7 +1917,7 @@ const SV_NUTRIENTS = [
     deficiency:{en:["Anemia (despite normal iron)","Bone weakness","Pale skin","Fatigue","Poor immunity","Nerve problems"],so:["Anemia (in kastoo bir caadi ah)","Daciifnimada lafaha","Maqaar cad","Daalnimo","Difaac liita","Dhibaatada narafka"]},
     foods:[
       {name:{en:"Beef Liver",so:"Beer lo'aad"},amount:"14.3mg/100g",emoji:"🫀"},
-      {name:{en:"Tuna",so:"Qolof-badeed"},amount:"4.5mg/100g",emoji:"🐟"},
+      {name:{en:"Tuna",so:"Tabadiin"},amount:"4.5mg/100g",emoji:"🐟"},
       {name:{en:"Dark Chocolate",so:"Shokolaadda madow"},amount:"1.8mg/100g",emoji:"🍫"},
       {name:{en:"Cashews",so:"Kaasho"},amount:"2.2mg/100g",emoji:"🌰"},
       {name:{en:"Sesame Seeds",so:"Simsim"},amount:"4.1mg/100g",emoji:"⚪"},
@@ -1942,7 +1954,7 @@ const SV_NUTRIENTS = [
     foods:[
       {name:{en:"Seaweed (Nori/Kelp)",so:"Dhir-badeed"},amount:"Up to 2,984mcg/100g",emoji:"🌿"},
       {name:{en:"Cod Fish",so:"Kalluunka Cod"},amount:"170mcg/100g",emoji:"🐟"},
-      {name:{en:"Tuna",so:"Qolof-badeed"},amount:"160mcg/100g",emoji:"🐟"},
+      {name:{en:"Tuna",so:"Tabadiin"},amount:"160mcg/100g",emoji:"🐟"},
       {name:{en:"Shrimp",so:"Jaad-badeed"},amount:"35mcg/100g",emoji:"🦐"},
       {name:{en:"Iodized Salt",so:"Cusbitaan iodine-ka leh"},amount:"~77mcg/1/4 tsp",emoji:"🧂"},
     ],
@@ -2082,12 +2094,16 @@ const SV_FOODS_DB = [
   {name:{en:"Sesame Seeds",so:"Simsim"},emoji:"⚪",category:{en:"Nuts & Seeds",so:"Cunooyin & abuur"},nutrients:["calcium","magnesium","iron","zinc","copper","manganese"],benefit:{en:"One of the richest plant sources of calcium that exists — a small handful rivals a glass of milk.",so:"Mid ka mid ah ilaha kalsiyamka ugu badan ee dhirta."}},
   {name:{en:"Chickpeas",so:"Digir Cad"},emoji:"🫛",category:{en:"Legumes",so:"Digirta"},nutrients:["iron","magnesium","zinc","manganese","vitamin-b9"],benefit:{en:"A filling, affordable plant protein rich in iron, folate, and manganese for bone health.",so:"Borotiin dhireed oo dhergiya oo bir iyo folate ka buuxa."}},
   {name:{en:"Plain Yogurt",so:"Caano Fadhi"},emoji:"🥣",category:{en:"Dairy",so:"Caano"},nutrients:["calcium","phosphorus","zinc","vitamin-b12"],benefit:{en:"Easier to digest than milk for many people, with just as much calcium and added gut-friendly probiotics.",so:"Way ka fudud tahay caanaha dheefshiidka, kalsiyam la mid ah ayeyna leedahay."}},
-  {name:{en:"Oats",so:"Digirjileec"},emoji:"🌾",category:{en:"Grains",so:"Hadhuudh"},nutrients:["iron","magnesium","potassium","vitamin-b1","phosphorus"],benefit:{en:"A slow-release breakfast grain with more iron than most people expect — pair with citrus to absorb it better.",so:"Hadhuudh subax ah oo bir ka badan intii la filayo."}},
-  {name:{en:"Tuna",so:"Qolof-badeed"},emoji:"🐟",category:{en:"Fish",so:"Kalluun"},nutrients:["selenium","vitamin-b12","zinc","vitamin-b6","iodine"],benefit:{en:"Lean, affordable, and one of the best food sources of selenium and iodine for thyroid health.",so:"Isha ugu fiican ee seeleniyam iyo iodine caafimaadka thyroid-ka."}},
+  {name:{en:"Oats",so:"Boorash"},emoji:"🌾",category:{en:"Grains",so:"Hadhuudh"},nutrients:["iron","magnesium","potassium","vitamin-b1","phosphorus"],benefit:{en:"A slow-release breakfast grain with more iron than most people expect — pair with citrus to absorb it better.",so:"Hadhuudh subax ah oo bir ka badan intii la filayo."}},
+  {name:{en:"Tuna",so:"Tabadiin"},emoji:"🐟",category:{en:"Fish",so:"Kalluun"},nutrients:["selenium","vitamin-b12","zinc","vitamin-b6","iodine"],benefit:{en:"Lean, affordable, and one of the best food sources of selenium and iodine for thyroid health.",so:"Isha ugu fiican ee seeleniyam iyo iodine caafimaadka thyroid-ka."}},
   {name:{en:"Shrimp",so:"Karkabo"},emoji:"🦐",category:{en:"Seafood",so:"Cunto-badeed"},nutrients:["iodine","selenium","zinc","vitamin-b12"],benefit:{en:"Very low in fat but rich in iodine and selenium — two minerals the modern diet often falls short on.",so:"Dufan yar leh laakiin iodine iyo seeleniyam ka buuxda."}},
   {name:{en:"Broccoli",so:"Brokoli"},emoji:"🥦",category:{en:"Vegetables",so:"Khudaar"},nutrients:["vitamin-c","vitamin-k","calcium","potassium","vitamin-b9"],benefit:{en:"More Vitamin C per bite than an orange, plus calcium and Vitamin K for strong bones.",so:"Fiitamiin C ka badan liinta macaan, iyo kalsiyam lafaha u adkeeya."}},
   {name:{en:"Garlic",so:"Toon"},emoji:"🧄",category:{en:"Other",so:"Kale"},nutrients:["manganese","selenium","vitamin-b6","vitamin-c","sulfur"],benefit:{en:"Small but mighty — crushed garlic releases sulfur compounds with real immune and heart benefits.",so:"Yar laakiin xoog badan — toonka la tuujiyay wuxuu sii daayaa walxo sulfur ah oo faa'iido leh."}},
   {name:{en:"Watermelon",so:"Xabxab"},emoji:"🍉",category:{en:"Fruits",so:"Khudaar"},nutrients:["potassium","vitamin-a","vitamin-c"],benefit:{en:"Over 90% water — a refreshing way to rehydrate and top up potassium in hot weather.",so:"In ka badan 90% biyo — hab qaboojiya oo botasiyam ah kuleylka daran."}},
+  {name:{en:"Groundnuts",so:"Lows Gaduud"},emoji:"🥜",category:{en:"Nuts & Seeds",so:"Cunooyin & abuur"},nutrients:["vitamin-b3","magnesium","iron","manganese"],benefit:{en:"A staple Somali crop — rich in niacin and magnesium, and an easy source of plant protein.",so:"Dalag Soomaaliyeed oo caan ah — ka buuxa niacin iyo magnesium, waana borotiin dhireed oo fudud."}},
+  {name:{en:"Cabbage",so:"Kabaash"},emoji:"🥬",category:{en:"Vegetables",so:"Khudaar"},nutrients:["vitamin-c","vitamin-k","potassium"],benefit:{en:"Cheap, easy to grow, and a genuine source of Vitamin K and C often overlooked.",so:"Jaban, si fudud loo beero, waxaana ka buuxa Fiitamiin K iyo C oo badanaa la iloobo."}},
+  {name:{en:"Papaya",so:"Babaay"},emoji:"🍈",category:{en:"Fruits",so:"Khudaar"},nutrients:["vitamin-c","potassium","vitamin-b9"],benefit:{en:"Grown across Somalia's riverine farmland — a soft, easy-to-digest source of Vitamin C.",so:"Waxaa lagu beeraa dhulka webiyada Soomaaliya — waa isha Fiitamiin C ee fudud in la dheefshiido."}},
+  {name:{en:"Sorghum",so:"Masago"},emoji:"🌾",category:{en:"Grains",so:"Hadhuudh"},nutrients:["iron","magnesium","phosphorus","vitamin-b3"],benefit:{en:"One of Somalia's oldest staple grains — the base of canjeero and muufo, and a real source of iron.",so:"Mid ka mid ah hadhuudhka ugu qadiimsan Soomaaliya — saldhigga canjeero iyo muufo, waxaana ka buuxa bir dhab ah."}},
 ];
 
 const SV_DAILY_TIPS = [
@@ -2098,7 +2114,7 @@ const SV_DAILY_TIPS = [
   {id:5, emoji:"🥚", cat:{en:"Synergy",so:"Is-xidid"}, title:{en:"Cook your eggs — raw whites block biotin",so:"Karinta ukuntaada — cad-cadka xaarka ah wuxuu biotin xannibaayaa"}, text:{en:"Raw egg whites contain avidin, a protein that binds biotin so tightly it becomes completely unabsorbable. Heat destroys avidin but not biotin — so cooked eggs deliver more biotin than raw ones.",so:"Cad-cadka ukunta xaarka ah wuxuu ka kooban yahay avidin."}, nutrient:"vitamin-b7"},
   {id:6, emoji:"🩸", cat:{en:"Myth Busted",so:"Khuraafaad La Jabiyay"}, title:{en:"Spinach iron is NOT the same as meat iron",so:"Bir sabaanagga MAAHA bir hilibka oo kale"}, text:{en:"Spinach is high in non-heme iron but it's also packed with oxalates that block absorption. You absorb about 1–2% of spinach iron vs 15–35% from meat. Add lemon juice to improve it.",so:"Sabaanaggu wuxuu xoog badan leedahay bir aan-heme ah."}, nutrient:"iron"},
   {id:7, emoji:"🌊", cat:{en:"Body Science",so:"Sayniska Jirka"}, title:{en:"You lose magnesium every time you sweat",so:"Waxaad maagnesiiyam lumisaa mar kasta oo aad dhadhinto"}, text:{en:"Sweat contains significant magnesium. Athletes, heavy sweaters, and people under chronic stress deplete magnesium rapidly — often faster than diet alone can replenish.",so:"Dhadhinnadu waxay ka kooban tahay maagnesiiyam muhiim ah."}, nutrient:"magnesium"},
-  {id:8, emoji:"🐟", cat:{en:"Food Wisdom",so:"Garsoornimada Cuntada"}, title:{en:"Tuna is an excellent zinc, B12 & omega-3 source",so:"Qolof-badeedku waa isha wanaagsan ee sink, B12 & omega-3"}, text:{en:"Tuna is one of the most complete protein sources — rich in zinc, B12, selenium, and omega-3. It is halal, affordable, and available year-round.",so:"Qolof-badeedku waa cuntada adduunka ugu sink badan."}, nutrient:"zinc"},
+  {id:8, emoji:"🐟", cat:{en:"Food Wisdom",so:"Garsoornimada Cuntada"}, title:{en:"Tuna is an excellent zinc, B12 & omega-3 source",so:"Tabadiinku waa isha wanaagsan ee sink, B12 & omega-3"}, text:{en:"Tuna is one of the most complete protein sources — rich in zinc, B12, selenium, and omega-3. It is halal, affordable, and available year-round.",so:"Tabadiinku waa cuntada adduunka ugu sink badan."}, nutrient:"zinc"},
   {id:9, emoji:"🧠", cat:{en:"Body Science",so:"Sayniska Jirka"}, title:{en:"Your brain is 60% fat — and it needs Omega-3 to rebuild",so:"Maskaxdaadu 60% dufan bay ka samaysan tahay"}, text:{en:"DHA makes up 40% of brain fatty acids. Every time a neuron fires, its membrane is slightly damaged. DHA is the raw material for repair. Low DHA is linked to depression and faster cognitive decline.",so:"DHA waxay ka samaysaa 40% dufanka maskaxda."}, nutrient:"omega3"},
   {id:10, emoji:"🫀", cat:{en:"Synergy",so:"Is-xidid"}, title:{en:"Vitamin K2 and D3 must work together",so:"Fiitamiin K2 iyo D3 waa iney wada shaqeeyaan"}, text:{en:"Vitamin D increases calcium absorption — but without K2, that calcium can deposit in arteries instead of bones. K2 activates the protein that sweeps calcium out of arteries and into bone.",so:"Fiitamiin D wuxuu kordhiyaa nuqulka kalsiyam."}, nutrient:"vitamin-k"},
   {id:11, emoji:"🌙", cat:{en:"Timing Matters",so:"Wakhtiga Muhiim"}, title:{en:"Take magnesium 1 hour before bed",so:"Maagnesiiyam 1 saac kahor jiifka qaado"}, text:{en:"Magnesium activates GABA receptors — your brain's 'calm down' system. Taking it before bed relaxes muscles, lowers cortisol, and prepares the nervous system for deep sleep.",so:"Maagnesiiyam wuxuu firfircooniyaa receptors-ka GABA."}, nutrient:"magnesium"},
@@ -2110,11 +2126,11 @@ const SV_DAILY_TIPS = [
 const SV_STACKS = [
   {id:"sleep", icon:"🌙", color:"linear-gradient(135deg,#4f46e5,#7c3aed)", name:{en:"Sleep Stack",so:"Xirmada Hurdada"}, desc:{en:"Calm your nervous system & drift into deep, restorative sleep",so:"Nidaamka narafka ka naso oo hurdo qoto dheer gasho"}, nutrients:["magnesium","vitamin-d","vitamin-b6","calcium"], topFoods:[{emoji:"🎃",name:{en:"Pumpkin Seeds",so:"Abuuraha gawska"}},{emoji:"🍌",name:{en:"Banana",so:"Moos"}},{emoji:"🐟",name:{en:"Salmon",so:"Salamon"}}]},
   {id:"energy", icon:"⚡", color:"linear-gradient(135deg,#d97706,#f59e0b)", name:{en:"Energy Stack",so:"Xirmada Tamarta"}, desc:{en:"Fuel every cell — from your mitochondria to your muscles",so:"Unug walba shid — mitochondria-gaaga ilaa murqahaaga"}, nutrients:["iron","vitamin-b12","coq10","magnesium","vitamin-d"], topFoods:[{emoji:"🫀",name:{en:"Liver",so:"Beer"}},{emoji:"🐟",name:{en:"Salmon",so:"Salamon"}},{emoji:"🌴",name:{en:"Dates",so:"Timir"}}]},
-  {id:"immunity", icon:"🛡️", color:"linear-gradient(135deg,#059669,#10b981)", name:{en:"Immunity Stack",so:"Xirmada Difaaca"}, desc:{en:"Build an immune army that fights off illness before it starts",so:"Ciidan difaac ah oo dhis oo cudurada ka hortagta"}, nutrients:["vitamin-c","zinc","vitamin-d","selenium","copper"], topFoods:[{emoji:"🍈",name:{en:"Guava",so:"Guwaafe"}},{emoji:"🐟",name:{en:"Tuna",so:"Qolof-badeed"}},{emoji:"🧄",name:{en:"Garlic",so:"Toon"}}]},
+  {id:"immunity", icon:"🛡️", color:"linear-gradient(135deg,#059669,#10b981)", name:{en:"Immunity Stack",so:"Xirmada Difaaca"}, desc:{en:"Build an immune army that fights off illness before it starts",so:"Ciidan difaac ah oo dhis oo cudurada ka hortagta"}, nutrients:["vitamin-c","zinc","vitamin-d","selenium","copper"], topFoods:[{emoji:"🍈",name:{en:"Guava",so:"Guwaafe"}},{emoji:"🐟",name:{en:"Tuna",so:"Tabadiin"}},{emoji:"🧄",name:{en:"Garlic",so:"Toon"}}]},
   {id:"brain", icon:"🧠", color:"linear-gradient(135deg,#0ea5e9,#2563eb)", name:{en:"Brain Stack",so:"Xirmada Maskaxda"}, desc:{en:"Sharpen focus, lift mood & protect your cognitive future",so:"Xushmiga xooji, xaalada nafsiyadeed kor u qaad"}, nutrients:["omega3","vitamin-b12","magnesium","vitamin-b6","iodine"], topFoods:[{emoji:"🐟",name:{en:"Mackerel",so:"Dambaalad"}},{emoji:"🥚",name:{en:"Eggs",so:"Ukunta"}},{emoji:"🌰",name:{en:"Walnuts",so:"Jawska"}}]},
   {id:"bones", icon:"🦴", color:"linear-gradient(135deg,#0891b2,#0e7490)", name:{en:"Bone & Joint Stack",so:"Xirmada Lafaha & Xubinta"}, desc:{en:"Build dense bones, cushion joints & keep you moving pain-free",so:"Lafaha cufan dhis, xubinta daboolo"}, nutrients:["calcium","vitamin-d","vitamin-k","magnesium","silica","boron"], topFoods:[{emoji:"🐠",name:{en:"Sardines (with bones)",so:"Sardiin (lafihiisa leh)"}},{emoji:"🥬",name:{en:"Kale",so:"Kayl"}},{emoji:"🌰",name:{en:"Almonds",so:"Loos"}}]},
   {id:"recovery", icon:"💪", color:"linear-gradient(135deg,#dc2626,#ea580c)", name:{en:"Workout Recovery Stack",so:"Xirmada Dib-u-Soo Kabashada Jimicsiga"}, desc:{en:"Repair muscle, reduce inflammation & bounce back faster",so:"Murqaha dayacti, bararka hoos u dhig"}, nutrients:["magnesium","coq10","omega3","iron","vitamin-c","zinc"], topFoods:[{emoji:"🥩",name:{en:"Red Meat",so:"Hilib cas"}},{emoji:"🎃",name:{en:"Pumpkin Seeds",so:"Abuuraha gawska"}},{emoji:"🍊",name:{en:"Orange",so:"Liinta macaan"}}]},
-  {id:"hormones", icon:"⚖️", color:"linear-gradient(135deg,#7c3aed,#a855f7)", name:{en:"Hormone Balance Stack",so:"Xirmada Dheellitirka Hormoonka"}, desc:{en:"Support testosterone, estrogen & thyroid with the minerals they're made from",so:"Testosterone, estrogen & thyroid ku taageer macdanta laga sameeyo"}, nutrients:["zinc","iodine","selenium","vitamin-d","boron","magnesium"], topFoods:[{emoji:"🐟",name:{en:"Tuna",so:"Qolof-badeed"}},{emoji:"🌿",name:{en:"Seaweed",so:"Dhir-badeed"}},{emoji:"🌰",name:{en:"Brazil Nuts",so:"Jawska Brazil"}}]},
+  {id:"hormones", icon:"⚖️", color:"linear-gradient(135deg,#7c3aed,#a855f7)", name:{en:"Hormone Balance Stack",so:"Xirmada Dheellitirka Hormoonka"}, desc:{en:"Support testosterone, estrogen & thyroid with the minerals they're made from",so:"Testosterone, estrogen & thyroid ku taageer macdanta laga sameeyo"}, nutrients:["zinc","iodine","selenium","vitamin-d","boron","magnesium"], topFoods:[{emoji:"🐟",name:{en:"Tuna",so:"Tabadiin"}},{emoji:"🌿",name:{en:"Seaweed",so:"Dhir-badeed"}},{emoji:"🌰",name:{en:"Brazil Nuts",so:"Jawska Brazil"}}]},
 ];
 
 const SV_REC_CATEGORIES = [
